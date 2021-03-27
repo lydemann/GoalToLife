@@ -18,7 +18,7 @@ const routes: Routes = [
       import('./monthly/monthly.module').then((m) => m.MonthlyModule),
   },
   {
-    path: 'quarly',
+    path: 'quarterly',
     loadChildren: () =>
       import('./quarterly/quarterly.module').then((m) => m.QuarterlyModule),
   },
