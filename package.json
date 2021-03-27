@@ -4,12 +4,30 @@
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "scripts": {
-    "ng": "ng",
+    "ng": "nx",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "lint": "nx workspace-lint && ng lint",
+    "e2e": "ng e2e",
+    "nx": "nx",
+    "affected:apps": "nx affected:apps",
+    "affected:libs": "nx affected:libs",
+    "affected:build": "nx affected:build",
+    "affected:e2e": "nx affected:e2e",
+    "affected:test": "nx affected:test",
+    "affected:lint": "nx affected:lint",
+    "affected:dep-graph": "nx affected:dep-graph",
+    "affected": "nx affected",
+    "format": "nx format:write",
+    "format:write": "nx format:write",
+    "format:check": "nx format:check",
+    "update": "ng update @nrwl/workspace",
+    "update:check": "ng update",
+    "dep-graph": "nx dep-graph",
+    "workspace-schematic": "nx workspace-schematic",
+    "help": "nx help",
+    "postinstall": "node ./decorate-angular-cli.js"
   },
   "private": true,
   "dependencies": {
@@ -20,7 +38,10 @@
     "@angular/platform-browser-dynamic": "~11.2.0",
     "@angular/router": "~11.2.0",
     "@capacitor/core": "2.4.7",
+    "@capacitor/ios": "^2.4.7",
     "@ionic/angular": "^5.5.2",
+    "@nrwl/angular": "11.5.2",
+    "@nrwl/workspace": "^11.5.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
@@ -48,7 +69,9 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.0.2"
+    "typescript": "~4.0.2",
+    "@nrwl/workspace": "11.5.2",
+    "prettier": "2.2.1"
   },
   "description": "An Ionic project"
 }

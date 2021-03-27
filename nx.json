@@ -1,0 +1,25 @@
+{
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*",
+    "tsconfig.base.json": "*"
+  },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "npmScope": "app",
+  "projects": {
+    "app": {
+      "tags": []
+    },
+    "app-e2e": {
+      "tags": [],
+      "implicitDependencies": [
+        "app"
+      ]
+    }
+  }
+}
