@@ -22,4 +22,8 @@ export class DailyComponent implements OnInit {
   tasksTrackBy(task: Task, idx) {
     return task.id;
   }
+
+  onDelete(task: Task) {
+    this.appFacadeService.deleteTask(task);
+  }
 }

@@ -1,29 +1,15 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <a routerLink="/monthly">Go to monthly</a>
-    </ion-buttons>
-    <ion-title>Week 30 (July 15)</ion-title>
-
-    <ion-buttons slot="end" class="right-header-controls">
-      <ion-icon name="pricetags-outline"></ion-icon>
-      <ion-select multiple>
-        <ion-select-option value="nes">NES</ion-select-option>
-        <ion-select-option value="n64">Nintendo64</ion-select-option>
-        <ion-select-option value="ps">PlayStation</ion-select-option>
-        <ion-select-option value="genesis">Sega Genesis</ion-select-option>
-        <ion-select-option value="saturn">Sega Saturn</ion-select-option>
-        <ion-select-option value="snes">SNES</ion-select-option>
-      </ion-select>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header
+  [title]="'March 20, week 12, 2021'"
+  [backText]="'Monthly'"
+  [backUrl]="'/monthly'"
+  [categories]="categories$ | async"
+></app-header>
 
 <ion-content>
   <div class="ion-padding-top ion-text-center">
     <h2>Weekly goals</h2>
 
-    <ion-list inset>
+    <ion-list>
       <ion-item
         *ngFor="let weeklyGoal of weeklyGoals; trackBy: weeklyGoalsTrackBy"
       >

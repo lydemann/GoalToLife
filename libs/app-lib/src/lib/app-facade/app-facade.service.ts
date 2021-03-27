@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Task } from '@app/shared/interfaces';
 
@@ -7,7 +7,7 @@ import { Task } from '@app/shared/interfaces';
   providedIn: 'root',
 })
 export class AppFacadeService {
-  tasks$: Observable<Task[]> = of([
+  tasks$ = new BehaviorSubject([
     {
       id: '1',
       name: 'Do laundry',
@@ -32,4 +32,11 @@ export class AppFacadeService {
   );
 
   constructor() {}
+
+  deleteTask(taskToDelete: Task) {
+    const newTasks = this.tasks$.value.filter(
+      (task) => taskToDelete.id !== task.id
+    );
+    this.tasks$.next(newTasks);
+  }
 }

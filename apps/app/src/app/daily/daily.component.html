@@ -1,28 +1,20 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <a routerLink="weekly">Go to weekly</a>
-    </ion-buttons>
-    <ion-title>March 20, 2021</ion-title>
-
-    <ion-buttons slot="end" class="right-header-controls">
-      <ion-icon name="pricetags-outline"></ion-icon>
-      <ion-select multiple selectedText=" ">
-        <ion-select-option *ngFor="let category of categories$ | async" [value]="category">category</ion-select-option>
-      </ion-select>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header
+  [title]="'March 20, 2021'"
+  [backText]="'Weekly'"
+  [backUrl]="'/weekly'"
+  [categories]="categories$ | async"
+></app-header>
 
 <ion-content>
   <div class="ion-padding-top ion-text-center">
     <h2>Client work</h2>
 
-    <ion-list inset>
-      <ion-item *ngFor="let task of tasks$ | async; trackBy: tasksTrackBy">
-        <ion-checkbox></ion-checkbox>
-        {{ task.name }}
-      </ion-item>
+    <ion-list>
+      <app-task
+        *ngFor="let task of tasks$ | async; trackBy: tasksTrackBy"
+        [task]="task"
+        (delete)="onDelete(task)"
+      ></app-task>
     </ion-list>
   </div>
 </ion-content>

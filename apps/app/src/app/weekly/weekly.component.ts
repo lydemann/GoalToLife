@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AppFacadeService } from '@app/app-lib';
 import { Day, Goal, Task } from '@app/shared/interfaces';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-weekly',
   templateUrl: './weekly.component.html',
@@ -152,12 +154,15 @@ export class WeeklyComponent implements OnInit {
       ],
     } as Day,
   ];
+  categories$: Observable<string[]>;
 
   weeklyGoalsTrackBy(goal: Goal, idx) {
     return goal.id;
   }
 
-  constructor() {}
+  constructor(private appFacadeService: AppFacadeService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.categories$ = this.appFacadeService.categories$;
+  }
 }

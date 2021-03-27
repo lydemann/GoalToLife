@@ -16,7 +16,8 @@
       "unitTestRunner": "jest"
     },
     "@schematics/angular:component": {
-      "styleext": "scss"
+      "styleext": "scss",
+      "changeDetection": "OnPush"
     },
     "@ionic/angular-toolkit:component": {
       "styleext": "scss"
