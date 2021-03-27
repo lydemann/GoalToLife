@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Day } from '../interfaces/day';
-import { Goal } from '../interfaces/goal';
-import { Task } from '../interfaces/task';
-
+import { Day, Goal, Task } from '@app/shared/interfaces';
 @Component({
   selector: 'app-weekly',
   templateUrl: './weekly.component.html',

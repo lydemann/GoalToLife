@@ -1,4 +1,6 @@
-
 .right-header-controls {
-    margin-right: 20px;
+}
+
+ion-select::part(icon) {
+  display: none !important;
 }

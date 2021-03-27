@@ -5,21 +5,14 @@
     "tslint.json": "*",
     ".eslintrc.json": "*",
     "nx.json": "*",
-    "tsconfig.base.json": "*"
+    "tsconfig.json": "*"
   },
-  "affected": {
-    "defaultBase": "master"
-  },
+  "affected": { "defaultBase": "master" },
   "npmScope": "app",
   "projects": {
-    "app": {
-      "tags": []
-    },
-    "app-e2e": {
-      "tags": [],
-      "implicitDependencies": [
-        "app"
-      ]
-    }
+    "app": { "tags": [] },
+    "app-e2e": { "tags": [], "implicitDependencies": ["app"] },
+    "app-lib": { "tags": ["scope:app", "type:app"] },
+    "shared-interfaces": { "tags": ["scope:shared"] }
   }
 }
