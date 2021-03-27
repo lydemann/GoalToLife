@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppFacadeService } from '@app/app-lib';
-import { Day, Goal, Task } from '@app/shared/interfaces';
+import { TaskPeriod, Goal, Task } from '@app/shared/interfaces';
 import { Observable } from 'rxjs';
 @Component({
   selector: 'app-weekly',
@@ -19,7 +19,7 @@ export class WeeklyComponent implements OnInit {
     } as Goal,
   ];
 
-  days: Day[] = [
+  days: TaskPeriod[] = [
     {
       date: new Date(2021, 3, 15),
       tasks: [
@@ -38,7 +38,7 @@ export class WeeklyComponent implements OnInit {
           categories: ['fitness'],
         } as Task,
       ],
-    } as Day,
+    } as TaskPeriod,
     {
       date: new Date(2021, 3, 16),
       tasks: [
@@ -57,7 +57,7 @@ export class WeeklyComponent implements OnInit {
           categories: ['fitness'],
         } as Task,
       ],
-    } as Day,
+    } as TaskPeriod,
     {
       date: new Date(2021, 3, 17),
       tasks: [
@@ -76,7 +76,7 @@ export class WeeklyComponent implements OnInit {
           categories: ['fitness'],
         } as Task,
       ],
-    } as Day,
+    } as TaskPeriod,
     {
       date: new Date(2021, 3, 18),
       tasks: [
@@ -95,7 +95,7 @@ export class WeeklyComponent implements OnInit {
           categories: ['fitness'],
         } as Task,
       ],
-    } as Day,
+    } as TaskPeriod,
     {
       date: new Date(2021, 3, 19),
       tasks: [
@@ -114,7 +114,7 @@ export class WeeklyComponent implements OnInit {
           categories: ['fitness'],
         } as Task,
       ],
-    } as Day,
+    } as TaskPeriod,
     {
       date: new Date(2021, 3, 20),
       tasks: [
@@ -133,7 +133,7 @@ export class WeeklyComponent implements OnInit {
           categories: ['fitness'],
         } as Task,
       ],
-    } as Day,
+    } as TaskPeriod,
     {
       date: new Date(2021, 3, 21),
       tasks: [
@@ -152,7 +152,7 @@ export class WeeklyComponent implements OnInit {
           categories: ['fitness'],
         } as Task,
       ],
-    } as Day,
+    } as TaskPeriod,
   ];
   categories$: Observable<string[]>;
 
@@ -163,6 +163,6 @@ export class WeeklyComponent implements OnInit {
   constructor(private appFacadeService: AppFacadeService) {}
 
   ngOnInit() {
-    this.categories$ = this.appFacadeService.categories$;
+    this.categories$ = this.appFacadeService.dailyCategories$;
   }
 }

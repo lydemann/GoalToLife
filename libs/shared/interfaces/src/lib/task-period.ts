@@ -1,6 +1,6 @@
 import { Task } from './task';
 
-export interface Day {
+export interface TaskPeriod {
     date: Date;
     tasks: Task[];
     wins: string[];

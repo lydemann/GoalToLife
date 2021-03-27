@@ -1,44 +1,23 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <a routerLink="/quarterly">Go to quarterly</a>
-      <!-- maybe dropdown on longpress etc -->
-    </ion-buttons>
-    <ion-title>March</ion-title>
-
-    <ion-buttons slot="end" class="right-header-controls">
-      <ion-icon name="pricetags-outline"></ion-icon>
-      <ion-select multiple>
-        <ion-select-option value="nes">NES</ion-select-option>
-        <ion-select-option value="n64">Nintendo64</ion-select-option>
-        <ion-select-option value="ps">PlayStation</ion-select-option>
-        <ion-select-option value="genesis">Sega Genesis</ion-select-option>
-        <ion-select-option value="saturn">Sega Saturn</ion-select-option>
-        <ion-select-option value="snes">SNES</ion-select-option>
-      </ion-select>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header
+  [title]="'March, 2021'"
+  [backText]="'Quarterly'"
+  [backUrl]="'/quarterly'"
+  [categories]="categories$ | async"
+></app-header>
 
 <ion-content>
   <div class="ion-padding-top ion-text-center">
-    <h2>Client work</h2>
+    <app-task-group
+      [title]="'Monthly goals'"
+      [tasks]="goalsForPeriod"
+      [isMain]="true"
+    ></app-task-group>
 
-    <ion-list inset>
-      <ion-item *ngFor="let monthlyGoal of monthlyGoals">
-        <ion-checkbox></ion-checkbox>
-        {{ monthlyGoal.name }}
-      </ion-item>
-    </ion-list>
-
-    <div *ngFor="let day of months">
-      <h3><a routerLink="">{{ day.date | date: "mediumDate" }}</a></h3>
-
-      <ion-item *ngFor="let task of day.tasks">
-        <ion-checkbox></ion-checkbox>
-        {{ task.name }}
-      </ion-item>
-      <hr/>
-    </div>
+    <app-task-group
+      *ngFor="let taskPeriod of taskPeriods$ | async"
+      [title]="taskPeriod.date | date: 'mediumDate'"
+      [titleLink]="'/weekly'"
+      [tasks]="taskPeriod.tasks"
+    ></app-task-group>
   </div>
 </ion-content>

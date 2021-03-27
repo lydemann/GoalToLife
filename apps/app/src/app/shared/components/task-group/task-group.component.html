@@ -1,0 +1,9 @@
+<h2 *ngIf="isMain">{{title}}</h2>
+<h3 *ngIf="!isMain"><a [routerLink]="titleLink">{{title}}</a></h3>
+
+<ion-list>
+  <app-task
+    *ngFor="let task of tasks; trackBy: tasksTrackBy"
+    [task]="task"
+  ></app-task>
+</ion-list>

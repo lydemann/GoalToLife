@@ -16,7 +16,7 @@ export class DailyComponent implements OnInit {
 
   ngOnInit(): void {
     this.tasks$ = this.appFacadeService.tasks$;
-    this.categories$ = this.appFacadeService.categories$;
+    this.categories$ = this.appFacadeService.dailyCategories$;
   }
 
   tasksTrackBy(task: Task, idx) {
