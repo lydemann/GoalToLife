@@ -1,0 +1,7 @@
+{
+  "name": "GoalToLife",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
