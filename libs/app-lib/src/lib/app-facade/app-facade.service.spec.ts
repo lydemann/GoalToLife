@@ -34,7 +34,7 @@ describe('AppFacadeService', () => {
 
       spectator.service.deleteTask(initialTasks[1]);
 
-      spectator.service.tasks$.pipe(first()).subscribe((tasks) => {
+      spectator.service.dailyTasks$.pipe(first()).subscribe((tasks) => {
         expect(tasks).toEqual([
           {
             id: '1',
