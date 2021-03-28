@@ -29,7 +29,7 @@
     "help": "nx help",
     "postinstall": "node ./decorate-angular-cli.js",
     "prepare": "husky install",
-    "test:pr": "npm run affected:test -- --base origin/master --head HEAD --parallel"
+    "test:pr": "npm run affected:test -- --parallel"
   },
   "private": true,
   "dependencies": {
