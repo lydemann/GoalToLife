@@ -7,7 +7,7 @@ import { Task, TaskPeriod } from '@app/shared/interfaces';
   providedIn: 'root',
 })
 export class AppFacadeService {
-  tasks$ = new BehaviorSubject([
+  dailyTasks$ = new BehaviorSubject([
     {
       id: '1',
       name: 'Do laundry',
@@ -24,7 +24,8 @@ export class AppFacadeService {
       categories: ['fitness'],
     } as Task,
   ]);
-  dailyCategories$: Observable<string[]> = this.tasks$.pipe(
+  taskInbox$ = this.dailyTasks$;
+  dailyCategories$: Observable<string[]> = this.dailyTasks$.pipe(
     map((tasks) =>
       tasks.reduce((prev, task) => [...prev, ...task.categories], [])
     ),
@@ -117,9 +118,9 @@ export class AppFacadeService {
   yearlyCategories$: Observable<string[]> = this.quarterlyCategories$
 
   deleteTask(taskToDelete: Task) {
-    const newTasks = this.tasks$.value.filter(
+    const newTasks = this.dailyTasks$.value.filter(
       (task) => taskToDelete.id !== task.id
     );
-    this.tasks$.next(newTasks);
+    this.dailyTasks$.next(newTasks);
   }
 }

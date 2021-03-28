@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DailyComponent } from './daily.component';
 import { TasksRoutingModule } from './daily-routing.module';
 import { IonicModule } from '@ionic/angular';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [

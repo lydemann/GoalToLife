@@ -1,14 +1,14 @@
 <app-header
-  [title]="'2021'"
-  [backText]="'Daily'"
-  [backUrl]="'/'"
+  [title]="'Q1, 2021'"
+  [backText]="'Yearly'"
+  [backUrl]="'/plan/yearly'"
   [categories]="categories$ | async"
 ></app-header>
 
 <ion-content>
   <div class="ion-padding-top ion-text-center">
     <app-task-group
-      [title]="'Yearly goals'"
+      [title]="'Quarterly goals'"
       [tasks]="goalsForPeriod"
       [isMain]="true"
     ></app-task-group>
@@ -16,7 +16,7 @@
     <app-task-group
       *ngFor="let taskPeriod of taskPeriods$ | async"
       [title]="taskPeriod.date | date: 'mediumDate'"
-      [titleLink]="'/quarterly'"
+      [titleLink]="'/monthly'"
       [tasks]="taskPeriod.tasks"
     ></app-task-group>
   </div>

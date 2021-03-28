@@ -4,31 +4,57 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
-        loadChildren: () => import('../../../e2e/tab1/tab1.module').then(m => m.Tab1PageModule)
+        path: 'plan',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../plan/daily/daily.module').then((m) => m.DailyModule),
+          },
+          {
+            path: 'weekly',
+            loadChildren: () =>
+              import('../plan/weekly/weekly.module').then((m) => m.WeeklyModule),
+          },
+          {
+            path: 'monthly',
+            loadChildren: () =>
+              import('../plan/monthly/monthly.module').then((m) => m.MonthlyModule),
+          },
+          {
+            path: 'quarterly',
+            loadChildren: () =>
+              import('../plan/quarterly/quarterly.module').then((m) => m.QuarterlyModule),
+          },
+          {
+            path: 'yearly',
+            loadChildren: () =>
+              import('../plan/yearly/yearly.module').then((m) => m.YearlyModule),
+          },
+        ],
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        path: 'inbox',
+        loadChildren: () => import('../inbox/inbox.module').then((m) => m.InboxModule)
       },
       {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        path: 'settings',
+        loadChildren: () => import('../settings/settings.module').then((m) => m.SettingsModule)
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/plan',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/plan',
     pathMatch: 'full'
   }
 ];

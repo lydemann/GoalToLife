@@ -15,7 +15,7 @@ export class DailyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.tasks$ = this.appFacadeService.tasks$;
+    this.tasks$ = this.appFacadeService.dailyTasks$;
     this.categories$ = this.appFacadeService.dailyCategories$;
   }
 
