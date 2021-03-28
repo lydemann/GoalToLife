@@ -28,7 +28,8 @@
     "workspace-schematic": "nx workspace-schematic",
     "help": "nx help",
     "postinstall": "node ./decorate-angular-cli.js",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test:pr": "npm run affected:test -- --base origin/master --head HEAD --parallel"
   },
   "private": true,
   "dependencies": {
