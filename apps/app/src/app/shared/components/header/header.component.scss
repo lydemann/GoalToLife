@@ -1,0 +1,16 @@
+.left-header-controls {
+  a {
+    text-decoration: none;
+  }
+}
+
+.right-header-controls {
+  cursor: pointer;
+
+  ion-select {
+    padding: 0;
+    &::part(icon) {
+      display: none !important;
+    }
+  }
+}

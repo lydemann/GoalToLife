@@ -1,0 +1,11 @@
+{
+	"{apps,libs}/**/*.{ts,json,md,scss,html}": [
+		"prettier --write",
+	],
+	"*.ts": [
+		"tslint --fix",
+	],
+	"*.scss": [
+		"stylelint --fix",
+	]
+}

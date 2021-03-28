@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" class="left-header-controls">
+      <ion-button (click)="onNavigateBack()" *ngIf="backText">
+        {{ backText }}
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+
+    <ion-buttons slot="end" class="right-header-controls">
+      <ion-button (click)="onSelectTags($event, select)">
+        <ion-icon name="pricetags-outline"></ion-icon>
+        <ion-select
+          multiple
+          selectedText=" "
+          #select
+          (click)="onSelectTags($event, select)"
+        >
+          <ion-select-option
+            *ngFor="let category of categories"
+            [value]="category"
+            >{{ category }}</ion-select-option
+          >
+        </ion-select>
+      </ion-button>
+      <ion-button>
+        <ion-icon name="search-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

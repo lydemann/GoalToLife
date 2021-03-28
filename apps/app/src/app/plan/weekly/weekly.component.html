@@ -1,0 +1,23 @@
+<app-header
+  [title]="'March 20, week 12, 2021'"
+  [backText]="'Monthly'"
+  [backUrl]="'/plan/monthly'"
+  [categories]="categories$ | async"
+></app-header>
+
+<ion-content>
+  <div class="ion-padding-top ion-text-center">
+    <app-task-group
+      [title]="'Weekly goals'"
+      [tasks]="weeklyGoals"
+      [isMain]="true"
+    ></app-task-group>
+
+    <app-task-group
+      *ngFor="let day of days"
+      [title]="day.date | date: 'mediumDate'"
+      [titleLink]="'/'"
+      [tasks]="day.tasks"
+    ></app-task-group>
+  </div>
+</ion-content>
