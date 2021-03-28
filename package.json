@@ -27,7 +27,8 @@
     "dep-graph": "nx dep-graph",
     "workspace-schematic": "nx workspace-schematic",
     "help": "nx help",
-    "postinstall": "node ./decorate-angular-cli.js"
+    "postinstall": "node ./decorate-angular-cli.js",
+    "prepare": "husky install"
   },
   "private": true,
   "dependencies": {
@@ -54,6 +55,7 @@
     "@angular/compiler-cli": "~11.2.0",
     "@angular/language-service": "~11.2.0",
     "@capacitor/cli": "2.4.7",
+    "@commitlint/config-conventional": "^12.0.1",
     "@ionic/angular-toolkit": "^3.1.1",
     "@ngneat/spectator": "^7.1.0",
     "@nrwl/eslint-plugin-nx": "11.5.2",
@@ -67,6 +69,7 @@
     "@typescript-eslint/eslint-plugin": "4.3.0",
     "@typescript-eslint/parser": "4.3.0",
     "codelyzer": "^6.0.0",
+    "commitlint": "^12.0.1",
     "eslint": "7.10.0",
     "eslint-config-prettier": "8.1.0",
     "husky": "^5.2.0",
