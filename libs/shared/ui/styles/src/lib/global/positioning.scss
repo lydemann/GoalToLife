@@ -1,0 +1,70 @@
+@import 'helpers';
+@import '../helpers/variables.scss';
+@import '../helpers/functions.scss';
+
+/*
+  Helpers for setting position using padding and margin
+  Eg. mr-m => margin-right: size('m')
+*/
+
+$spacings: (m, margin) (p, padding);
+$tshirtSizes: xxxs, xxs, xs, s, m, l, xl, xxl, xxxl;
+$directions: (t, top), (r, right), (b, bottom), (l, left);
+
+@each $spacingKey, $spacingName in $spacings {
+  @each $size in $tshirtSizes {
+    .#{$spacingKey}-#{$size} {
+      #{$spacingName}: size($size);
+    }
+    .#{$spacingKey}h-#{$size} {
+      #{$spacingName}-right: size($size);
+      #{$spacingName}-left: size($size);
+    }
+    .#{$spacingKey}v-#{$size} {
+      #{$spacingName}-top: size($size);
+      #{$spacingName}-down: size($size);
+    }
+
+    @each $directionKey, $directionName in $directions {
+      .#{$spacingKey}#{$directionKey}-#{$size} {
+        #{$spacingName}-#{$directionName}: size($size);
+      }
+    }
+  }
+}
+
+.mh-a {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.center {
+  display: block;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pull-right {
+  margin-left: auto;
+}
+
+.center-in-parent {
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+  top: 50%;
+  margin-top: -50px;
+}
+
+.center-in-page {
+  height: 100px;
+  width: 100px;
+  position: fixed;
+  left: 50%;
+  margin-left: -50px;
+  top: 50%;
+  margin-top: -50px;
+}

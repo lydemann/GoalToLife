@@ -216,6 +216,13 @@
   dependencies:
     tslib "^2.0.0"
 
+"@angular/fire@^6.1.4":
+  version "6.1.4"
+  resolved "https://registry.yarnpkg.com/@angular/fire/-/fire-6.1.4.tgz#d3923a68336d7177abbb2676731d0aef566b9739"
+  integrity sha512-5u305XnBC041JMrAtczLa0bdprxw7RkXy4kgcRCisPI8maGuiN4XzlwNYX+plCHZCo4R0motxQom//tPTA2edQ==
+  dependencies:
+    tslib "^2.0.0"
+
 "@angular/forms@~11.2.0":
   version "11.2.7"
   resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-11.2.7.tgz#42c47906123397e6adee8b3d02f389c28ea942a2"

@@ -2,12 +2,18 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  HostBinding,
+  HostListener,
   Input,
   OnInit,
   Output,
+  ViewChild,
 } from '@angular/core';
-import { Task } from '@app/shared/interfaces';
+import { FormControl, Validators } from '@angular/forms';
+import { Goal, Task } from '@app/shared/interfaces';
+import { IonInput } from '@ionic/angular';
 
+export const tempIdPrefix = 'temp';
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -15,11 +21,46 @@ import { Task } from '@app/shared/interfaces';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskComponent implements OnInit {
-  @Input() task: Task;
-  @Output() edit = new EventEmitter();
-  @Output() delete = new EventEmitter();
+  private _task: Goal;
+  public get task(): Goal {
+    return this._task;
+  }
+  @Input()
+  public set task(v: Goal) {
+    this._task = v;
+    this.isTempTask = this._task.id?.startsWith(tempIdPrefix);
+  }
+
+  isTempTask = false;
+
+  @Output() edit = new EventEmitter<Task>();
+  @Output() add = new EventEmitter<Task>();
+  @Output() delete = new EventEmitter<Task>();
+
+  taskNameControl: FormControl;
+
+  @ViewChild('input') inputElm: IonInput;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.taskNameControl = new FormControl(
+      this.task?.name,
+      Validators.required
+    );
+  }
+
+  @HostListener('document:keydown.enter', ['$event'])
+  onAdd() {
+    const taskToAdd = {
+      ...this.task,
+      name: this.taskNameControl.value,
+    } as Task;
+    this.add.emit(taskToAdd);
+    this.task.id = `${tempIdPrefix}-${Date.now()}`;
+  }
+
+  onFocus() {
+    this.inputElm.setFocus();
+  }
 }
