@@ -35,7 +35,7 @@ export class AppFacadeService {
   monthlyTaskPeriods$ = of([
     {
       date: new Date(2021, 3, 27),
-      tasks: [
+      goals: [
         {
           id: '1',
           name: 'Do laundry',
@@ -54,7 +54,7 @@ export class AppFacadeService {
     } as TaskPeriod,
     {
       date: new Date(2021, 3, 27),
-      tasks: [
+      goals: [
         {
           id: '1',
           name: 'Do laundry',
@@ -73,7 +73,7 @@ export class AppFacadeService {
     } as TaskPeriod,
     {
       date: new Date(2021, 3, 27),
-      tasks: [
+      goals: [
         {
           id: '1',
           name: 'Do laundry',
@@ -92,7 +92,7 @@ export class AppFacadeService {
     } as TaskPeriod,
     {
       date: new Date(2021, 3, 27),
-      tasks: [
+      goals: [
         {
           id: '1',
           name: 'Do laundry',
@@ -115,7 +115,7 @@ export class AppFacadeService {
   quarterlyTaskPeriods$ = this.monthlyTaskPeriods$;
 
   yearlyTaskPeriods$ = this.quarterlyTaskPeriods$;
-  yearlyCategories$: Observable<string[]> = this.quarterlyCategories$
+  yearlyCategories$: Observable<string[]> = this.quarterlyCategories$;
 
   deleteTask(taskToDelete: Task) {
     const newTasks = this.dailyTasks$.value.filter(

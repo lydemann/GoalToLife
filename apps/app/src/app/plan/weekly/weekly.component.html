@@ -16,8 +16,8 @@
     <app-task-group
       *ngFor="let day of days"
       [title]="day.date | date: 'mediumDate'"
-      [titleLink]="'/'"
-      [tasks]="day.tasks"
+      [titleLink]="'../'"
+      [tasks]="day.goals"
     ></app-task-group>
   </div>
 </ion-content>

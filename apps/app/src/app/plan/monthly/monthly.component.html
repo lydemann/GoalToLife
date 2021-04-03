@@ -14,10 +14,10 @@
     ></app-task-group>
 
     <app-task-group
-      *ngFor="let taskPeriod of taskPeriods$ | async"
+      *ngFor="let taskPeriod of taskPeriods$ | async"
       [title]="taskPeriod.date | date: 'mediumDate'"
-      [titleLink]="'/weekly'"
-      [tasks]="taskPeriod.tasks"
+      [titleLink]="'../weekly'"
+      [tasks]="taskPeriod.goals"
     ></app-task-group>
   </div>
 </ion-content>

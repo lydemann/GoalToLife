@@ -22,135 +22,135 @@ export class WeeklyComponent implements OnInit {
   days: TaskPeriod[] = [
     {
       date: new Date(2021, 3, 15),
-      tasks: [
+      goals: [
         {
           id: '1',
           name: 'Do laundry',
-        } as Task,
+        } as Goal,
         {
           id: '2',
           name: 'Buy milk',
           categories: ['groceries'],
-        } as Task,
+        } as Goal,
         {
           id: '3',
           name: 'Run 10k',
           categories: ['fitness'],
-        } as Task,
+        } as Goal,
       ],
     } as TaskPeriod,
     {
       date: new Date(2021, 3, 16),
-      tasks: [
+      goals: [
         {
           id: '1',
           name: 'Do laundry',
-        } as Task,
+        } as Goal,
         {
           id: '2',
           name: 'Buy milk',
           categories: ['groceries'],
-        } as Task,
+        } as Goal,
         {
           id: '3',
           name: 'Run 10k',
           categories: ['fitness'],
-        } as Task,
+        } as Goal,
       ],
     } as TaskPeriod,
     {
       date: new Date(2021, 3, 17),
-      tasks: [
+      goals: [
         {
           id: '1',
           name: 'Do laundry',
-        } as Task,
+        } as Goal,
         {
           id: '2',
           name: 'Buy milk',
           categories: ['groceries'],
-        } as Task,
+        } as Goal,
         {
           id: '3',
           name: 'Run 10k',
           categories: ['fitness'],
-        } as Task,
+        } as Goal,
       ],
     } as TaskPeriod,
     {
       date: new Date(2021, 3, 18),
-      tasks: [
+      goals: [
         {
           id: '1',
           name: 'Do laundry',
-        } as Task,
+        } as Goal,
         {
           id: '2',
           name: 'Buy milk',
           categories: ['groceries'],
-        } as Task,
+        } as Goal,
         {
           id: '3',
           name: 'Run 10k',
           categories: ['fitness'],
-        } as Task,
+        } as Goal,
       ],
     } as TaskPeriod,
     {
       date: new Date(2021, 3, 19),
-      tasks: [
+      goals: [
         {
           id: '1',
           name: 'Do laundry',
-        } as Task,
+        } as Goal,
         {
           id: '2',
           name: 'Buy milk',
           categories: ['groceries'],
-        } as Task,
+        } as Goal,
         {
           id: '3',
           name: 'Run 10k',
           categories: ['fitness'],
-        } as Task,
+        } as Goal,
       ],
     } as TaskPeriod,
     {
       date: new Date(2021, 3, 20),
-      tasks: [
+      goals: [
         {
           id: '1',
           name: 'Do laundry',
-        } as Task,
+        } as Goal,
         {
           id: '2',
           name: 'Buy milk',
           categories: ['groceries'],
-        } as Task,
+        } as Goal,
         {
           id: '3',
           name: 'Run 10k',
           categories: ['fitness'],
-        } as Task,
+        } as Goal,
       ],
     } as TaskPeriod,
     {
       date: new Date(2021, 3, 21),
-      tasks: [
+      goals: [
         {
           id: '1',
           name: 'Do laundry',
-        } as Task,
+        } as Goal,
         {
           id: '2',
           name: 'Buy milk',
           categories: ['groceries'],
-        } as Task,
+        } as Goal,
         {
           id: '3',
           name: 'Run 10k',
           categories: ['fitness'],
-        } as Task,
+        } as Goal,
       ],
     } as TaskPeriod,
   ];

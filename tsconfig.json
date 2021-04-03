@@ -14,10 +14,14 @@
     "target": "es2015",
     "module": "es2020",
     "lib": ["es2018", "dom"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "paths": {
       "@app/app-lib": ["libs/app-lib/src/index.ts"],
       "@app/shared/interfaces": ["libs/shared/interfaces/src/index.ts"]
     },
+    "allowSyntheticDefaultImports": true,
     "rootDir": "."
   },
   "angularCompilerOptions": {

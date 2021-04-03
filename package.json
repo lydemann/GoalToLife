@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
+  "main": "dist/apps/service/main.js",
   "scripts": {
     "ng": "nx",
     "start": "ng serve",
@@ -29,7 +30,9 @@
     "help": "nx help",
     "postinstall": "node ./decorate-angular-cli.js",
     "prepare": "husky install",
-    "test:pr": "npm run affected:test -- --parallel"
+    "test:pr": "npm run affected:test -- --parallel",
+    "service:serve": "concurrently --kill-others \"npm run build -- service --source-map --watch\" \"firebase serve --only functions\"",
+    "service:debug": "concurrently --kill-others \"npm run build -- service --source-map --watch\" \"firebase emulators:start --only functions --inspect-functions \""
   },
   "private": true,
   "dependencies": {
@@ -45,6 +48,13 @@
     "@ionic/angular": "^5.5.2",
     "@nrwl/angular": "11.5.2",
     "@nrwl/workspace": "^11.5.2",
+    "apollo-server-express": "^2.22.2",
+    "apollo-server-plugin-response-cache": "^0.7.0",
+    "express": "^4.17.1",
+    "firebase": "^8.3.2",
+    "firebase-admin": "^9.6.0",
+    "firebase-functions": "^3.13.2",
+    "graphql": "^15.5.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
@@ -62,6 +72,7 @@
     "@nrwl/eslint-plugin-nx": "11.5.2",
     "@nrwl/jest": "11.5.2",
     "@nrwl/linter": "11.5.2",
+    "@nrwl/node": "^11.6.1",
     "@nrwl/workspace": "11.5.2",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
@@ -71,6 +82,7 @@
     "@typescript-eslint/parser": "4.3.0",
     "codelyzer": "^6.0.0",
     "commitlint": "^12.0.1",
+    "concurrently": "^6.0.0",
     "eslint": "7.10.0",
     "eslint-config-prettier": "8.1.0",
     "husky": "^5.2.0",

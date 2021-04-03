@@ -13,6 +13,7 @@
     "app": { "tags": [] },
     "app-e2e": { "tags": [], "implicitDependencies": ["app"] },
     "app-lib": { "tags": ["scope:app", "type:app"] },
-    "shared-interfaces": { "tags": ["scope:shared"] }
+    "shared-interfaces": { "tags": ["scope:shared"] },
+    "service": { "tags": ["scope:service", "type:app"] }
   }
 }
