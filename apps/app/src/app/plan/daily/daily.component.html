@@ -9,23 +9,21 @@
   <div class="ion-padding-top ion-text-center">
     <h2>Tasks</h2>
 
+    <div *ngIf="isLoadingGoals$ | async">Loading...</div>
+
     <ng-container *ngIf="goals$ | async as goals">
-      <div *ngIf="isLoadingGoals$ | async; else goalList">Loading...</div>
+      <ion-list>
+        <app-task
+          *ngFor="let task of goals; trackBy: tasksTrackBy"
+          [task]="task"
+          (delete)="onDelete($event)"
+          (add)="onAdd($event)"
+        ></app-task>
+      </ion-list>
 
-      <ng-template #goalList>
-        <ion-list>
-          <app-task
-            *ngFor="let task of goals; trackBy: tasksTrackBy"
-            [task]="task"
-            (delete)="onDelete($event)"
-            (add)="onAdd($event)"
-          ></app-task>
-        </ion-list>
-
-        <ion-button (click)="createTempTask()" autofocus class="mt-m"
-          >Create task</ion-button
-        >
-      </ng-template>
+      <ion-button (click)="createTempTask()" autofocus class="mt-m"
+        >Create task</ion-button
+      >
     </ng-container>
   </div>
 </ion-content>

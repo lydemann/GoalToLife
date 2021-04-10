@@ -1,12 +1,13 @@
 import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 import responseCachePlugin from 'apollo-server-plugin-response-cache';
 import * as express from 'express';
+
 import { RequestContext } from './auth-identity';
+import { resolvers } from './resolvers';
+import { typeDefs } from './schema';
 // import admin from 'firebase-admin';
 
 // import { AuthIdentity, RequestContext } from './auth-identity';
-import { resolvers } from './resolvers';
-import { typeDefs } from './schema';
 
 /* Async verification with user token */
 // const verifyToken = async ({ authorization, schoolid }) => {
@@ -71,9 +72,9 @@ export function gqlServer() {
     persistedQueries: {
       ttl: 900, // 15 minutes
     },
-    cacheControl: {
-      defaultMaxAge: 30, // seconds
-    },
+    // cacheControl: {
+    //   defaultMaxAge: 30, // seconds
+    // },
     plugins: [
       responseCachePlugin({
         sessionId: (requestContext) =>

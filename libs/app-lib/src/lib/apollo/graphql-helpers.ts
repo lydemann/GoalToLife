@@ -15,12 +15,13 @@ export function createInCache<ReadQueryResponseT>(
     Record<keyof ReadQueryResponseT, EntityObject[]>
   >({
     query: readQuery,
-    variables: variables,
+    variables,
   });
 
   if (toCreate && existingEntities) {
     cache.writeQuery({
       query: readQuery,
+      variables,
       data: {
         [entityName]: [...existingEntities[entityName], toCreate],
       },
@@ -30,7 +31,7 @@ export function createInCache<ReadQueryResponseT>(
 
 export function removeFromCache<ReadQueryResponseT>(
   toRemove: EntityObject,
-  readQuery: DocumentNode,
+  { readQuery, variables }: { readQuery: DocumentNode; variables?: Object },
   cache: ApolloCache<any>,
   entityName: keyof ReadQueryResponseT
 ) {
@@ -38,11 +39,13 @@ export function removeFromCache<ReadQueryResponseT>(
     Record<keyof ReadQueryResponseT, EntityObject[]>
   >({
     query: readQuery,
+    variables,
   });
 
   if (toRemove && existingEntities) {
     cache.writeQuery({
       query: readQuery,
+      variables,
       data: {
         [entityName]: existingEntities[entityName].filter(
           (entity) => entity.id !== toRemove.id

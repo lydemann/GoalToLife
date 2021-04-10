@@ -11,5 +11,10 @@ export const goalSchema = gql`
 `;
 
 export const goalQuerySchema = `
-    goals(scheduledDate: String): [Goal]
+    goal(scheduledDate: String): [Goal]
+`;
+
+export const goalMutationSchema = `
+  addGoal(name: String!, scheduledDate: String): Goal
+  deleteGoal(id: String!): String
 `;

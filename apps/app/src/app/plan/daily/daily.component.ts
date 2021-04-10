@@ -15,7 +15,7 @@ export class DailyComponent implements OnInit {
   @ViewChildren(TaskComponent) taskComponents: QueryList<TaskComponent>;
 
   categories$: Observable<string[]>;
-  tempTask: Goal;
+  hasTempTask$: Observable<boolean>;
   goals$: Observable<Goal[]>;
   isLoadingGoals$: Observable<boolean>;
 
@@ -32,16 +32,18 @@ export class DailyComponent implements OnInit {
   }
 
   onDelete(task: Task) {
-    if (!task.id) {
-      this.goals$ = this.goals$.pipe(
-        map((tasks) => tasks.filter((task) => !!task.id))
-      );
-    }
+    this.goals$ = this.goals$.pipe(
+      map((tasks) => tasks.filter((task) => !!task.id))
+    );
 
-    this.appFacadeService.deleteTask(task);
+    this.appFacadeService.deleteGoal(task);
   }
 
   onAdd(task: Task) {
+    this.goals$ = this.goals$.pipe(
+      map((tasks) => tasks.filter((task) => !!task.id))
+    );
+
     this.appFacadeService.addGoal(task);
   }
 

@@ -52,6 +52,10 @@ export class TaskComponent implements OnInit {
 
   @HostListener('document:keydown.enter', ['$event'])
   onAdd() {
+    if (!!this.task.id) {
+      return;
+    }
+
     const taskToAdd = {
       ...this.task,
       name: this.taskNameControl.value,

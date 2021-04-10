@@ -1,8 +1,13 @@
-import { goalQueryResolvers } from './goal/goal-resolvers';
+import {
+  goalMutationResolvers,
+  goalQueryResolvers,
+} from './goal/goal-resolvers';
 
 export const resolvers = {
   Query: {
     ...goalQueryResolvers,
   },
-  // Mutation: {},
+  Mutation: {
+    ...goalMutationResolvers,
+  },
 };

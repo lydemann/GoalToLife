@@ -4,8 +4,17 @@ import { Apollo, gql } from 'apollo-angular';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map, pluck } from 'rxjs/operators';
 
-import { createInCache } from '../graphql/graphql-helpers';
+import { createInCache, removeFromCache } from '../apollo/graphql-helpers';
 
+const getGoalsQuery = gql`
+  query getGoalsQuery($scheduledDate: String!) {
+    goal(scheduledDate: $scheduledDate) {
+      id
+      name
+      scheduledDate
+    }
+  }
+`;
 @Injectable({
   providedIn: 'root',
 })
@@ -123,16 +132,6 @@ export class AppFacadeService {
 
   isAddingTask$: Observable<boolean>;
 
-  private getGoalsQuery = gql`
-    query getGoalsQuery($scheduledDate: String!) {
-      goals(scheduledDate: $scheduledDate) {
-        id
-        name
-        scheduledDate
-      }
-    }
-  `;
-
   private isAddingGoalSubject = new BehaviorSubject(false);
   isAddingGoal$ = this.isAddingGoalSubject.asObservable();
 
@@ -142,31 +141,47 @@ export class AppFacadeService {
   getGoals(scheduledDate: string, type: GoalType) {
     this.isLoadingGoalsSubject.next(true);
     return this.apollo
-      .query<{ goals: Goal[] }>({
-        query: this.getGoalsQuery,
+      .watchQuery<{ goal: Goal[] }>({
+        query: getGoalsQuery,
         variables: { scheduledDate },
       })
-      .pipe(
+      .valueChanges.pipe(
         map(({ data }) => {
           this.isLoadingGoalsSubject.next(false);
-          return data.goals;
+          return data.goal;
         })
       );
   }
 
   addGoal(goal: Goal) {
     this.isAddingGoalSubject.next(true);
+    // TODO: use scheduled date form goal
     const mutation = gql`
-      mutation addGoal {
-        addTask(task: Task)
+      mutation addGoal($name: String!) {
+        addGoal(name: $name, scheduledDate: "2021") {
+          name
+          scheduledDate
+        }
       }
     `;
 
     this.apollo
-      .mutate({
+      .mutate<{ addGoal: Goal }>({
         mutation,
+        variables: {
+          name: goal.name,
+          // scheduledDate: goal.scheduledDate,
+        } as Goal,
         update(cache, { data }) {
-          createInCache(goal, { readQuery: this.getGoalsQuery }, cache, 'goal');
+          createInCache(
+            data.addGoal,
+            {
+              readQuery: getGoalsQuery,
+              variables: { scheduledDate: '2021' },
+            },
+            cache,
+            'goal'
+          );
         },
       })
       .pipe(
@@ -179,13 +194,35 @@ export class AppFacadeService {
             return of();
           })
         )
-      );
+      )
+      .subscribe();
   }
 
-  deleteTask(taskToDelete: Task) {
-    const newTasks = this.dailyTasks$.value.filter(
-      (task) => taskToDelete.id !== task.id
-    );
-    this.dailyTasks$.next(newTasks);
+  deleteGoal(goal: Task) {
+    const mutation = gql`
+      mutation deleteGoal($id: String!) {
+        deleteGoal(id: $id)
+      }
+    `;
+
+    return this.apollo
+      .mutate({
+        mutation,
+        variables: {
+          id: goal.id,
+        },
+        update(cache, { data }) {
+          removeFromCache(
+            goal,
+            {
+              readQuery: getGoalsQuery,
+              variables: { scheduledDate: '2021' },
+            },
+            cache,
+            'goal'
+          );
+        },
+      })
+      .subscribe();
   }
 }
