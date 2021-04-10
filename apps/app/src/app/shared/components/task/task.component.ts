@@ -57,7 +57,6 @@ export class TaskComponent implements OnInit {
       name: this.taskNameControl.value,
     } as Task;
     this.add.emit(taskToAdd);
-    this.task.id = `${tempIdPrefix}-${Date.now()}`;
   }
 
   onFocus() {

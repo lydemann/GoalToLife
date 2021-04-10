@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
+import { Goal, GoalType, Task, TaskPeriod } from '@app/shared/interfaces';
+import { Apollo, gql } from 'apollo-angular';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Task, TaskPeriod } from '@app/shared/interfaces';
+import { catchError, map, pluck } from 'rxjs/operators';
+
+import { createInCache } from '../graphql/graphql-helpers';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppFacadeService {
+  constructor(private apollo: Apollo) {}
   dailyTasks$ = new BehaviorSubject([
     {
       id: '1',
@@ -116,6 +120,67 @@ export class AppFacadeService {
 
   yearlyTaskPeriods$ = this.quarterlyTaskPeriods$;
   yearlyCategories$: Observable<string[]> = this.quarterlyCategories$;
+
+  isAddingTask$: Observable<boolean>;
+
+  private getGoalsQuery = gql`
+    query getGoalsQuery($scheduledDate: String!) {
+      goals(scheduledDate: $scheduledDate) {
+        id
+        name
+        scheduledDate
+      }
+    }
+  `;
+
+  private isAddingGoalSubject = new BehaviorSubject(false);
+  isAddingGoal$ = this.isAddingGoalSubject.asObservable();
+
+  private isLoadingGoalsSubject = new BehaviorSubject(false);
+  isLoadingGoals$ = this.isLoadingGoalsSubject.asObservable();
+
+  getGoals(scheduledDate: string, type: GoalType) {
+    this.isLoadingGoalsSubject.next(true);
+    return this.apollo
+      .query<{ goals: Goal[] }>({
+        query: this.getGoalsQuery,
+        variables: { scheduledDate },
+      })
+      .pipe(
+        map(({ data }) => {
+          this.isLoadingGoalsSubject.next(false);
+          return data.goals;
+        })
+      );
+  }
+
+  addGoal(goal: Goal) {
+    this.isAddingGoalSubject.next(true);
+    const mutation = gql`
+      mutation addGoal {
+        addTask(task: Task)
+      }
+    `;
+
+    this.apollo
+      .mutate({
+        mutation,
+        update(cache, { data }) {
+          createInCache(goal, { readQuery: this.getGoalsQuery }, cache, 'goal');
+        },
+      })
+      .pipe(
+        map(
+          ({ data }) => {
+            this.isAddingGoalSubject.next(false);
+          },
+          catchError(() => {
+            this.isAddingGoalSubject.next(false);
+            return of();
+          })
+        )
+      );
+  }
 
   deleteTask(taskToDelete: Task) {
     const newTasks = this.dailyTasks$.value.filter(
