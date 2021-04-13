@@ -1,0 +1,16 @@
+<section>
+  <div class="headers">
+    <div class="day-header" *ngFor="let dayHeader of dayHeaders">
+      {{dayHeader}}
+    </div>
+  </div>
+  <div class="data">
+    <ng-container class="week data" *ngFor="let week of weeks">
+      <app-day *ngFor="let day of week.days"
+               [dayDate]="day"
+               [selected]="selected"
+               [highlited]="highlited"
+               (click)="onDayClick(day.date)"></app-day>
+    </ng-container>
+  </div>
+</section>

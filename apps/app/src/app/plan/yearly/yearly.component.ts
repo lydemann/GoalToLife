@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppFacadeService } from '@app/app-lib';
-import { Goal, TaskPeriod } from '@app/shared/interfaces';
+import { Goal, GoalSummary } from '@app/shared/interfaces';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./yearly.component.scss']
 })
 export class YearlyComponent implements OnInit {
-  taskPeriods$: Observable<TaskPeriod[]>;
+  taskPeriods$: Observable<GoalSummary[]>;
   goalsForPeriod: Goal[] = [
     {
       id: 'quarterly-goal-1',
@@ -26,6 +26,6 @@ export class YearlyComponent implements OnInit {
 
   ngOnInit() {
     this.categories$ = this.appFacadeService.yearlyCategories$;
-    this.taskPeriods$ = this.appFacadeService.yearlyTaskPeriods$;
+    // this.taskPeriods$ = this.appFacadeService.yearlyTaskPeriods$;
   }
 }

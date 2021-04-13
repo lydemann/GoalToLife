@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Goal, GoalType, Task, TaskPeriod } from '@app/shared/interfaces';
+import { Goal, GoalSummary, GoalType, Task } from '@app/shared/interfaces';
 import { Apollo, gql } from 'apollo-angular';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map, pluck } from 'rxjs/operators';
 
-import { createInCache, removeFromCache } from '../apollo/graphql-helpers';
+import { createInCache, removeFromCache } from '../graphql/graphql-helpers';
 
 const getGoalsQuery = gql`
   query getGoalsQuery($scheduledDate: String!) {
@@ -45,84 +45,36 @@ export class AppFacadeService {
     map((categories) => [...new Set(categories)])
   );
   monthlyCategories$ = this.dailyCategories$;
-  monthlyTaskPeriods$ = of([
-    {
-      date: new Date(2021, 3, 27),
+  monthlyTaskPeriods$ = of({
+    '2021-04-12': {
       goals: [
         {
           id: '1',
-          name: 'Do laundry',
-        } as Task,
-        {
-          id: '2',
-          name: 'Buy milk',
-          categories: ['groceries'],
-        } as Task,
-        {
-          id: '3',
-          name: 'Run 10k',
-          categories: ['fitness'],
-        },
-      ],
-    } as TaskPeriod,
-    {
-      date: new Date(2021, 3, 27),
-      goals: [
+          name: 'some goal alal 2',
+        } as Goal,
         {
           id: '1',
-          name: 'Do laundry',
-        } as Task,
-        {
-          id: '2',
-          name: 'Buy milk',
-          categories: ['groceries'],
-        } as Task,
-        {
-          id: '3',
-          name: 'Run 10k',
-          categories: ['fitness'],
-        },
-      ],
-    } as TaskPeriod,
-    {
-      date: new Date(2021, 3, 27),
-      goals: [
+          name: 'some goal alal 2',
+        } as Goal,
         {
           id: '1',
-          name: 'Do laundry',
-        } as Task,
-        {
-          id: '2',
-          name: 'Buy milk',
-          categories: ['groceries'],
-        } as Task,
-        {
-          id: '3',
-          name: 'Run 10k',
-          categories: ['fitness'],
-        },
-      ],
-    } as TaskPeriod,
-    {
-      date: new Date(2021, 3, 27),
-      goals: [
+          name: 'some goal alal 2',
+        } as Goal,
         {
           id: '1',
-          name: 'Do laundry',
-        } as Task,
+          name: 'some goal alal 2',
+        } as Goal,
         {
-          id: '2',
-          name: 'Buy milk',
-          categories: ['groceries'],
-        } as Task,
+          id: '1',
+          name: 'some goal alal 2',
+        } as Goal,
         {
-          id: '3',
-          name: 'Run 10k',
-          categories: ['fitness'],
-        },
+          id: '1',
+          name: 'some goal alal 2',
+        } as Goal,
       ],
-    } as TaskPeriod,
-  ]);
+    } as GoalSummary,
+  } as Record<string, GoalSummary>);
 
   quarterlyCategories$ = this.monthlyCategories$;
   quarterlyTaskPeriods$ = this.monthlyTaskPeriods$;

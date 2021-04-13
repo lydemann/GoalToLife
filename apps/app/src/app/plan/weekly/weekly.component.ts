@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppFacadeService } from '@app/app-lib';
-import { TaskPeriod, Goal, Task } from '@app/shared/interfaces';
+import { GoalSummary, Goal, Task } from '@app/shared/interfaces';
 import { Observable } from 'rxjs';
 @Component({
   selector: 'app-weekly',
@@ -19,7 +19,7 @@ export class WeeklyComponent implements OnInit {
     } as Goal,
   ];
 
-  days: TaskPeriod[] = [
+  days: GoalSummary[] = [
     {
       date: new Date(2021, 3, 15),
       goals: [
@@ -38,7 +38,7 @@ export class WeeklyComponent implements OnInit {
           categories: ['fitness'],
         } as Goal,
       ],
-    } as TaskPeriod,
+    } as GoalSummary,
     {
       date: new Date(2021, 3, 16),
       goals: [
@@ -57,7 +57,7 @@ export class WeeklyComponent implements OnInit {
           categories: ['fitness'],
         } as Goal,
       ],
-    } as TaskPeriod,
+    } as GoalSummary,
     {
       date: new Date(2021, 3, 17),
       goals: [
@@ -76,7 +76,7 @@ export class WeeklyComponent implements OnInit {
           categories: ['fitness'],
         } as Goal,
       ],
-    } as TaskPeriod,
+    } as GoalSummary,
     {
       date: new Date(2021, 3, 18),
       goals: [
@@ -95,7 +95,7 @@ export class WeeklyComponent implements OnInit {
           categories: ['fitness'],
         } as Goal,
       ],
-    } as TaskPeriod,
+    } as GoalSummary,
     {
       date: new Date(2021, 3, 19),
       goals: [
@@ -114,7 +114,7 @@ export class WeeklyComponent implements OnInit {
           categories: ['fitness'],
         } as Goal,
       ],
-    } as TaskPeriod,
+    } as GoalSummary,
     {
       date: new Date(2021, 3, 20),
       goals: [
@@ -133,7 +133,7 @@ export class WeeklyComponent implements OnInit {
           categories: ['fitness'],
         } as Goal,
       ],
-    } as TaskPeriod,
+    } as GoalSummary,
     {
       date: new Date(2021, 3, 21),
       goals: [
@@ -152,7 +152,7 @@ export class WeeklyComponent implements OnInit {
           categories: ['fitness'],
         } as Goal,
       ],
-    } as TaskPeriod,
+    } as GoalSummary,
   ];
   categories$: Observable<string[]>;
 

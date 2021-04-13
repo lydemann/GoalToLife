@@ -6,6 +6,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { Endpoints, ENDPOINTS_TOKEN, GraphQLModule } from '@app/app-lib';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { LocalStorageModule } from 'angular-2-local-storage';
 import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -37,6 +38,10 @@ export function endpointsFactory() {
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    LocalStorageModule.forRoot({
+      prefix: 'my-app',
+      storageType: 'localStorage',
+    }),
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

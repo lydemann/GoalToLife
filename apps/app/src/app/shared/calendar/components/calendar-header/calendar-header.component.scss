@@ -1,0 +1,36 @@
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px 10px;
+  background-color: #FCFCFC;
+  color: #999999;
+
+  .month-title-holder {
+    text-align: center;
+    font-weight: bold;
+    margin: 0;
+    padding-top: 2px;
+  }
+
+  button {
+    border-radius: 99999999px;
+    height: 37px;
+    font-weight: bold;
+    width: 38px;
+    background: none;
+    border-color: #DFDFDF;
+  }
+
+  .back-button-holder {
+    button {
+      padding-left: 9px;
+    }
+  }
+
+  .forward-btn-holder {
+    button {
+      padding-left: 14px;
+    }
+  }
+}
