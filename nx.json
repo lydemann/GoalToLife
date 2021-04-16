@@ -14,6 +14,8 @@
     "app-e2e": { "tags": [], "implicitDependencies": ["app"] },
     "app-lib": { "tags": ["scope:app", "type:app"] },
     "shared-interfaces": { "tags": ["scope:shared"] },
-    "service": { "tags": ["scope:service", "type:app"] }
+    "service": { "tags": ["scope:service", "type:app"] },
+    "app-lib-features-plan": { "tags": ["type:feat", "scope:app"] },
+    "app-lib-shared-ui": { "tags": ["scope:app"] }
   }
 }

@@ -1,0 +1,40 @@
+:host {
+  section {
+    width: 100%;
+    height: 100%;
+    // TOOD: min width + overflow auto
+    display: flex;
+    flex-direction: column;
+
+    .headers {
+      flex-grow: 5;
+      display: flex;
+      align-items: center;
+      height: 30px;
+      background: #d5d5d5;
+      text-transform: uppercase;
+      font-weight: bold;
+      box-shadow: inset 0px 1px 5px #999999;
+      padding: 5px 0;
+
+      .day-header {
+        flex-grow: 1;
+        text-align: center;
+        height: 100%;
+        color: #777777;
+        font-size: 1.1em;
+      }
+    }
+    .data {
+      flex-grow: 88;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      background: #ffffff;
+
+      app-day {
+        width: calc(100% * 1 / 7);
+      }
+    }
+  }
+}

@@ -9,7 +9,7 @@ export const goalSchema = gql`
     completed: Boolean
   }
 
-  type GoalSummary {
+  type GoalPeriod {
     date: String
     goals: [Goal]
   }
@@ -17,7 +17,7 @@ export const goalSchema = gql`
 
 export const goalQuerySchema = `
     goal(scheduledDate: String): [Goal]
-    dailySummaries(month: Int, fromDate: String, toDate: String): [GoalSummary]
+    goalPeriod(fromDate: String, toDate: String): [GoalPeriod]
 `;
 
 export const goalMutationSchema = `

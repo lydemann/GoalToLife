@@ -1,0 +1,33 @@
+<div class="todo-wrapper">
+  <div class="todo-list-wrapper">
+    <ul class="list-group">
+      <li
+        *ngFor="let todo of goals; let i = index"
+        class="{{ todoDOMClass }}-{{ todo.id }} list-group-item"
+        [draggable]="isDraggable()"
+        [makeDraggable]="todo"
+        [helperClass]="todoDOMClass"
+      >
+        <span>{{ todo.name }}</span>
+        <span
+          *ngIf="editable === true"
+          (click)="onDeleteTODO(todo)"
+          class="badge badge-default bg-danger"
+        >
+          <i class="fa fa-times"></i>
+        </span>
+      </li>
+    </ul>
+  </div>
+  <!-- <app-task *ngIf="editable === true"></app-task> -->
+  <form *ngIf="editable === true" (submit)="onAddTODO($event)">
+    <textarea
+      (keyup.control.enter)="onAddTODO($event)"
+      [formControl]="todoTextControl"
+      class="form-control"
+      name="todoText"
+      autocomplete="off"
+      placeholder="Enter - add event"
+    ></textarea>
+  </form>
+</div>

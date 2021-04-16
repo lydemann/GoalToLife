@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Goal, GoalSummary, GoalType, Task } from '@app/shared/interfaces';
+import { getDailyGoalKey } from '@app/app-lib/shared/ui';
+import { Goal, GoalPeriod, GoalPeriodType, Task } from '@app/shared/interfaces';
 import { Apollo, gql } from 'apollo-angular';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, map, pluck } from 'rxjs/operators';
+import { catchError, map, pluck, startWith } from 'rxjs/operators';
 
 import { createInCache, removeFromCache } from '../graphql/graphql-helpers';
 
@@ -15,11 +16,24 @@ const getGoalsQuery = gql`
     }
   }
 `;
+
+const getGoalPeriodsQuery = gql`
+  query goalGoalPeriodsQuery($fromDate: String, $toDate: String) {
+    goalPeriod(fromDate: $fromDate, toDate: $toDate) {
+      date
+      goals {
+        name
+      }
+    }
+  }
+`;
 @Injectable({
   providedIn: 'root',
 })
 export class AppFacadeService {
   constructor(private apollo: Apollo) {}
+
+  monthlyGoalPeriods$: Observable<Record<string, GoalPeriod>>;
   dailyTasks$ = new BehaviorSubject([
     {
       id: '1',
@@ -45,39 +59,9 @@ export class AppFacadeService {
     map((categories) => [...new Set(categories)])
   );
   monthlyCategories$ = this.dailyCategories$;
-  monthlyTaskPeriods$ = of({
-    '2021-04-12': {
-      goals: [
-        {
-          id: '1',
-          name: 'some goal alal 2',
-        } as Goal,
-        {
-          id: '1',
-          name: 'some goal alal 2',
-        } as Goal,
-        {
-          id: '1',
-          name: 'some goal alal 2',
-        } as Goal,
-        {
-          id: '1',
-          name: 'some goal alal 2',
-        } as Goal,
-        {
-          id: '1',
-          name: 'some goal alal 2',
-        } as Goal,
-        {
-          id: '1',
-          name: 'some goal alal 2',
-        } as Goal,
-      ],
-    } as GoalSummary,
-  } as Record<string, GoalSummary>);
 
   quarterlyCategories$ = this.monthlyCategories$;
-  quarterlyTaskPeriods$ = this.monthlyTaskPeriods$;
+  quarterlyTaskPeriods$ = of();
 
   yearlyTaskPeriods$ = this.quarterlyTaskPeriods$;
   yearlyCategories$: Observable<string[]> = this.quarterlyCategories$;
@@ -90,7 +74,35 @@ export class AppFacadeService {
   private isLoadingGoalsSubject = new BehaviorSubject(false);
   isLoadingGoals$ = this.isLoadingGoalsSubject.asObservable();
 
-  getGoals(scheduledDate: string, type: GoalType) {
+  getMonthlyGoalPeriods(month: number, year: number): Observable<Record<string, GoalPeriod>> {
+    const date = new Date();
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+
+    const fromDate = getDailyGoalKey(firstDay);
+    const toDate = getDailyGoalKey(lastDay);
+
+    return this.apollo
+      .query<{goalPeriod: GoalPeriod[]}>({
+        query: getGoalPeriodsQuery,
+        variables: {
+          fromDate,
+          toDate,
+        },
+      })
+      .pipe(
+        map(({ data }) => {
+          const goaPeriodMap = data.goalPeriod.reduce((prev, goalPeriod) => ({
+            ...prev,
+            [goalPeriod.date]: goalPeriod,
+          }), {});
+          return goaPeriodMap;
+        }),
+        startWith({})
+      )
+  }
+
+  getGoals(scheduledDate: string, type: GoalPeriodType) {
     this.isLoadingGoalsSubject.next(true);
     return this.apollo
       .watchQuery<{ goal: Goal[] }>({
@@ -109,8 +121,8 @@ export class AppFacadeService {
     this.isAddingGoalSubject.next(true);
     // TODO: use scheduled date form goal
     const mutation = gql`
-      mutation addGoal($name: String!) {
-        addGoal(name: $name, scheduledDate: "2021") {
+      mutation addGoal($name: String!, $type: String!, $scheduledDate: String) {
+        addGoal(name: $name, type: $type, scheduledDate: $scheduledDate) {
           name
           scheduledDate
         }
@@ -122,6 +134,8 @@ export class AppFacadeService {
         mutation,
         variables: {
           name: goal.name,
+          type: goal.type,
+          scheduledDate: goal.scheduledDate,
           // scheduledDate: goal.scheduledDate,
         } as Goal,
         update(cache, { data }) {

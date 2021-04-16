@@ -12,17 +12,18 @@ interface GoalsInput {
   scheduledDate: string;
 }
 
-const enrichGoalSummary = async (
-  goalSummary: GoalPeriodFirebase
+const enrichGoalPeriod = async (
+  goalPeriod: GoalPeriodFirebase
 ): Promise<GoalPeriod> => {
-  const goalsPromises = goalSummary.goals.map((goalId) => {
-    return (firestoreDB
+  const goalsPromises = goalPeriod.goals.map(async (goalId) => {
+    const snap = await firestoreDB
       .doc(`/users/haOhlwjhAfRIOFGhHuJS/goals/${goalId}`)
-      .get() as unknown) as Promise<Goal>;
+      .get();
+    return {id: snap.id, ...snap.data()} as Goal
   });
   const goals = await Promise.all(goalsPromises);
   return {
-    ...goalSummary,
+    ...goalPeriod,
     goals,
   } as GoalPeriod;
 };
@@ -37,31 +38,31 @@ export const goalQueryResolvers = {
 
     return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as Goal));
   }),
-  // TODO: name goalPeriods
-  dailySummaries: createResolver<DailySummariesInput>(
+  goalPeriod: createResolver<DailySummariesInput>(
     async (_, { fromDate, toDate }) => {
-      const goalSummariesSnapshot = await firestoreDB
-        .collection('/users/haOhlwjhAfRIOFGhHuJS/goalSummaries')
+      const goalPeriodSnapshot = await firestoreDB
+        .collection('/users/haOhlwjhAfRIOFGhHuJS/goalPeriods')
         // TODO: get for type
         .where('date', '<=', toDate)
         .where('date', '>=', fromDate)
         .get();
 
-      const goalSummariesFirebase = goalSummariesSnapshot.docs.map(
+      const goalPeriodFirebase = goalPeriodSnapshot.docs.map(
         (doc) => doc.data() as GoalPeriodFirebase
       );
-      const goalSummaries = await Promise.all(
-        goalSummariesFirebase.map(async (goalSummary) => {
-          return enrichGoalSummary(goalSummary);
+      const goalPeriods = await Promise.all(
+        goalPeriodFirebase.map(async (goalPeriod) => {
+          return enrichGoalPeriod(goalPeriod);
         })
       );
 
-      return goalSummaries;
+      return goalPeriods;
     }
   ),
 };
 
 interface AddGoalInput {
+  id: string;
   name: string;
   type: GoalPeriodType;
   scheduledDate?: string;
@@ -80,11 +81,11 @@ interface DeleteGoalInput {
 
 export const goalMutationResolvers = {
   addGoal: createResolver<AddGoalInput>(
-    async (_, { name, type, scheduledDate = null, goalIndex = null }) => {
+    async (_, { id, name, type, scheduledDate = null, goalIndex = null }) => {
       // TODO: setup security
       const newGoalRef = firestoreDB
         .collection('/users/haOhlwjhAfRIOFGhHuJS/goals')
-        .doc();
+        .doc(id);
       const newGoal = {
         id: newGoalRef.id,
         name,
@@ -102,13 +103,14 @@ export const goalMutationResolvers = {
         const prevGoalPeriodSnap = await goalPeriodRef.get();
         const prevGoalPeriod: GoalPeriodFirebase =
           (prevGoalPeriodSnap.data() as GoalPeriodFirebase) ||
-          ({ goals: [] } as GoalPeriodFirebase);
+          ({date: scheduledDate, goals: [] } as GoalPeriodFirebase);
         const prevGoals = prevGoalPeriod.goals;
         let updatedGoals = [...prevGoals];
-        if (
-          goalIndex !== undefined &&
+        const hasExistingGoalPeriod = goalIndex !== undefined &&
           goalIndex >= 0 &&
-          goalIndex <= prevGoals.length
+          goalIndex <= prevGoals.length;
+        if (
+          hasExistingGoalPeriod
         ) {
           updatedGoals.splice(goalIndex, 0, newGoalRef.id);
         } else {

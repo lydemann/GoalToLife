@@ -1,7 +1,7 @@
 {
   "version": 1,
   "cli": {
-    "defaultCollection": "@ionic/angular-toolkit"
+    "defaultCollection": "@nrwl/angular"
   },
   "defaultProject": "app",
   "schematics": {
@@ -315,6 +315,62 @@
           "outputs": ["coverage/apps/service"],
           "options": {
             "jestConfig": "apps/service/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "app-lib-shared-ui": {
+      "root": "libs/app-lib/shared/ui",
+      "sourceRoot": "libs/app-lib/shared/ui/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/app-lib/shared/ui/tsconfig.lib.json",
+              "libs/app-lib/shared/ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/app-lib/shared/ui/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/app-lib/shared/ui"],
+          "options": {
+            "jestConfig": "libs/app-lib/shared/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "app-lib-features-plan": {
+      "root": "libs/app-lib/features/plan",
+      "sourceRoot": "libs/app-lib/features/plan/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/app-lib/features/plan/tsconfig.lib.json",
+              "libs/app-lib/features/plan/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/app-lib/features/plan/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/app-lib/features/plan"],
+          "options": {
+            "jestConfig": "libs/app-lib/features/plan/jest.config.js",
             "passWithNoTests": true
           }
         }
