@@ -1,14 +1,17 @@
 import {
   Component,
-  OnInit,
-  OnChanges,
-  Input,
-  Output,
+  ElementRef,
   EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  TemplateRef,
+  ViewChild,
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Goal, GoalPeriodType } from '@app/shared/interfaces';
-
+import { IonTextarea } from '@ionic/angular';
 import { Error } from 'tslint/lib/error';
 
 import { TODOItem } from '../../classes/todo-item';
@@ -21,6 +24,7 @@ import { TODOService } from '../../services/todo.service';
   providers: [TODOService],
 })
 export class TODOListComponent implements OnInit, OnChanges {
+  @ViewChild('addTodoText') textArea: IonTextarea;
   /*
    * PRIVATE variables
    * list of TODOs in day
@@ -37,7 +41,21 @@ export class TODOListComponent implements OnInit, OnChanges {
 
   @Input() goals: Goal[] = [];
   @Input() refreshRequired: Date = null;
-  @Input() editable: boolean = true;
+
+  private _editable = true;
+  public get editable(): boolean {
+    return this._editable;
+  }
+  @Input()
+  public set editable(v: boolean) {
+    this._editable = v;
+    if (v) {
+      setTimeout(() => {
+        this.textArea.setFocus();
+      });
+    }
+  }
+
   @Input() droppedTodo: TODOItem;
   @Output() addTodo = new EventEmitter<Goal>();
   @Output() deleteTodo = new EventEmitter<Goal>();
@@ -71,30 +89,23 @@ export class TODOListComponent implements OnInit, OnChanges {
    * PUBLIC VARIABLES to manage interaction and render UI
    */
 
-  todoDOMClass: string = 'todoItemClass';
+  todoDOMClass = 'todoItemClass';
 
   /*
    * Output: emitting true if list of TODOs changed
    */
-  @Output('onTodoListChange')
+  @Output()
   listChanged: EventEmitter<Boolean> = new EventEmitter();
-
-  /*
-   * Various checks
-   */
-  isEditable(): boolean {
-    return this.editable;
-  }
 
   isDraggable(): boolean {
     return this.draggable;
   }
 
   // method to get TODO list
-  getTODOList () : void {
+  getTODOList(): void {
     // this.todoService.getList(this._dayDate).then(todos => {
-      // this.goals = todos;
-      this.listChanged.emit(true);
+    // this.goals = todos;
+    this.listChanged.emit(true);
     // });
   }
 
@@ -103,23 +114,23 @@ export class TODOListComponent implements OnInit, OnChanges {
     event.preventDefault();
 
     // TODO: check if valid, using require validator
-    if(this.todoTextControl.invalid) {
+    if (this.todoTextControl.invalid) {
       return;
     }
 
-    this.addTodo.emit({name: this.todoTextControl.value} as Goal)
+    this.addTodo.emit({ name: this.todoTextControl.value } as Goal);
   }
 
   // method to remove TODO from list
   onDeleteTODO(goal: Goal): void {
-    this.deleteTodo.next(goal)
+    this.deleteTodo.next(goal);
     return;
   }
 
   // handling drag-and-drop's drop event to store TODO
   onDrop(event: any, data?: any): void {
     // target is day (generally)
-    if (data == undefined) {
+    if (data === undefined) {
       // if drop into empty space in day, then - update date and put the item into beginning of the list
       // this.todoService
       //   .changeTodoDate(event, this._dayDate)
@@ -136,7 +147,7 @@ export class TODOListComponent implements OnInit, OnChanges {
 
   // initializing list
   ngOnInit(): void {
-    this.todoTextControl = new FormControl(null, [Validators.required])
+    this.todoTextControl = new FormControl(null, [Validators.required]);
   }
 
   // listening on incoming changes to handle "drop" and "refresh" of other components

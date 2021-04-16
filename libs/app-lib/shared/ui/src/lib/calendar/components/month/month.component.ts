@@ -1,5 +1,13 @@
-import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Goal, GoalPeriod as GoalPeriod } from '@app/shared/interfaces';
+
 import { getDailyGoalKey } from '../../../utils/goal-utils';
 import { DayDate } from '../../classes/day-date';
 import { Week } from '../../classes/weeks';
@@ -61,11 +69,18 @@ export class MonthComponent implements OnInit, OnChanges {
     this.weeks = [];
   }
 
+  weeksTrackBy(item: Week, idx) {
+    return idx;
+  }
+  daysTrackBy(item: DayDate, idx) {
+    return idx;
+  }
+
   /*
    * Helper method to add days to some date
    */
   private _addDays(date: Date, days: number = 1): Date {
-    let result = new Date(date);
+    const result = new Date(date);
     result.setDate(result.getDate() + days);
     return result;
   }
@@ -74,16 +89,17 @@ export class MonthComponent implements OnInit, OnChanges {
    * Helper method to build week: generates sequence of days and sets their attributes
    */
   private _buildWeek(start: Date, month: number): DayDate[] {
-    let days: DayDate[] = [];
+    const days: DayDate[] = [];
     let date: Date = new Date(start.setHours(0, 0, 0, 0));
-    for (var i = 0; i < 7; i++) {
+    for (let i = 0; i < 7; i++) {
       const dailyGoalKey = getDailyGoalKey(date);
       const goals = this.goalPeriods[dailyGoalKey]?.goals || [];
+      const isSelected = date?.getTime() === this.selected?.getTime();
       days.push({
         date,
         month,
         goals,
-        isSelected: false
+        isSelected,
       });
       date = this._addDays(date, 1);
     }
@@ -94,14 +110,14 @@ export class MonthComponent implements OnInit, OnChanges {
    * Helper method to build month of weeks: generates sequence of weeks and sets their attributes
    */
   private _buildMonth(): void {
-    let month: number = this._calendarDate.getMonth();
+    const month: number = this._calendarDate.getMonth();
     let firstDay: Date = this._calendarDate;
 
     /* getting start date of month (weird part):
        not calendar one, but 35-cell one - not necessary this is 1st of, e.g., January
     */
-    while (firstDay.getDay() == 0 ? 7 : firstDay.getDay() >= 1) {
-      if (firstDay.getDay() == 1) {
+    while (firstDay.getDay() === 0 ? 7 : firstDay.getDay() >= 1) {
+      if (firstDay.getDay() === 1) {
         break;
       } else {
         firstDay = this._addDays(firstDay, -1);
@@ -115,12 +131,12 @@ export class MonthComponent implements OnInit, OnChanges {
     }
 
     // Removing last week if it does not belong to current month (checking only 1st day)
-    let weekRemoveException = new Error(
+    const weekRemoveException = new Error(
       'Error occured while removing last week of month.'
     );
     try {
       if (
-        this.weeks[5]['days'][0].month !=
+        this.weeks[5]['days'][0].month !==
         new Date(this.weeks[5]['days'][0].date).getMonth()
       ) {
         this.weeks.splice(5, 1);
@@ -143,7 +159,6 @@ export class MonthComponent implements OnInit, OnChanges {
   // listening to change of month to refresh calendar
   ngOnChanges(changes: any): void {
     this.weeks = [];
-    this.selected = null;
     this._buildMonth();
   }
 

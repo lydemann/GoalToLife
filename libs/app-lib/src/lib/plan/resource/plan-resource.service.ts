@@ -59,8 +59,18 @@ export class PlanResourceService {
   addGoal(goal: Goal) {
     // TODO: use scheduled date form goal
     const mutation = gql`
-      mutation addGoal($id: String!, $name: String!, $type: String!, $scheduledDate: String) {
-        addGoal(id: $id, name: $name, type: $type, scheduledDate: $scheduledDate) {
+      mutation addGoal(
+        $id: String!
+        $name: String!
+        $type: String!
+        $scheduledDate: String
+      ) {
+        addGoal(
+          id: $id
+          name: $name
+          type: $type
+          scheduledDate: $scheduledDate
+        ) {
           id
           name
           scheduledDate

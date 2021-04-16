@@ -21,6 +21,6 @@ export const goalQuerySchema = `
 `;
 
 export const goalMutationSchema = `
-  addGoal(name: String!, type: String!, scheduledDate: String, goalIndex: Int): Goal
+  addGoal(id: String, name: String!, type: String!, scheduledDate: String, goalIndex: Int): Goal
   deleteGoal(id: String!): String
 `;

@@ -5,9 +5,9 @@
     </div>
   </div>
   <div class="data">
-    <ng-container class="week data" *ngFor="let week of weeks">
+    <ng-container class="week data" *ngFor="let week of weeks; weeksTrackBy">
       <app-day
-        *ngFor="let day of week.days"
+        *ngFor="let day of week.days; trackBy: daysTrackBy"
         [dayDate]="day"
         [selected]="selected"
         [highlited]="highlited"

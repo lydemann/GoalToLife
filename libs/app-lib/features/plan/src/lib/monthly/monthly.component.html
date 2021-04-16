@@ -5,7 +5,7 @@
   [categories]="categories$ | async"
 ></app-header>
 
-<ion-content>
+<ion-content [fullscreen]="true" [scrollX]="true" class="content">
   <div class="ion-padding-top ion-text-center">
     <app-task-group
       [title]="'Monthly goals'"

@@ -8,6 +8,7 @@
         [makeDraggable]="todo"
         [helperClass]="todoDOMClass"
       >
+        <ion-checkbox> </ion-checkbox>
         <span>{{ todo.name }}</span>
         <span
           *ngIf="editable === true"
@@ -21,13 +22,14 @@
   </div>
   <!-- <app-task *ngIf="editable === true"></app-task> -->
   <form *ngIf="editable === true" (submit)="onAddTODO($event)">
-    <textarea
+    <ion-textarea
+      #addTodoText
       (keyup.control.enter)="onAddTODO($event)"
       [formControl]="todoTextControl"
       class="form-control"
       name="todoText"
       autocomplete="off"
       placeholder="Enter - add event"
-    ></textarea>
+    ></ion-textarea>
   </form>
 </div>
