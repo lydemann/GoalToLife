@@ -3,7 +3,7 @@ import { Goal, GoalPeriod } from '@app/shared/interfaces';
 import { produce } from 'immer';
 import { Observable } from 'rxjs';
 
-import { PlanResourceService } from './resources/plan-resource.service';
+import { PlanResourceService } from './resource/plan-resource.service';
 import { PlanStateService } from './state/plan-state.service';
 
 @Injectable({
@@ -37,7 +37,7 @@ export class PlanFacadeService {
         draft[goal.scheduledDate] || ({ goals: [] } as GoalPeriod);
       draft[goal.scheduledDate] = {
         ...goalPeriod,
-        goals: [...goalPeriod.goals, goal ],
+        goals: [...goalPeriod.goals, goal],
       } as GoalPeriod;
 
       return draft;
