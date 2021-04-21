@@ -40,6 +40,10 @@ export class EditGoalModalComponent implements OnInit, EditModalComponentProps {
       return;
     }
 
-    this.modalController.dismiss();
+    this.modalController.dismiss({
+      id: this.goal.id,
+      name: this.formGroup.value.name,
+      completed: this.formGroup.value.completed,
+    } as Goal);
   }
 }

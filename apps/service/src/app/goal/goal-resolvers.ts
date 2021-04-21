@@ -1,4 +1,5 @@
 import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
+import { ApolloError } from 'apollo-server-express';
 import admin from 'firebase-admin';
 
 import { firestoreDB } from '../firestore';
@@ -69,6 +70,10 @@ interface AddGoalInput {
   goalIndex?: number;
 }
 
+interface UpdateGoalInput extends Partial<Goal> {
+  goalIndex?: number;
+}
+
 interface DailySummariesInput {
   month: number;
   fromDate: string;
@@ -122,6 +127,19 @@ export const goalMutationResolvers = {
       return newGoal;
     }
   ),
+  updateGoal: createResolver<UpdateGoalInput>(async (_, payload) => {
+    const goalRef = firestoreDB.doc(
+      `/users/haOhlwjhAfRIOFGhHuJS/goals/${payload.id}`
+    );
+
+    const goalSnapShot = await goalRef.get();
+    if (!goalSnapShot.exists) {
+      throw new ApolloError("Goal doesn't exist");
+    }
+
+    await goalRef.update(payload);
+    return await goalSnapShot.data();
+  }),
   deleteGoal: createResolver<DeleteGoalInput>(async (_, { id }) => {
     const goalRef = firestoreDB.doc(`/users/haOhlwjhAfRIOFGhHuJS/goals/${id}`);
     const goalSnap = await goalRef.get();

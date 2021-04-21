@@ -18,6 +18,7 @@
       (addTodo)="onAddTodo($event)"
       (deleteTodo)="onDeleteTodo($event)"
       (editTodo)="editTodo.next($event)"
+      (toggleComplete)="toggleComplete.emit($event)"
     ></app-todolist>
   </div>
 </div>

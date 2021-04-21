@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Goal, GoalPeriod, GoalPeriodStore } from '@app/shared/interfaces';
-import { produce } from 'immer';
+import { Goal, GoalPeriod } from '@app/shared/interfaces';
 import { Observable } from 'rxjs';
 
 import { PlanResourceService } from './resource/plan-resource.service';
 import { GoalPeriodsQuery } from './state/goal-periods/goal-periods.query';
 import { GoalPeriodsStore } from './state/goal-periods/goal-periods.store';
-import { GoalsQuery } from './state/goals/goals.query';
 import { GoalsStore } from './state/goals/goals.store';
 
 @Injectable({
@@ -23,7 +21,7 @@ export class PlanFacadeService {
     private goalPeriodsStore: GoalPeriodsStore,
     private goalPeriodsQuery: GoalPeriodsQuery
   ) {
-    this.goalPeriods$ = this.goalPeriodsQuery.select((state) => state.entities);
+    this.goalPeriods$ = this.goalPeriodsQuery.entities$;
     this.isLoadingGoalPeriods$ = this.goalPeriodsQuery.selectLoading();
   }
 
@@ -32,14 +30,14 @@ export class PlanFacadeService {
     this.planResourceService
       .getMonthlyGoalPeriods(month, year)
       .subscribe(({ data }) => {
-        this.goalPeriodsStore.add(data.goalPeriod);
+        this.goalPeriodsStore.addGoalPeriod(data.goalPeriod);
         this.goalPeriodsStore.setLoading(false);
       });
   }
 
   addGoal(goal: Goal) {
     this.goalPeriodsStore.addGoal(goal);
-    this.planResourceService.addGoal(goal).subscribe(({ errors, data }) => {
+    this.planResourceService.addGoal(goal).subscribe(({ errors }) => {
       if (!!errors) {
         this.goalsStore.setError(errors[0]);
         return;
@@ -49,7 +47,7 @@ export class PlanFacadeService {
 
   updateGoal(goal: Goal) {
     this.goalsStore.upsert(goal.id, goal);
-    this.planResourceService.updateGoal(goal).subscribe(({ errors, data }) => {
+    this.planResourceService.updateGoal(goal).subscribe(({ errors }) => {
       if (!!errors) {
         this.goalsStore.setError(errors[0]);
         return;

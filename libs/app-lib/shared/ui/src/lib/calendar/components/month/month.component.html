@@ -15,6 +15,7 @@
         (addTodo)="onAddTodo($event)"
         (deleteTodo)="onDeleteTodo($event)"
         (editTodo)="editTodo.next($event)"
+        (toggleComplete)="toggleComplete.emit($event)"
       ></app-day>
     </ng-container>
   </div>

@@ -1,4 +1,4 @@
-import { GoalPeriod } from '@app/shared/interfaces';
+import { GoalPeriodStore } from '@app/shared/interfaces';
 import { EntityState } from '@datorama/akita';
 
 /**
@@ -7,4 +7,5 @@ import { EntityState } from '@datorama/akita';
  * @export
  * @interface GoalPeriodsState
  */
-export interface GoalPeriodsState extends EntityState<GoalPeriod, string> {}
+export interface GoalPeriodsState
+  extends EntityState<GoalPeriodStore, string> {}

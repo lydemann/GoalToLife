@@ -60,6 +60,7 @@ export class TODOListComponent implements OnInit, OnChanges {
   @Output() addTodo = new EventEmitter<Goal>();
   @Output() deleteTodo = new EventEmitter<Goal>();
   @Output() editTodo = new EventEmitter<Goal>();
+  @Output() toggleComplete = new EventEmitter<Goal>();
   todoTextControl: FormControl;
 
   // set todos(todos: TODOItem[]) {
@@ -167,7 +168,16 @@ export class TODOListComponent implements OnInit, OnChanges {
     }
   }
 
-  onTodoItemClick(goal: Goal) {
+  onTodoItemClick(goal: Goal, event: Event) {
+    event.stopPropagation();
     this.editTodo.next(goal);
+  }
+
+  onToggleComplete(goal: Goal, event: Event) {
+    event.stopPropagation();
+    this.toggleComplete.emit({
+      ...goal,
+      completed: !goal.completed,
+    });
   }
 }

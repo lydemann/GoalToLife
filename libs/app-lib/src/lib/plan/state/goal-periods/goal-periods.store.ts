@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Goal, GoalPeriod } from '@app/shared/interfaces';
+import { Goal, GoalPeriod, GoalPeriodStore } from '@app/shared/interfaces';
 import { EntityStore, OrArray, StoreConfig } from '@datorama/akita';
 import produce from 'immer';
 
@@ -27,35 +27,44 @@ export class GoalPeriodsStore extends EntityStore<GoalPeriodsState> {
     super(createInitialState());
   }
 
-  add(goalPeriod: OrArray<GoalPeriod>) {
-    super.add(goalPeriod);
-
-    let goals = [];
+  addGoalPeriod(goalPeriod: OrArray<GoalPeriod>) {
+    let goals: Goal[] = [];
 
     if (goalPeriod instanceof Array) {
       // TODO: handle nested goals
       goals = goalPeriod.reduce((prev, cur) => [...prev, ...cur.goals], []);
+      const goalPeriodStore = goalPeriod.map((goalP) => ({
+        ...goalP,
+        goals: goalP.goals.map((goal) => goal.id),
+      }));
+      super.add(goalPeriodStore);
     } else {
       goals = [...goalPeriod.goals];
+      super.add({
+        ...goalPeriod,
+        goals: goals.map((goal) => goal.id),
+      });
     }
 
     this.goalsStore.upsertMany(goals);
   }
 
   addGoal(goal: Goal) {
-    const goalPeriod = this.getValue().entities[goal.scheduledDate];
+    const goalPeriod =
+      this.getValue().entities[goal.scheduledDate] ||
+      ({ goals: [], date: goal.scheduledDate } as GoalPeriodStore);
     const updatedGoalPeriod = produce(goalPeriod, (draft) => {
-      draft.goals.push(goal);
+      draft.goals = [...draft.goals, goal.id];
       return draft;
     });
-    this.update(goalPeriod.date, updatedGoalPeriod);
+    this.upsert(goalPeriod.date, updatedGoalPeriod);
     this.goalsStore.add(goal);
   }
 
   deleteGoal(goal: Goal) {
     const updatedGoals = this.getValue().entities[
       goal.scheduledDate
-    ]?.goals.filter((goalStore) => goalStore.id !== goal.id);
+    ]?.goals.filter((goalId) => goalId !== goal.id);
     this.update(goal.scheduledDate, { goals: updatedGoals });
     this.goalsStore.remove(goal.id);
   }

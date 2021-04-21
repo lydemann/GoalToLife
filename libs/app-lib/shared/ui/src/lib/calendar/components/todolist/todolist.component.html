@@ -7,9 +7,14 @@
         [draggable]="isDraggable()"
         [makeDraggable]="todo"
         [helperClass]="todoDOMClass"
-        (click)="onTodoItemClick(todo)"
+        (click)="onTodoItemClick(todo, $event)"
       >
-        <ion-checkbox class="checkbox"> </ion-checkbox>
+        <ion-checkbox
+          class="checkbox"
+          (click)="onToggleComplete(todo, $event)"
+          [checked]="todo.completed"
+        >
+        </ion-checkbox>
         <span class="text">{{ todo.name }}</span>
         <span
           *ngIf="editable === true"

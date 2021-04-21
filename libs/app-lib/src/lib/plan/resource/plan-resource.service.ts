@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { getDailyGoalKey } from '@app/app-lib/shared/ui';
-import { Goal, GoalPeriod, GoalPeriodType, Task } from '@app/shared/interfaces';
+import { Goal, GoalPeriod, Task } from '@app/shared/interfaces';
 import { Apollo, gql } from 'apollo-angular';
-import { Observable } from 'rxjs';
-import { map, pluck } from 'rxjs/operators';
 
 const getGoalPeriodsQuery = gql`
   query goalGoalPeriodsQuery($fromDate: String, $toDate: String) {
@@ -13,6 +11,7 @@ const getGoalPeriodsQuery = gql`
         id
         name
         scheduledDate
+        completed
       }
     }
   }
@@ -77,19 +76,22 @@ export class PlanResourceService {
     const mutation = gql`
       mutation updateGoal(
         $id: String!
-        $name: String!
-        $type: String!
+        $name: String
+        $type: String
         $scheduledDate: String
+        $completed: Boolean
       ) {
         updateGoal(
           id: $id
           name: $name
           type: $type
           scheduledDate: $scheduledDate
+          completed: $completed
         ) {
           id
           name
           scheduledDate
+          completed
         }
       }
     `;
@@ -101,6 +103,7 @@ export class PlanResourceService {
         name: goal.name,
         type: goal.type,
         scheduledDate: goal.scheduledDate,
+        completed: goal.completed,
       } as Goal,
     });
   }
