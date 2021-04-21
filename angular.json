@@ -1,7 +1,7 @@
 {
   "version": 1,
   "cli": {
-    "defaultCollection": "@ionic/angular-toolkit"
+    "defaultCollection": "@datorama/akita"
   },
   "defaultProject": "app",
   "schematics": {
@@ -58,7 +58,10 @@
               "apps/app/src/theme/variables.scss",
               "apps/app/src/global.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": ["libs/shared/ui/styles/src/lib"]
+            }
           },
           "configurations": {
             "production": {
@@ -258,6 +261,116 @@
           "outputs": ["coverage/libs/shared/interfaces"],
           "options": {
             "jestConfig": "libs/shared/interfaces/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "service": {
+      "root": "apps/service",
+      "sourceRoot": "apps/service/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/service",
+            "main": "apps/service/src/main.ts",
+            "tsConfig": "apps/service/tsconfig.app.json",
+            "assets": ["apps/service/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/service/src/environments/environment.ts",
+                  "with": "apps/service/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "service:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/service/tsconfig.app.json",
+              "apps/service/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/service/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/service"],
+          "options": {
+            "jestConfig": "apps/service/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "app-lib-shared-ui": {
+      "root": "libs/app-lib/shared/ui",
+      "sourceRoot": "libs/app-lib/shared/ui/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/app-lib/shared/ui/tsconfig.lib.json",
+              "libs/app-lib/shared/ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/app-lib/shared/ui/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/app-lib/shared/ui"],
+          "options": {
+            "jestConfig": "libs/app-lib/shared/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "app-lib-features-plan": {
+      "root": "libs/app-lib/features/plan",
+      "sourceRoot": "libs/app-lib/features/plan/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/app-lib/features/plan/tsconfig.lib.json",
+              "libs/app-lib/features/plan/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/app-lib/features/plan/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/app-lib/features/plan"],
+          "options": {
+            "jestConfig": "libs/app-lib/features/plan/jest.config.js",
             "passWithNoTests": true
           }
         }

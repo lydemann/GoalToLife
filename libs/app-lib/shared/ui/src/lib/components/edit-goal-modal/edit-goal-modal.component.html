@@ -1,0 +1,15 @@
+<h3 class="center">Edit goal</h3>
+
+<form [formGroup]="formGroup" (submit)="onSubmit()">
+  <ion-item>
+    <ion-label>Completed</ion-label>
+    <ion-checkbox formControlName="completed"></ion-checkbox>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Name</ion-label>
+    <ion-textarea formControlName="name"></ion-textarea>
+  </ion-item>
+
+  <ion-button type="submit" expand="full">Submit</ion-button>
+</form>

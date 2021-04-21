@@ -1,0 +1,68 @@
+:host {
+  section {
+    width: 100%;
+    height: 100%;
+    // TOOD: min width + overflow auto
+    display: flex;
+    flex-direction: column;
+    min-width: 1400px;
+
+    .headers {
+      flex-grow: 5;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      height: 30px;
+      background: #d5d5d5;
+      text-transform: uppercase;
+      font-weight: bold;
+      box-shadow: inset 0 1px 5px #999999;
+      padding: 5px 0;
+
+      .day-header {
+        flex-grow: 1;
+        text-align: center;
+        width: 100%;
+        color: #777777;
+        font-size: 1.1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .data {
+      flex-grow: 88;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      background: #ffffff;
+
+      app-day {
+        width: calc(100% * 1 / 7);
+      }
+    }
+  }
+
+  &.swap-axis {
+    .section {
+      flex-direction: row;
+    }
+
+    .headers {
+      flex-direction: column;
+      width: 30px;
+
+      .day-header {
+        width: 100%;
+      }
+    }
+
+    .data {
+      flex-direction: column;
+      app-day {
+        height: calc(100% * 1 / 7);
+      }
+    }
+  }
+}

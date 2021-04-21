@@ -9,33 +9,7 @@ const routes: Routes = [
     children: [
       {
         path: 'plan',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../plan/daily/daily.module').then((m) => m.DailyModule),
-          },
-          {
-            path: 'weekly',
-            loadChildren: () =>
-              import('../plan/weekly/weekly.module').then((m) => m.WeeklyModule),
-          },
-          {
-            path: 'monthly',
-            loadChildren: () =>
-              import('../plan/monthly/monthly.module').then((m) => m.MonthlyModule),
-          },
-          {
-            path: 'quarterly',
-            loadChildren: () =>
-              import('../plan/quarterly/quarterly.module').then((m) => m.QuarterlyModule),
-          },
-          {
-            path: 'yearly',
-            loadChildren: () =>
-              import('../plan/yearly/yearly.module').then((m) => m.YearlyModule),
-          },
-        ],
+        loadChildren: () => import('@app/app-lib/features/plan').then(m => m.PlanModule)
       },
       {
         path: 'inbox',

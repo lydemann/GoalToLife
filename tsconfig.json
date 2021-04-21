@@ -14,10 +14,17 @@
     "target": "es2015",
     "module": "es2020",
     "lib": ["es2018", "dom"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "paths": {
       "@app/app-lib": ["libs/app-lib/src/index.ts"],
-      "@app/shared/interfaces": ["libs/shared/interfaces/src/index.ts"]
+      "@app/app-lib/features/plan": ["libs/app-lib/features/plan/src/index.ts"],
+      "@app/app-lib/shared/ui": ["libs/app-lib/shared/ui/src/index.ts"],
+      "@app/shared/interfaces": ["libs/shared/interfaces/src/index.ts"],
+      "@app/shared/feat-auth": ["libs/shared/feat-auth/src/index.ts"]
     },
+    "allowSyntheticDefaultImports": true,
     "rootDir": "."
   },
   "angularCompilerOptions": {

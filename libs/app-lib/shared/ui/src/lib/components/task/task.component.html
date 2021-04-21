@@ -1,0 +1,29 @@
+<ion-item>
+  <ion-checkbox slot="start"></ion-checkbox>
+  <div>
+    <ion-input
+      #input
+      [value]="task.name"
+      autofocus
+      [formControl]="taskNameControl"
+    ></ion-input>
+  </div>
+  <div slot="end">
+    <ion-buttons slot="primary">
+      <ion-button color="secondary" (click)="edit.emit(task)" *ngIf="!!task.id">
+        <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+      </ion-button>
+      <ion-button
+        color="secondary"
+        [disabled]="this.taskNameControl.invalid"
+        (click)="onAdd()"
+        *ngIf="!task.id"
+      >
+        <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button color="secondary" (click)="delete.emit(task)">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </div>
+</ion-item>
