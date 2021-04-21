@@ -6,11 +6,23 @@
     li {
       position: relative;
       display: flex;
-      padding: 10px 15px;
+      padding: 8px;
       margin-bottom: -1px;
       background-color: #fff;
       border: 1px solid #ddd;
-      justify-content: space-between;
+      align-items: center;
+      max-width: 200px;
+
+      .checkbox {
+        min-width: 20px;
+        margin-right: 8px;
+      }
+
+      .text {
+        flex: 1;
+        text-align: left;
+        font-size: 12px;
+      }
 
       .badge {
         cursor: pointer;

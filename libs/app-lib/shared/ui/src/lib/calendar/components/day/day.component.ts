@@ -34,6 +34,7 @@ export class DayComponent implements OnInit, OnChanges {
   private _refreshRequired: Date;
   @Output() addTodo = new EventEmitter<Goal>();
   @Output() deleteTodo = new EventEmitter<Goal>();
+  @Output() editTodo = new EventEmitter<Goal>();
 
   /*
    * Getters, setters and inputs

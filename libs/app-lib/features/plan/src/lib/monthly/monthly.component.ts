@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AppFacadeService, PlanFacadeService } from '@app/app-lib';
+import { PlanFacadeService } from '@app/app-lib';
+import {
+  EditGoalModalComponent,
+  EditModalComponentProps,
+} from '@app/app-lib/shared/ui';
 import { Goal, GoalPeriod } from '@app/shared/interfaces';
+import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
-
 
 @Component({
   selector: 'app-monthly',
@@ -34,7 +38,10 @@ export class MonthlyComponent implements OnInit {
     return this._currentDate;
   }
 
-  constructor(private planFacadeService: PlanFacadeService) {}
+  constructor(
+    private planFacadeService: PlanFacadeService,
+    private modalController: ModalController
+  ) {}
 
   ngOnInit() {
     this.currentDate = new Date();
@@ -60,10 +67,24 @@ export class MonthlyComponent implements OnInit {
   }
 
   onAddTodo(goal: Goal) {
-    this.planFacadeService.addGoal({...goal, id: uuidv4()});
+    this.planFacadeService.addGoal({ ...goal, id: uuidv4() });
   }
 
   onDeleteTodo(goal: Goal) {
     this.planFacadeService.deleteGoal(goal);
+  }
+
+  async onEditTodo(goal: Goal) {
+    const modal = await this.modalController.create({
+      component: EditGoalModalComponent,
+      componentProps: {
+        goal,
+      } as EditModalComponentProps,
+    });
+
+    modal.present();
+    const { data } = await modal.onWillDismiss<Goal>();
+
+    this.planFacadeService.updateGoal(data);
   }
 }

@@ -19,7 +19,7 @@ const enrichGoalPeriod = async (
     const snap = await firestoreDB
       .doc(`/users/haOhlwjhAfRIOFGhHuJS/goals/${goalId}`)
       .get();
-    return {id: snap.id, ...snap.data()} as Goal
+    return { id: snap.id, ...snap.data() } as Goal;
   });
   const goals = await Promise.all(goalsPromises);
   return {
@@ -103,15 +103,12 @@ export const goalMutationResolvers = {
         const prevGoalPeriodSnap = await goalPeriodRef.get();
         const prevGoalPeriod: GoalPeriodFirebase =
           (prevGoalPeriodSnap.data() as GoalPeriodFirebase) ||
-          ({date: scheduledDate, goals: [] } as GoalPeriodFirebase);
+          ({ date: scheduledDate, goals: [] } as GoalPeriodFirebase);
         const prevGoals = prevGoalPeriod.goals;
         let updatedGoals = [...prevGoals];
-        const hasExistingGoalPeriod = goalIndex !== undefined &&
-          goalIndex >= 0 &&
-          goalIndex <= prevGoals.length;
-        if (
-          hasExistingGoalPeriod
-        ) {
+        const hasExistingGoalPeriod =
+          goalIndex !== null && goalIndex >= 0 && goalIndex <= prevGoals.length;
+        if (hasExistingGoalPeriod) {
           updatedGoals.splice(goalIndex, 0, newGoalRef.id);
         } else {
           updatedGoals = [...prevGoalPeriod.goals, newGoalRef.id];

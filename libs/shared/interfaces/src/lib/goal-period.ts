@@ -21,3 +21,13 @@ export interface GoalPeriod {
   obtainedKnowledge: string[];
   thoughts: string[];
 }
+
+export interface GoalPeriodStore {
+  date: string;
+  goals: string[];
+  wins: string[];
+  type: GoalPeriodType;
+  improvementPoints: string[];
+  obtainedKnowledge: string[];
+  thoughts: string[];
+}

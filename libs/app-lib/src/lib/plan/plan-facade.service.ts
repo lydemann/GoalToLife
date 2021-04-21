@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Goal, GoalPeriod } from '@app/shared/interfaces';
+import { Goal, GoalPeriod, GoalPeriodStore } from '@app/shared/interfaces';
 import { produce } from 'immer';
 import { Observable } from 'rxjs';
 
 import { PlanResourceService } from './resource/plan-resource.service';
-import { PlanStateService } from './state/plan-state.service';
+import { GoalPeriodsQuery } from './state/goal-periods/goal-periods.query';
+import { GoalPeriodsStore } from './state/goal-periods/goal-periods.store';
+import { GoalsQuery } from './state/goals/goals.query';
+import { GoalsStore } from './state/goals/goals.store';
 
 @Injectable({
   providedIn: 'root',
@@ -16,64 +19,52 @@ export class PlanFacadeService {
 
   constructor(
     private planResourceService: PlanResourceService,
-    private planStateService: PlanStateService
+    private goalsStore: GoalsStore,
+    private goalPeriodsStore: GoalPeriodsStore,
+    private goalPeriodsQuery: GoalPeriodsQuery
   ) {
-    this.goalPeriods$ = this.planStateService.goalPeriods$;
-    this.isLoadingGoalPeriods$ = this.planStateService.isLoadingGoalPeriods$;
+    this.goalPeriods$ = this.goalPeriodsQuery.select((state) => state.entities);
+    this.isLoadingGoalPeriods$ = this.goalPeriodsQuery.selectLoading();
   }
 
   fetchMonthlyGoalPeriods(month: number, year: number) {
+    this.goalPeriodsStore.setLoading(true);
     this.planResourceService
       .getMonthlyGoalPeriods(month, year)
-      .subscribe((goalPeriods) => {
-        this.planStateService.setState({ goalPeriods });
+      .subscribe(({ data }) => {
+        this.goalPeriodsStore.add(data.goalPeriod);
+        this.goalPeriodsStore.setLoading(false);
       });
   }
 
   addGoal(goal: Goal) {
-    const goalPeriods = this.planStateService.state.goalPeriods;
-    const updatedGoalPeriods = produce(goalPeriods, (draft) => {
-      const goalPeriod =
-        draft[goal.scheduledDate] || ({ goals: [] } as GoalPeriod);
-      draft[goal.scheduledDate] = {
-        ...goalPeriod,
-        goals: [...goalPeriod.goals, goal],
-      } as GoalPeriod;
-
-      return draft;
+    this.goalPeriodsStore.addGoal(goal);
+    this.planResourceService.addGoal(goal).subscribe(({ errors, data }) => {
+      if (!!errors) {
+        this.goalsStore.setError(errors[0]);
+        return;
+      }
     });
-    this.planStateService.setState({
-      goalPeriods: updatedGoalPeriods,
-      isAddingGoal: true,
-    });
+  }
 
-    this.planResourceService.addGoal(goal).subscribe((newGoal) => {
-      this.planStateService.setState({
-        isAddingGoal: false,
-      });
+  updateGoal(goal: Goal) {
+    this.goalsStore.upsert(goal.id, goal);
+    this.planResourceService.updateGoal(goal).subscribe(({ errors, data }) => {
+      if (!!errors) {
+        this.goalsStore.setError(errors[0]);
+        return;
+      }
     });
   }
 
   deleteGoal(goal: Goal) {
-    const goalPeriods = this.planStateService.state.goalPeriods;
-    const updatedGoalPeriods = produce(goalPeriods, (draft) => {
-      const goalPeriod =
-        draft[goal.scheduledDate] || ({ goals: [] } as GoalPeriod);
-      draft[goal.scheduledDate] = {
-        ...goalPeriod,
-        goals: goalPeriod.goals.filter(
-          (existingGoal) => existingGoal.id !== goal.id
-        ),
-      } as GoalPeriod;
-
-      return draft;
-    });
-    this.planStateService.setState({
-      isDeletingGoal: true,
-      goalPeriods: updatedGoalPeriods,
-    });
-    this.planResourceService.deleteGoal(goal).subscribe(() => {
-      this.planStateService.setState({ isDeletingGoal: false });
+    this.goalPeriodsStore.deleteGoal(goal);
+    this.planResourceService.deleteGoal(goal).subscribe(({ errors }) => {
+      if (!!errors) {
+        // TODO: revert
+        this.goalsStore.setError(errors[0]);
+        return;
+      }
     });
   }
 }

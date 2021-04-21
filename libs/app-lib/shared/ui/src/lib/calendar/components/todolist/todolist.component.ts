@@ -59,6 +59,7 @@ export class TODOListComponent implements OnInit, OnChanges {
   @Input() droppedTodo: TODOItem;
   @Output() addTodo = new EventEmitter<Goal>();
   @Output() deleteTodo = new EventEmitter<Goal>();
+  @Output() editTodo = new EventEmitter<Goal>();
   todoTextControl: FormControl;
 
   // set todos(todos: TODOItem[]) {
@@ -122,7 +123,9 @@ export class TODOListComponent implements OnInit, OnChanges {
   }
 
   // method to remove TODO from list
-  onDeleteTODO(goal: Goal): void {
+  onDeleteTODO(goal: Goal, event: Event): void {
+    event.preventDefault();
+    event.stopImmediatePropagation();
     this.deleteTodo.next(goal);
     return;
   }
@@ -162,5 +165,9 @@ export class TODOListComponent implements OnInit, OnChanges {
     } else {
       this.getTODOList();
     }
+  }
+
+  onTodoItemClick(goal: Goal) {
+    this.editTodo.next(goal);
   }
 }

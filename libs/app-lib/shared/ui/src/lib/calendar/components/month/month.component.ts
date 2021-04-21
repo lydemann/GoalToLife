@@ -26,6 +26,8 @@ export class MonthComponent implements OnInit, OnChanges {
   private _calendarDate: Date;
   private _currentDate: Date;
 
+  @Input() swapAxis = true;
+
   /*
    * Getters, setters and inputs
    */
@@ -46,6 +48,7 @@ export class MonthComponent implements OnInit, OnChanges {
 
   @Output() addTodo = new EventEmitter<Goal>();
   @Output() deleteTodo = new EventEmitter<Goal>();
+  @Output() editTodo = new EventEmitter<Goal>();
 
   get currentDate() {
     return this._currentDate;

@@ -3,6 +3,8 @@
 	"plugins": ["stylelint-scss"],
 	"ignoreFiles": ["libs/**/_normalize.scss"],
 	"rules": {
+		"block-no-empty": null,
+		"no-empty-source": null,
 		"color-named": [
 			"never",
 			{
