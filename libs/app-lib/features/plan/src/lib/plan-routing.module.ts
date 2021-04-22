@@ -6,7 +6,7 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: '',
+        path: 'daily',
         loadChildren: () =>
           import('./daily/daily.module').then((m) => m.DailyModule),
       },
@@ -23,14 +23,17 @@ const routes: Routes = [
       {
         path: 'quarterly',
         loadChildren: () =>
-          import('./quarterly/quarterly.module').then(
-            (m) => m.QuarterlyModule
-          ),
+          import('./quarterly/quarterly.module').then((m) => m.QuarterlyModule),
       },
       {
         path: 'yearly',
         loadChildren: () =>
           import('./yearly/yearly.module').then((m) => m.YearlyModule),
+      },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'monthly',
       },
     ],
   },

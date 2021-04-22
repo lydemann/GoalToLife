@@ -51,12 +51,6 @@ export class TODOListComponent implements OnInit, OnChanges {
   @Input()
   public set editable(v: boolean) {
     this._editable = v;
-    // TODO: remove maybe
-    // if (v) {
-    //   setTimeout(() => {
-    //     this.textArea.setFocus();
-    //   });
-    // }
   }
 
   @Input() droppedTodo: TODOItem;

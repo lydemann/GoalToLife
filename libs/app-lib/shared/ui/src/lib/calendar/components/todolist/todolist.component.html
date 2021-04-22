@@ -27,7 +27,7 @@
     </ul>
   </div>
   <!-- <app-task *ngIf="editable === true"></app-task> -->
-  <form *ngIf="editable === true" (submit)="onAddTODO($event)">
+  <form (submit)="onAddTODO($event)">
     <ion-input
       #addTodoText
       (keydown.enter)="onKeydown($event)"

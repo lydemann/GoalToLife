@@ -178,21 +178,6 @@ export class DayComponent implements OnInit, OnChanges, OnDestroy {
         });
       }, 300);
     }
-
-    this.retroForm.valueChanges
-      .pipe(
-        debounceTime(SAVE_RETRO_FORM_DEBOUNCE_TIME),
-        distinctUntilChanged(
-          (prev, cur) => JSON.stringify(prev) === JSON.stringify(cur)
-        ),
-        takeUntil(this.destroy$)
-      )
-      .subscribe(() => {
-        this.retroChange.emit({
-          ...this.retroForm.value,
-          date: getDailyGoalKey(this.dayDate.dateDate),
-        });
-      });
   }
 
   /*
@@ -210,6 +195,20 @@ export class DayComponent implements OnInit, OnChanges, OnDestroy {
         improvementPoints: this.dayDate.improvementPoints,
         thoughts: this.dayDate.thoughts,
       });
+      this.retroForm.valueChanges
+        .pipe(
+          debounceTime(SAVE_RETRO_FORM_DEBOUNCE_TIME),
+          distinctUntilChanged(
+            (prev, cur) => JSON.stringify(prev) === JSON.stringify(cur)
+          ),
+          takeUntil(this.destroy$)
+        )
+        .subscribe(() => {
+          this.retroChange.emit({
+            ...this.retroForm.value,
+            date: getDailyGoalKey(this.dayDate.dateDate),
+          });
+        });
     }
   }
 }

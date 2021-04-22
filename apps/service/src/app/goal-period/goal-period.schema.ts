@@ -13,10 +13,10 @@ export const goalSchema = gql`
     date: String
     goals: [Goal]
     type: String
-    wins: [String]
-    improvementPoints: [String]
-    obtainedKnowledge: [String]
-    thoughts: [String]
+    wins: String
+    improvementPoints: String
+    obtainedKnowledge: String
+    thoughts: String
   }
 `;
 
@@ -29,10 +29,10 @@ export const goalMutationSchema = `
   updateGoalPeriod(
     date: String,
     type: String,
-    wins: [String],
-    improvementPoints: [String],
-    obtainedKnowledge: [String],
-    thoughts: [String]
+    wins: String,
+    improvementPoints: String,
+    obtainedKnowledge: String,
+    thoughts: String
   ): GoalPeriod
 
   addGoal(id: String!, name: String!, type: String!, scheduledDate: String, goalIndex: Int): Goal

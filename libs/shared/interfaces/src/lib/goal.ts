@@ -14,4 +14,8 @@ export interface Goal {
   completed: boolean;
   lastUpdated: Date;
   createdAt: string;
+  repeat: boolean;
+  repeatFrequency: number;
+  repeatOccurences: number;
+  repeatId: string;
 }

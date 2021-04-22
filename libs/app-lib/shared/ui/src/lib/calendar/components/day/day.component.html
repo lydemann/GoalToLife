@@ -22,9 +22,18 @@
       (toggleComplete)="toggleComplete.emit($event)"
     ></app-todolist>
 
-    <p>Retro</p>
+    <p
+      [class.hidden]="
+        !dayDate.wins &&
+        !dayDate.obtainedKnowledge &&
+        !dayDate.improvementPoints &&
+        !dayDate.thoughts
+      "
+    >
+      Retro
+    </p>
     <form class="retro" [formGroup]="retroForm">
-      <div>
+      <div [class.hidden]="!dayDate.isSelected && !dayDate.wins">
         <ion-label>Wins</ion-label>
         <ion-textarea
           class="input"
@@ -32,7 +41,7 @@
           placeholder="Good things that I did today"
         ></ion-textarea>
       </div>
-      <div>
+      <div [class.hidden]="!dayDate.isSelected && !dayDate.obtainedKnowledge">
         <ion-label>Obtained Knowledge</ion-label>
         <ion-textarea
           class="input"
@@ -40,7 +49,7 @@
           formControlName="obtainedKnowledge"
         ></ion-textarea>
       </div>
-      <div>
+      <div [class.hidden]="!dayDate.isSelected && !dayDate.improvementPoints">
         <ion-label>Improvement Points</ion-label>
         <ion-textarea
           class="input"
@@ -48,7 +57,7 @@
           formControlName="improvementPoints"
         ></ion-textarea>
       </div>
-      <div>
+      <div [class.hidden]="!dayDate.isSelected && !dayDate.thoughts">
         <ion-label>Thoughts</ion-label>
         <ion-textarea
           class="input"

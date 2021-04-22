@@ -1,5 +1,5 @@
 import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
-import { ApolloError, UserInputError } from 'apollo-server-express';
+import { ApolloError } from 'apollo-server-express';
 import firebase from 'firebase';
 import admin, { firestore } from 'firebase-admin';
 

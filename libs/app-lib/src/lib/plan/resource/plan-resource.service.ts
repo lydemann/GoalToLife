@@ -53,10 +53,10 @@ export class PlanResourceService {
       mutation updateGoalPeriod(
         $date: String
         $type: String
-        $wins: [String]
-        $improvementPoints: [String]
-        $obtainedKnowledge: [String]
-        $thoughts: [String]
+        $wins: String
+        $improvementPoints: String
+        $obtainedKnowledge: String
+        $thoughts: String
       ) {
         updateGoalPeriod(
           date: $date

@@ -17,5 +17,29 @@
     <ion-textarea formControlName="name"></ion-textarea>
   </ion-item>
 
+  <ion-item>
+    <ion-label>Keep in current date until completed</ion-label>
+    <ion-checkbox formControlName="currentDateUntilCompleted"></ion-checkbox>
+  </ion-item>
+
+  <hr />
+
+  <ion-item>
+    <ion-label>Repeat</ion-label>
+    <ion-checkbox formControlName="repeat"></ion-checkbox>
+  </ion-item>
+
+  <ng-container>
+    <ion-item>
+      <ion-label>Repeat frequency (days)</ion-label>
+      <ion-input formControlName="repeatFrequency"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Repeat occurences</ion-label>
+      <ion-input formControlName="repeatOccurences"></ion-input>
+    </ion-item>
+  </ng-container>
+
   <ion-button type="submit" expand="full">Submit</ion-button>
 </form>

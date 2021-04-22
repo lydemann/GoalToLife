@@ -37,7 +37,7 @@ export class GoalPeriodsStore extends EntityStore<GoalPeriodsState> {
         ...goalP,
         goals: goalP.goals.map((goal) => goal.id),
       }));
-      super.add(goalPeriodStore);
+      super.set(goalPeriodStore);
     } else {
       goals = [...goalPeriod.goals];
       super.add({
