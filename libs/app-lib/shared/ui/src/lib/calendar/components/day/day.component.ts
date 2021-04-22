@@ -8,7 +8,6 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  SimpleChange,
   SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -20,7 +19,7 @@ import { getDailyGoalKey } from '../../../utils/goal-utils';
 import { DayDate } from '../../classes/day-date';
 import { TODOItem } from '../../classes/todo-item';
 
-export const SAVE_RETRO_FORM_DEBOUNCE_TIME = 1000;
+export const SAVE_RETRO_FORM_DEBOUNCE_TIME = 500;
 
 /*
  * This component is used to render "day" with all the contents
