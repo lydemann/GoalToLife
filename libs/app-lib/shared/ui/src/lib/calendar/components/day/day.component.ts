@@ -176,7 +176,7 @@ export class DayComponent implements OnInit, OnChanges, OnDestroy {
           inline: 'center',
           block: 'center',
         });
-      }, 100);
+      }, 300);
     }
 
     this.retroForm.valueChanges
