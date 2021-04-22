@@ -4,7 +4,7 @@ import {
   EditGoalModalComponent,
   EditModalComponentProps,
 } from '@app/app-lib/shared/ui';
-import { Goal, GoalPeriod } from '@app/shared/interfaces';
+import { Goal, GoalPeriod, GoalPeriodStore } from '@app/shared/interfaces';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
@@ -15,6 +15,7 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./monthly.component.scss'],
 })
 export class MonthlyComponent implements OnInit {
+  isLoading$: Observable<boolean>;
   goalPeriods$: Observable<Record<string, GoalPeriod>>;
   goalsForPeriod: Goal[] = [
     {
@@ -56,6 +57,8 @@ export class MonthlyComponent implements OnInit {
       this.calendarDate.getMonth(),
       this.calendarDate.getFullYear()
     );
+
+    this.isLoading$ = this.planFacadeService.isLoading$;
   }
 
   monthChanges(changeResult: any): void {
@@ -90,5 +93,9 @@ export class MonthlyComponent implements OnInit {
 
   onToggleComplete(goal: Goal) {
     this.planFacadeService.updateGoal(goal);
+  }
+
+  onRetroChange(goalPeriod: GoalPeriodStore) {
+    this.planFacadeService.updateGoalPeriod(goalPeriod);
   }
 }

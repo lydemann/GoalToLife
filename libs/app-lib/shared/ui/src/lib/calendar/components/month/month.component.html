@@ -11,11 +11,12 @@
         [dayDate]="day"
         [selected]="selected"
         [highlited]="highlited"
-        (click)="onDayClick(day.date)"
+        (click)="onDayClick(day.dateDate)"
         (addTodo)="onAddTodo($event)"
         (deleteTodo)="onDeleteTodo($event)"
         (editTodo)="editTodo.next($event)"
         (toggleComplete)="toggleComplete.emit($event)"
+        (retroChange)="retroChange.emit($event)"
       ></app-day>
     </ng-container>
   </div>

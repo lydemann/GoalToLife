@@ -2,7 +2,7 @@ import {
   goalMutationSchema,
   goalQuerySchema,
   goalSchema,
-} from './goal/goal-schema';
+} from './goal-period/goal-period.schema';
 
 const { gql } = require('apollo-server-express');
 

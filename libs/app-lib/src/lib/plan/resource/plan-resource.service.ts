@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { getDailyGoalKey } from '@app/app-lib/shared/ui';
-import { Goal, GoalPeriod, Task } from '@app/shared/interfaces';
+import {
+  Goal,
+  GoalPeriod,
+  GoalPeriodStore,
+  Task,
+} from '@app/shared/interfaces';
 import { Apollo, gql } from 'apollo-angular';
 
 const getGoalPeriodsQuery = gql`
@@ -13,6 +18,10 @@ const getGoalPeriodsQuery = gql`
         scheduledDate
         completed
       }
+      wins
+      improvementPoints
+      obtainedKnowledge
+      thoughts
     }
   }
 `;
@@ -36,6 +45,47 @@ export class PlanResourceService {
         fromDate,
         toDate,
       },
+    });
+  }
+
+  updateGoalPeriod(goalPeriod: GoalPeriodStore) {
+    const mutation = gql`
+      mutation updateGoalPeriod(
+        $date: String
+        $type: String
+        $wins: [String]
+        $improvementPoints: [String]
+        $obtainedKnowledge: [String]
+        $thoughts: [String]
+      ) {
+        updateGoalPeriod(
+          date: $date
+          type: $type
+          wins: $wins
+          improvementPoints: $improvementPoints
+          obtainedKnowledge: $obtainedKnowledge
+          thoughts: $thoughts
+        ) {
+          date
+          type
+          wins
+          improvementPoints
+          obtainedKnowledge
+          thoughts
+        }
+      }
+    `;
+
+    return this.apollo.mutate<{ addGoal: Goal }>({
+      mutation,
+      variables: {
+        date: goalPeriod.date,
+        type: goalPeriod.type,
+        wins: goalPeriod.wins,
+        improvementPoints: goalPeriod.improvementPoints,
+        obtainedKnowledge: goalPeriod.obtainedKnowledge,
+        thoughts: goalPeriod.thoughts,
+      } as GoalPeriod,
     });
   }
 

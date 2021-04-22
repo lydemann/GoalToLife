@@ -28,14 +28,15 @@
   </div>
   <!-- <app-task *ngIf="editable === true"></app-task> -->
   <form *ngIf="editable === true" (submit)="onAddTODO($event)">
-    <ion-textarea
+    <ion-input
       #addTodoText
-      (keyup.control.enter)="onAddTODO($event)"
+      (keydown.enter)="onKeydown($event)"
+      (keyup.enter)="onAddTODO($event)"
       [formControl]="todoTextControl"
       class="form-control"
       name="todoText"
       autocomplete="off"
-      placeholder="Enter - add event"
-    ></ion-textarea>
+      placeholder="Add task - Enter"
+    ></ion-input>
   </form>
 </div>

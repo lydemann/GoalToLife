@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -6,7 +7,11 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { Goal, GoalPeriod as GoalPeriod } from '@app/shared/interfaces';
+import {
+  Goal,
+  GoalPeriod as GoalPeriod,
+  GoalPeriodType,
+} from '@app/shared/interfaces';
 
 import { getDailyGoalKey } from '../../../utils/goal-utils';
 import { DayDate } from '../../classes/day-date';
@@ -16,6 +21,7 @@ import { Week } from '../../classes/weeks';
   selector: 'app-month',
   templateUrl: './month.component.html',
   styleUrls: ['month.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MonthComponent implements OnInit, OnChanges {
   /*
@@ -50,6 +56,7 @@ export class MonthComponent implements OnInit, OnChanges {
   @Output() deleteTodo = new EventEmitter<Goal>();
   @Output() editTodo = new EventEmitter<Goal>();
   @Output() toggleComplete = new EventEmitter<Goal>();
+  @Output() retroChange = new EventEmitter<Partial<GoalPeriod>>();
 
   get currentDate() {
     return this._currentDate;
@@ -73,11 +80,11 @@ export class MonthComponent implements OnInit, OnChanges {
     this.weeks = [];
   }
 
-  weeksTrackBy(item: Week, idx) {
+  weeksTrackBy(idx, item: Week) {
     return idx;
   }
-  daysTrackBy(item: DayDate, idx) {
-    return idx;
+  daysTrackBy(idx, item: DayDate) {
+    return item.date;
   }
 
   /*
@@ -97,12 +104,14 @@ export class MonthComponent implements OnInit, OnChanges {
     let date: Date = new Date(start.setHours(0, 0, 0, 0));
     for (let i = 0; i < 7; i++) {
       const dailyGoalKey = getDailyGoalKey(date);
-      const goals = this.goalPeriods[dailyGoalKey]?.goals || [];
+      const goalPeriod =
+        this.goalPeriods[dailyGoalKey] ||
+        ({ type: GoalPeriodType.DAILY, goals: [] } as GoalPeriod);
       const isSelected = date?.getTime() === this.selected?.getTime();
       days.push({
-        date,
+        ...goalPeriod,
+        dateDate: date,
         month,
-        goals,
         isSelected,
       });
       date = this._addDays(date, 1);

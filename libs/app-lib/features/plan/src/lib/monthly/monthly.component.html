@@ -1,3 +1,7 @@
+<ion-progress-bar
+  type="indeterminate"
+  *ngIf="isLoading$ | async"
+></ion-progress-bar>
 <app-header
   [title]="'March, 2021'"
   [backText]="'Quarterly'"
@@ -39,6 +43,7 @@
     (deleteTodo)="onDeleteTodo($event)"
     (editTodo)="onEditTodo($event)"
     (toggleComplete)="onToggleComplete($event)"
+    (retroChange)="onRetroChange($event)"
     >Loading month ...</app-month
   >
 </ion-content>

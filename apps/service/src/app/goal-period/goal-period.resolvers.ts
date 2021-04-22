@@ -1,6 +1,7 @@
 import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
-import { ApolloError } from 'apollo-server-express';
-import admin from 'firebase-admin';
+import { ApolloError, UserInputError } from 'apollo-server-express';
+import firebase from 'firebase';
+import admin, { firestore } from 'firebase-admin';
 
 import { firestoreDB } from '../firestore';
 import { createResolver } from '../utils/create-resolver';
@@ -16,6 +17,10 @@ interface GoalsInput {
 const enrichGoalPeriod = async (
   goalPeriod: GoalPeriodFirebase
 ): Promise<GoalPeriod> => {
+  if (!goalPeriod.goals) {
+    return Promise.resolve({ ...goalPeriod, goals: [] } as GoalPeriod);
+  }
+
   const goalsPromises = goalPeriod.goals.map(async (goalId) => {
     const snap = await firestoreDB
       .doc(`/users/haOhlwjhAfRIOFGhHuJS/goals/${goalId}`)
@@ -85,6 +90,23 @@ interface DeleteGoalInput {
 }
 
 export const goalMutationResolvers = {
+  updateGoalPeriod: createResolver<GoalPeriod>(async (_, goalPeriod) => {
+    const newGoalPeriodRef = firestoreDB
+      .collection('/users/haOhlwjhAfRIOFGhHuJS/goalPeriods')
+      .doc(goalPeriod.date);
+
+    const updatedGoalPeriodSnapShot = await newGoalPeriodRef.get();
+
+    const updatedGoalPeriod = {
+      goals: [],
+      ...updatedGoalPeriodSnapShot.data(),
+      ...goalPeriod,
+      lastUpdated: firebase.database.ServerValue.TIMESTAMP,
+    };
+    await newGoalPeriodRef.set(updatedGoalPeriod);
+
+    return updatedGoalPeriod;
+  }),
   addGoal: createResolver<AddGoalInput>(
     async (_, { id, name, type, scheduledDate = null, goalIndex = null }) => {
       // TODO: setup security

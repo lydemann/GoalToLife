@@ -7,8 +7,9 @@
   (click)="(setActiveState)"
 >
   <!-- <i class="bg-icon fa fa-arrow-up"></i> -->
-  <div class="day-date">{{ dayDate.date | date: 'dd' }}</div>
+  <div class="day-date">{{ dayDate.dateDate | date: 'dd' }}</div>
   <div>
+    <p class="headline">Goals</p>
     <app-todolist
       [goals]="dayDate.goals"
       [editable]="dayDate.isSelected"
@@ -20,6 +21,42 @@
       (editTodo)="editTodo.next($event)"
       (toggleComplete)="toggleComplete.emit($event)"
     ></app-todolist>
+
+    <p>Retro</p>
+    <form class="retro" [formGroup]="retroForm">
+      <div>
+        <ion-label>Wins</ion-label>
+        <ion-textarea
+          class="input"
+          formControlName="wins"
+          placeholder="Good things that I did today"
+        ></ion-textarea>
+      </div>
+      <div>
+        <ion-label>Obtained Knowledge</ion-label>
+        <ion-textarea
+          class="input"
+          placeholder="What I learned today"
+          formControlName="obtainedKnowledge"
+        ></ion-textarea>
+      </div>
+      <div>
+        <ion-label>Improvement Points</ion-label>
+        <ion-textarea
+          class="input"
+          placeholder="How I will improve"
+          formControlName="improvementPoints"
+        ></ion-textarea>
+      </div>
+      <div>
+        <ion-label>Thoughts</ion-label>
+        <ion-textarea
+          class="input"
+          formControlName="thoughts"
+          placeholder="What is occupying my mind"
+        ></ion-textarea>
+      </div>
+    </form>
   </div>
 </div>
 <!-- <popover-content #todoPopover

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -22,6 +23,7 @@ import { TODOService } from '../../services/todo.service';
   templateUrl: './todolist.component.html',
   styleUrls: ['todolist.component.scss'],
   providers: [TODOService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TODOListComponent implements OnInit, OnChanges {
   @ViewChild('addTodoText') textArea: IonTextarea;
@@ -49,11 +51,12 @@ export class TODOListComponent implements OnInit, OnChanges {
   @Input()
   public set editable(v: boolean) {
     this._editable = v;
-    if (v) {
-      setTimeout(() => {
-        this.textArea.setFocus();
-      });
-    }
+    // TODO: remove maybe
+    // if (v) {
+    //   setTimeout(() => {
+    //     this.textArea.setFocus();
+    //   });
+    // }
   }
 
   @Input() droppedTodo: TODOItem;
@@ -121,6 +124,9 @@ export class TODOListComponent implements OnInit, OnChanges {
     }
 
     this.addTodo.emit({ name: this.todoTextControl.value } as Goal);
+  }
+  onKeydown(event) {
+    event.preventDefault();
   }
 
   // method to remove TODO from list
