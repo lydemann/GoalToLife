@@ -15,16 +15,15 @@ interface GoalsInput {
 }
 
 const enrichGoalPeriod = async (
-  goalPeriod: GoalPeriodFirebase
+  goalPeriod: GoalPeriodFirebase,
+  uid: string
 ): Promise<GoalPeriod> => {
   if (!goalPeriod.goals) {
     return Promise.resolve({ ...goalPeriod, goals: [] } as GoalPeriod);
   }
 
   const goalsPromises = goalPeriod.goals.map(async (goalId) => {
-    const snap = await firestoreDB
-      .doc(`/users/haOhlwjhAfRIOFGhHuJS/goals/${goalId}`)
-      .get();
+    const snap = await firestoreDB.doc(`/users/${uid}/goals/${goalId}`).get();
     return { id: snap.id, ...snap.data() } as Goal;
   });
   const goals = await Promise.all(goalsPromises);
@@ -35,19 +34,23 @@ const enrichGoalPeriod = async (
 };
 
 export const goalQueryResolvers = {
-  goal: createResolver<GoalsInput>(async (_, { scheduledDate }) => {
-    // TODO: setup security
-    const snapshot = await firestoreDB
-      .collection('/users/haOhlwjhAfRIOFGhHuJS/goals')
-      .where('scheduledDate', '==', scheduledDate)
-      .get();
+  goal: createResolver<GoalsInput>(
+    async (_, { scheduledDate }, { auth: { uid } }) => {
+      // TODO: setup security
+      const snapshot = await firestoreDB
+        .collection(`/users/${uid}/goals`)
+        .where('scheduledDate', '==', scheduledDate)
+        .get();
 
-    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as Goal));
-  }),
+      return snapshot.docs.map(
+        (doc) => ({ id: doc.id, ...doc.data() } as Goal)
+      );
+    }
+  ),
   goalPeriod: createResolver<DailySummariesInput>(
-    async (_, { fromDate, toDate }) => {
+    async (_, { fromDate, toDate }, { auth: { uid } }) => {
       const goalPeriodSnapshot = await firestoreDB
-        .collection('/users/haOhlwjhAfRIOFGhHuJS/goalPeriods')
+        .collection(`/users/${uid}/goalPeriods`)
         // TODO: get for type
         .where('date', '<=', toDate)
         .where('date', '>=', fromDate)
@@ -58,7 +61,7 @@ export const goalQueryResolvers = {
       );
       const goalPeriods = await Promise.all(
         goalPeriodFirebase.map(async (goalPeriod) => {
-          return enrichGoalPeriod(goalPeriod);
+          return enrichGoalPeriod(goalPeriod, uid);
         })
       );
 
@@ -90,29 +93,33 @@ interface DeleteGoalInput {
 }
 
 export const goalMutationResolvers = {
-  updateGoalPeriod: createResolver<GoalPeriod>(async (_, goalPeriod) => {
-    const newGoalPeriodRef = firestoreDB
-      .collection('/users/haOhlwjhAfRIOFGhHuJS/goalPeriods')
-      .doc(goalPeriod.date);
+  updateGoalPeriod: createResolver<GoalPeriod>(
+    async (_, goalPeriod, { auth: { uid } }) => {
+      const newGoalPeriodRef = firestoreDB
+        .collection(`/users/${uid}/goalPeriods`)
+        .doc(goalPeriod.date);
 
-    const updatedGoalPeriodSnapShot = await newGoalPeriodRef.get();
+      const updatedGoalPeriodSnapShot = await newGoalPeriodRef.get();
 
-    const updatedGoalPeriod = {
-      goals: [],
-      ...updatedGoalPeriodSnapShot.data(),
-      ...goalPeriod,
-      lastUpdated: firebase.database.ServerValue.TIMESTAMP,
-    };
-    await newGoalPeriodRef.set(updatedGoalPeriod);
+      const updatedGoalPeriod = {
+        goals: [],
+        ...updatedGoalPeriodSnapShot.data(),
+        ...goalPeriod,
+        lastUpdated: firebase.database.ServerValue.TIMESTAMP,
+      };
+      await newGoalPeriodRef.set(updatedGoalPeriod);
 
-    return updatedGoalPeriod;
-  }),
+      return updatedGoalPeriod;
+    }
+  ),
   addGoal: createResolver<AddGoalInput>(
-    async (_, { id, name, type, scheduledDate = null, goalIndex = null }) => {
+    async (
+      _,
+      { id, name, type, scheduledDate = null, goalIndex = null },
+      { auth: { uid } }
+    ) => {
       // TODO: setup security
-      const newGoalRef = firestoreDB
-        .collection('/users/haOhlwjhAfRIOFGhHuJS/goals')
-        .doc(id);
+      const newGoalRef = firestoreDB.collection(`/users/${uid}/goals`).doc(id);
       const newGoal = {
         id: newGoalRef.id,
         name,
@@ -124,7 +131,7 @@ export const goalMutationResolvers = {
 
       if (!!scheduledDate) {
         const goalPeriodRef = firestoreDB
-          .collection('/users/haOhlwjhAfRIOFGhHuJS/goalPeriods')
+          .collection(`/users/${uid}/goalPeriods`)
           .doc(scheduledDate);
 
         const prevGoalPeriodSnap = await goalPeriodRef.get();
@@ -149,39 +156,41 @@ export const goalMutationResolvers = {
       return newGoal;
     }
   ),
-  updateGoal: createResolver<UpdateGoalInput>(async (_, payload) => {
-    const goalRef = firestoreDB.doc(
-      `/users/haOhlwjhAfRIOFGhHuJS/goals/${payload.id}`
-    );
+  updateGoal: createResolver<UpdateGoalInput>(
+    async (_, payload, { auth: { uid } }) => {
+      const goalRef = firestoreDB.doc(`/users/${uid}/goals/${payload.id}`);
 
-    const goalSnapShot = await goalRef.get();
-    if (!goalSnapShot.exists) {
-      throw new ApolloError("Goal doesn't exist");
+      const goalSnapShot = await goalRef.get();
+      if (!goalSnapShot.exists) {
+        throw new ApolloError("Goal doesn't exist");
+      }
+
+      await goalRef.update(payload);
+      return await goalSnapShot.data();
     }
+  ),
+  deleteGoal: createResolver<DeleteGoalInput>(
+    async (_, { id }, { auth: { uid } }) => {
+      const goalRef = firestoreDB.doc(`/users/${uid}/goals/${id}`);
+      const goalSnap = await goalRef.get();
+      const goalToDelete = goalSnap.data() as Goal;
 
-    await goalRef.update(payload);
-    return await goalSnapShot.data();
-  }),
-  deleteGoal: createResolver<DeleteGoalInput>(async (_, { id }) => {
-    const goalRef = firestoreDB.doc(`/users/haOhlwjhAfRIOFGhHuJS/goals/${id}`);
-    const goalSnap = await goalRef.get();
-    const goalToDelete = goalSnap.data() as Goal;
+      if (!goalToDelete) {
+        return 'No goal with id found';
+      }
+      goalRef.delete();
 
-    if (!goalToDelete) {
-      return 'No goal with id found';
+      if (goalToDelete.scheduledDate) {
+        const goalPeriodRef = firestoreDB.doc(
+          `/users/${uid}/goalPeriods/${goalToDelete.scheduledDate}`
+        );
+        const goalPeriodSnap = await goalPeriodRef.get();
+        const goalPeriod = (await goalPeriodSnap.data()) as GoalPeriodFirebase;
+        const updatedGoals = goalPeriod.goals.filter((goal) => goal !== id);
+        goalPeriodRef.update({ goals: updatedGoals } as GoalPeriodFirebase);
+      }
+
+      return 'Goal deleted';
     }
-    goalRef.delete();
-
-    if (goalToDelete.scheduledDate) {
-      const goalPeriodRef = firestoreDB.doc(
-        `/users/haOhlwjhAfRIOFGhHuJS/goalPeriods/${goalToDelete.scheduledDate}`
-      );
-      const goalPeriodSnap = await goalPeriodRef.get();
-      const goalPeriod = (await goalPeriodSnap.data()) as GoalPeriodFirebase;
-      const updatedGoals = goalPeriod.goals.filter((goal) => goal !== id);
-      goalPeriodRef.update({ goals: updatedGoals } as GoalPeriodFirebase);
-    }
-
-    return 'Goal deleted';
-  }),
+  ),
 };

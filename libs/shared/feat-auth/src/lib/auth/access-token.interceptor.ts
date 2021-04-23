@@ -12,14 +12,14 @@ import { exhaustMap, first, switchMap } from 'rxjs/operators';
 import { UserService } from './user.service';
 
 @Injectable({ providedIn: 'root' })
-export class SetTokenInterceptor implements HttpInterceptor {
+export class AccessTokenInterceptor implements HttpInterceptor {
   constructor(private userService: UserService) {}
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!this.userService.currentUser$.value || !firebase.auth().tenantId) {
+    if (!this.userService.currentUser$.value) {
       return next.handle(req);
     }
 
@@ -30,10 +30,7 @@ export class SetTokenInterceptor implements HttpInterceptor {
       }),
       exhaustMap((token) => {
         const tenantId = firebase.auth().tenantId;
-        let headers = tenantId
-          ? req.headers.append('Schoolid', tenantId)
-          : req.headers;
-
+        let headers = req.headers;
         headers = headers.append('Authorization', token);
         const authReq = req.clone({ headers });
         return next.handle(authReq);

@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
+import { SharedFeatAuthModule } from '@app/shared/feat-auth';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCs89L7bIdvZ6ziG6R053mED0f9HHeuEik',
@@ -46,6 +47,7 @@ export function endpointsFactory() {
     }),
     environment.production ? [] : AkitaNgDevtools.forRoot(),
     AkitaNgRouterStoreModule,
+    SharedFeatAuthModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
