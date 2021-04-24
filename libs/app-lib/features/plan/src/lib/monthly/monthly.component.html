@@ -24,7 +24,10 @@
       [tasks]="currentMonthGoalPeriod.goals"
       [date]="currentMonthGoalPeriod.date"
       [isMain]="true"
+      [goalPeriodType]="monthlyGoalPeriodType"
       (addGoal)="onAddGoal($event)"
+      (deleteGoal)="onDeleteGoal($event)"
+      (editGoal)="onEditGoal($event)"
     ></app-task-group>
 
     <!-- <app-task-group
@@ -45,8 +48,8 @@
     [currentDate]="currentDate"
     [goalPeriods]="goalPeriods$ | async"
     (addTodo)="onAddGoal($event)"
-    (deleteTodo)="onDeleteTodo($event)"
-    (editTodo)="onEditTodo($event)"
+    (deleteTodo)="onDeleteGoal($event)"
+    (editTodo)="onEditGoal($event)"
     (toggleComplete)="onToggleComplete($event)"
     (retroChange)="onRetroChange($event)"
     >Loading month ...</app-month

@@ -9,7 +9,7 @@ import {
   EditGoalModalComponent,
   EditModalComponentProps,
 } from '@app/app-lib/shared/ui';
-import { Goal, GoalPeriod, GoalPeriodStore } from '@app/shared/interfaces';
+import { Goal, GoalPeriod, GoalPeriodStore, GoalPeriodType } from '@app/shared/interfaces';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
@@ -24,6 +24,7 @@ export class MonthlyComponent implements OnInit {
   goalPeriods$: Observable<Record<string, GoalPeriod>>;
   currentMonthGoalPeriod$: Observable<GoalPeriod>;
   categories$: Observable<string[]>;
+  monthlyGoalPeriodType = GoalPeriodType.MONTHLY;
 
   calendarDate: Date;
   private _currentDate: Date;
@@ -76,11 +77,11 @@ export class MonthlyComponent implements OnInit {
     this.planFacadeService.addGoal({ ...goal, id: uuidv4() });
   }
 
-  onDeleteTodo(goal: Goal) {
+  onDeleteGoal(goal: Goal) {
     this.planFacadeService.deleteGoal(goal);
   }
 
-  async onEditTodo(goal: Goal) {
+  async onEditGoal(goal: Goal) {
     const modal = await this.modalController.create({
       component: EditGoalModalComponent,
       componentProps: {

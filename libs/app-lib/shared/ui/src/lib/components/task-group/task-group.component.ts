@@ -21,10 +21,13 @@ export class TaskGroupComponent implements OnInit {
   @HostBinding('class.main')
   @Input()
   isMain: boolean;
-  @Input() tasks: Task[];
+  @Input() tasks: Goal[];
   @Input() date: string;
+  @Input() goalPeriodType: GoalPeriodType;
   @Input() titleLink: string;
   @Output() addGoal = new EventEmitter<Goal>();
+  @Output() deleteGoal = new EventEmitter<Goal>();
+  @Output() editGoal = new EventEmitter<Goal>();
   todoTextControl: FormControl;
 
   constructor() {}
@@ -47,11 +50,12 @@ export class TaskGroupComponent implements OnInit {
 
     this.addGoal.emit({
       name: this.todoTextControl.value,
-      type: GoalPeriodType.MONTHLY,
+      type: this.goalPeriodType,
       scheduledDate: this.date,
     } as Goal);
     this.todoTextControl.reset();
   }
+
   onKeydown(event) {
     event.preventDefault();
   }

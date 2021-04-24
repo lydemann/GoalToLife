@@ -7,6 +7,8 @@
   <app-task
     *ngFor="let task of tasks; trackBy: tasksTrackBy"
     [task]="task"
+    (delete)="this.deleteGoal.next(task)"
+    (edit)="this.editGoal.next(task)"
   ></app-task>
 </ion-list>
 
