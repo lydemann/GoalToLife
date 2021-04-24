@@ -45,7 +45,8 @@ export class MonthlyComponent implements OnInit {
     const params = this.activatedRoute.snapshot.params;
     const year = params[YEAR_PARAM_KEY];
     const month = params[MONTH_PARAM_KEY];
-    this.currentDate = new Date(year, month);
+    const dateOfMonth = new Date().getDate();
+    this.currentDate = new Date(year, month, dateOfMonth);
     this.calendarDate = new Date(this._currentDate.setHours(0, 0, 0, 0));
     this.calendarDate.setMonth(this.calendarDate.getMonth(), 1); // avoiding problems with 29th,30th,31st days
 

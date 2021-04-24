@@ -73,8 +73,11 @@ export const goalQueryResolvers = {
           .where('date', 'in', ['2021-3'])
           .get();
 
-        goalPeriods.push(goalPeriodSnapshot.docs[0].data() as GoalPeriodStore);
-        console.log(goalPeriods);
+        if (goalPeriodSnapshot.docs[0]) {
+          goalPeriods.push(
+            goalPeriodSnapshot.docs[0].data() as GoalPeriodStore
+          );
+        }
       }
 
       const enrichedGoalPeriods = await Promise.all(

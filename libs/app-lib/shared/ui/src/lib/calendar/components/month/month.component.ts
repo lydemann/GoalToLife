@@ -7,11 +7,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import {
-  Goal,
-  GoalPeriod as GoalPeriod,
-  GoalPeriodType,
-} from '@app/shared/interfaces';
+import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
 
 import { getDailyGoalKey } from '../../../utils/goal-utils';
 import { DayDate } from '../../classes/day-date';
