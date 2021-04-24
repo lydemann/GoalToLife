@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
-import { getDailyGoalKey } from '@app/app-lib/shared/ui';
 import {
+  getDailyGoalKey,
+  getMonthlyGoalPeriodKey,
+} from '@app/app-lib/shared/ui';
+import {
+  GetGoalPeriodsInput,
   Goal,
   GoalPeriod,
   GoalPeriodStore,
@@ -9,12 +13,18 @@ import {
 import { Apollo, gql } from 'apollo-angular';
 
 const getGoalPeriodsQuery = gql`
-  query goalGoalPeriodsQuery($fromDate: String, $toDate: String) {
-    goalPeriod(fromDate: $fromDate, toDate: $toDate) {
+  query goalGoalPeriodsQuery(
+    $fromDate: String
+    $toDate: String
+    $dates: [String]
+  ) {
+    goalPeriod(fromDate: $fromDate, toDate: $toDate, dates: $dates) {
       date
+      type
       goals {
         id
         name
+        type
         scheduledDate
         completed
       }
@@ -35,7 +45,8 @@ export class PlanResourceService {
   getMonthlyGoalPeriods(month: number, year: number) {
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
-
+    const monthlyGoalPeriodKey = getMonthlyGoalPeriodKey(year, month);
+    const dates = [monthlyGoalPeriodKey];
     const fromDate = getDailyGoalKey(firstDay);
     const toDate = getDailyGoalKey(lastDay);
 
@@ -44,7 +55,8 @@ export class PlanResourceService {
       variables: {
         fromDate,
         toDate,
-      },
+        dates,
+      } as GetGoalPeriodsInput,
     });
   }
 
@@ -106,6 +118,7 @@ export class PlanResourceService {
         ) {
           id
           name
+          type
           scheduledDate
         }
       }

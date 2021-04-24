@@ -206,6 +206,7 @@ export class DayComponent implements OnInit, OnChanges, OnDestroy {
           this.retroChange.emit({
             ...this.retroForm.value,
             date: getDailyGoalKey(this.dayDate.dateDate),
+            type: GoalPeriodType.DAILY,
           });
         });
     }

@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MONTH_PARAM_KEY, YEAR_PARAM_KEY } from '@app/app-lib';
+
+import { RedirectToCurrentMonthResolver } from './monthly/redirect-to-current-month.resolver';
 
 const routes: Routes = [
   {
@@ -17,6 +20,10 @@ const routes: Routes = [
       },
       {
         path: 'monthly',
+        resolve: [RedirectToCurrentMonthResolver],
+      },
+      {
+        path: `monthly/:${YEAR_PARAM_KEY}/:${MONTH_PARAM_KEY}`,
         loadChildren: () =>
           import('./monthly/monthly.module').then((m) => m.MonthlyModule),
       },
@@ -32,7 +39,6 @@ const routes: Routes = [
       },
       {
         path: '',
-        pathMatch: 'full',
         redirectTo: 'monthly',
       },
     ],

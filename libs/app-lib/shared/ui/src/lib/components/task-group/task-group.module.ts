@@ -1,18 +1,21 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TaskGroupComponent } from './task-group.component';
-import { IonicModule } from '@ionic/angular';
-import { TaskModule } from '../task/task.module';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+
+import { TaskModule } from '../task/task.module';
+import { TaskGroupComponent } from './task-group.component';
 
 @NgModule({
   imports: [
     CommonModule,
     IonicModule,
     TaskModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule,
   ],
   declarations: [TaskGroupComponent],
-  exports: [TaskGroupComponent]
+  exports: [TaskGroupComponent],
 })
-export class TaskGroupModule { }
+export class TaskGroupModule {}

@@ -20,8 +20,15 @@ export interface GoalPeriodStore {
   date: string;
   goals: string[];
   type: GoalPeriodType;
+  // retro
   wins: string;
   improvementPoints: string;
   obtainedKnowledge: string;
   thoughts: string;
+}
+
+export interface GetGoalPeriodsInput {
+  dates: string[];
+  fromDate: string;
+  toDate: string;
 }

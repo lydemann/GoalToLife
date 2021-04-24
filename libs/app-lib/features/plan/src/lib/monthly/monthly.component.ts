@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { PlanFacadeService } from '@app/app-lib';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import {
+  MONTH_PARAM_KEY,
+  PlanFacadeService,
+  YEAR_PARAM_KEY,
+} from '@app/app-lib';
 import {
   EditGoalModalComponent,
   EditModalComponentProps,
@@ -17,16 +22,7 @@ import { v4 as uuidv4 } from 'uuid';
 export class MonthlyComponent implements OnInit {
   isLoading$: Observable<boolean>;
   goalPeriods$: Observable<Record<string, GoalPeriod>>;
-  goalsForPeriod: Goal[] = [
-    {
-      id: 'weekly-goal-1',
-      name: 'Finish feature xyz',
-    } as Goal,
-    {
-      id: 'weekly-goal-2',
-      name: 'Finish feature xyz 2',
-    } as Goal,
-  ];
+  currentMonthGoalPeriod$: Observable<GoalPeriod>;
   categories$: Observable<string[]>;
 
   calendarDate: Date;
@@ -41,11 +37,15 @@ export class MonthlyComponent implements OnInit {
 
   constructor(
     private planFacadeService: PlanFacadeService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.currentDate = new Date();
+    const params = this.activatedRoute.snapshot.params;
+    const year = params[YEAR_PARAM_KEY];
+    const month = params[MONTH_PARAM_KEY];
+    this.currentDate = new Date(year, month);
     this.calendarDate = new Date(this._currentDate.setHours(0, 0, 0, 0));
     this.calendarDate.setMonth(this.calendarDate.getMonth(), 1); // avoiding problems with 29th,30th,31st days
 
@@ -57,6 +57,7 @@ export class MonthlyComponent implements OnInit {
       this.calendarDate.getMonth(),
       this.calendarDate.getFullYear()
     );
+    this.currentMonthGoalPeriod$ = this.planFacadeService.currentMonthGoalPeriod$;
 
     this.isLoading$ = this.planFacadeService.isLoading$;
   }
@@ -67,9 +68,10 @@ export class MonthlyComponent implements OnInit {
       this.calendarDate.getMonth(),
       this.calendarDate.getFullYear()
     );
+    // TODO: update path params on month change
   }
 
-  onAddTodo(goal: Goal) {
+  onAddGoal(goal: Goal) {
     this.planFacadeService.addGoal({ ...goal, id: uuidv4() });
   }
 

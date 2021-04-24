@@ -20,6 +20,7 @@ export class PlanFacadeService {
   isLoadingGoalPeriods$: Observable<boolean>;
   goalPeriodsStateHistory: StateHistoryPlugin<GoalPeriodsState>;
   isLoading$: Observable<boolean>;
+  currentMonthGoalPeriod$: Observable<GoalPeriod>;
 
   constructor(
     private planResourceService: PlanResourceService,
@@ -28,7 +29,7 @@ export class PlanFacadeService {
     private goalPeriodsQuery: GoalPeriodsQuery,
     private goalsQuery: GoalsQuery
   ) {
-    this.goalPeriods$ = this.goalPeriodsQuery.entities$;
+    this.goalPeriods$ = this.goalPeriodsQuery.dailyGoalPeriods$;
     this.isLoading$ = combineQueries([
       this.goalPeriodsQuery.selectLoading(),
       this.goalsQuery.selectLoading(),
@@ -41,6 +42,7 @@ export class PlanFacadeService {
     this.goalPeriodsStateHistory = new StateHistoryPlugin(
       this.goalPeriodsQuery
     );
+    this.currentMonthGoalPeriod$ = this.goalPeriodsQuery.monthlyGoalPeriod$;
   }
 
   fetchMonthlyGoalPeriods(month: number, year: number) {

@@ -22,7 +22,7 @@ export const goalSchema = gql`
 
 export const goalQuerySchema = `
     goal(scheduledDate: String): [Goal]
-    goalPeriod(fromDate: String, toDate: String): [GoalPeriod]
+    goalPeriod(fromDate: String, toDate: String, dates: [String]): [GoalPeriod]
 `;
 
 export const goalMutationSchema = `

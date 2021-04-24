@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
-import { GoalPeriod, GoalPeriodStore } from '@app/shared/interfaces';
-import { combineQueries, QueryEntity } from '@datorama/akita';
+import { getMonthlyGoalPeriodKey } from '@app/app-lib/shared/ui';
+import {
+  Goal,
+  GoalPeriod,
+  GoalPeriodStore,
+  GoalPeriodType,
+} from '@app/shared/interfaces';
+import { combineQueries, HashMap, QueryEntity } from '@datorama/akita';
+import { RouterQuery } from '@datorama/akita-ng-router-store';
 import { Observable } from 'rxjs';
-import { filter, map, startWith } from 'rxjs/operators';
+import { map, startWith, tap } from 'rxjs/operators';
 
+import { MONTH_PARAM_KEY, YEAR_PARAM_KEY } from '../../plan.constants';
 import { GoalsQuery } from '../goals/goals.query';
-import { GoalsStore } from '../goals/goals.store';
 import { GoalPeriodsState } from './goal-periods.model';
 import { GoalPeriodsStore } from './goal-periods.store';
-
 /**
  * GoalPeriods query
  *
@@ -21,32 +27,74 @@ export class GoalPeriodsQuery extends QueryEntity<
   GoalPeriodsState,
   GoalPeriodStore
 > {
-  entities$: Observable<Record<string, GoalPeriod>>;
+  dailyGoalPeriods$: Observable<Record<string, GoalPeriod>>;
   isLoadingGoalPeriods$: Observable<boolean>;
+  monthlyGoalPeriod$: Observable<GoalPeriod>;
 
   constructor(
     protected store: GoalPeriodsStore,
-    private goalsQuery: GoalsQuery
+    private goalsQuery: GoalsQuery,
+    routerQuery: RouterQuery
   ) {
     super(store);
 
-    this.entities$ = combineQueries([
-      this.selectAll(),
+    this.dailyGoalPeriods$ = combineQueries([
+      this.selectAll().pipe(
+        map((goalPeriods) =>
+          goalPeriods.filter(
+            (goalPeriod) => goalPeriod.type === GoalPeriodType.DAILY
+          )
+        )
+      ),
       this.goalsQuery.select((state) => state.entities),
     ]).pipe(
       map(([goalPeriods, goalEntities]) => {
-        return goalPeriods.reduce(
-          (prev, goalPeriod) => ({
-            ...prev,
-            [goalPeriod.date]: {
-              ...goalPeriod,
-              goals: goalPeriod.goals.map((goalId) => goalEntities[goalId]),
-            },
-          }),
-          {}
-        );
+        return this.getEnrichedGoalPeriods(goalPeriods, goalEntities);
       }),
       startWith({})
+    );
+
+    this.monthlyGoalPeriod$ = combineQueries([
+      routerQuery.selectParams<string>(YEAR_PARAM_KEY),
+      routerQuery.selectParams<string>(MONTH_PARAM_KEY),
+      this.selectAll({ asObject: true }),
+      this.goalsQuery.select((state) => state.entities),
+    ]).pipe(
+      map(([year, month, goalPeriodsEntities, goalEntities]) => {
+        const monthDateKey = getMonthlyGoalPeriodKey(+year, +month);
+        const existingGoalPeriod = goalPeriodsEntities[monthDateKey];
+        const currentMonthlyGoalPeriod = {
+          goals: [],
+          date: monthDateKey,
+          type: GoalPeriodType.MONTHLY,
+          ...existingGoalPeriod,
+        } as GoalPeriodStore;
+
+        return this.enrichGoalPeriod(currentMonthlyGoalPeriod, goalEntities);
+      })
+    );
+  }
+
+  private enrichGoalPeriod(
+    goalPeriod: GoalPeriodStore,
+    goalEntities: HashMap<Goal>
+  ): GoalPeriod {
+    return {
+      ...goalPeriod,
+      goals: goalPeriod?.goals?.map((goalId) => goalEntities[goalId]),
+    };
+  }
+
+  private getEnrichedGoalPeriods(
+    goalPeriods,
+    goalEntities
+  ): Record<string, GoalPeriod> {
+    return goalPeriods.reduce(
+      (prev, goalPeriod) => ({
+        ...prev,
+        [goalPeriod.date]: this.enrichGoalPeriod(goalPeriod, goalEntities),
+      }),
+      {}
     );
   }
 }

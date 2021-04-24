@@ -117,7 +117,11 @@ export class TODOListComponent implements OnInit, OnChanges {
       return;
     }
 
-    this.addTodo.emit({ name: this.todoTextControl.value } as Goal);
+    this.addTodo.emit({
+      name: this.todoTextControl.value,
+      type: GoalPeriodType.DAILY,
+    } as Goal);
+    this.todoTextControl.reset();
   }
   onKeydown(event) {
     event.preventDefault();

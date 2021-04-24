@@ -1,5 +1,7 @@
-<h2 *ngIf="isMain">{{title}}</h2>
-<h3 *ngIf="!isMain"><a [routerLink]="titleLink">{{title}}</a></h3>
+<h2 *ngIf="isMain">{{ title }}</h2>
+<h3 *ngIf="!isMain">
+  <a [routerLink]="titleLink">{{ title }}</a>
+</h3>
 
 <ion-list>
   <app-task
@@ -7,3 +9,17 @@
     [task]="task"
   ></app-task>
 </ion-list>
+
+<form (submit)="onAddTODO($event)">
+  <ion-input
+    #addTodoText
+    enterkeyhint
+    (keydown.enter)="onKeydown($event)"
+    (keyup.enter)="onAddTODO($event)"
+    [formControl]="todoTextControl"
+    class="form-control"
+    name="todoText"
+    autocomplete="off"
+    placeholder="Add task - Enter"
+  ></ion-input>
+</form>
