@@ -1,0 +1,4641 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MonthlyComponent should show calendar 1`] = `
+<div
+  id="root0"
+  ng-version="11.2.7"
+>
+  <!--bindings={
+  "ng-reflect-ng-if": null
+}-->
+  <app-header
+    ng-reflect-back-text="Quarterly"
+    ng-reflect-back-url="/plan/quarterly"
+    ng-reflect-title="March, 2021"
+  >
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons
+          class="left-header-controls"
+          slot="start"
+        >
+          <!--bindings={
+  "ng-reflect-ng-if": "Quarterly"
+}-->
+          <ion-button>
+             Quarterly 
+          </ion-button>
+        </ion-buttons>
+        <ion-title>
+          March, 2021
+        </ion-title>
+        <ion-buttons
+          class="right-header-controls"
+          slot="end"
+        >
+          <ion-button>
+            <ion-icon
+              name="pricetags-outline"
+              ng-reflect-name="pricetags-outline"
+            />
+            <ion-select
+              multiple=""
+              ng-reflect-multiple=""
+              ng-reflect-selected-text=" "
+              selectedtext=" "
+            >
+              <!--bindings={
+  "ng-reflect-ng-for-of": null
+}-->
+            </ion-select>
+          </ion-button>
+          <ion-button>
+            <ion-icon
+              name="search-outline"
+              ng-reflect-name="search-outline"
+            />
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+  </app-header>
+  <ion-content
+    class="content"
+    ng-reflect-fullscreen="true"
+    ng-reflect-scroll-x="true"
+    ng-reflect-scroll-y="true"
+  >
+    <!--bindings={
+  "ng-reflect-ng-if": null
+}-->
+    <app-calendar-header
+      ng-reflect-calendar-date="Thu Apr 01 2021 00:00:00 GMT+0"
+    >
+      <header>
+        <div
+          class="back-button-holder"
+        >
+          <button
+            class="btn previous-month"
+            type="button"
+          >
+            <i
+              class="fa fa-chevron-left"
+            />
+          </button>
+        </div>
+        <h2
+          class="month-title-holder"
+        >
+           April 2021 
+        </h2>
+        <div
+          class="forward-btn-holder"
+        >
+          <button
+            class="btn next-month"
+            type="button"
+          >
+            <i
+              class="fa fa-chevron-right"
+            />
+          </button>
+        </div>
+      </header>
+    </app-calendar-header>
+    <app-month
+      ng-reflect-calendar-date="Thu Apr 01 2021 00:00:00 GMT+0"
+      ng-reflect-current-date="Sat Apr 24 2021 00:00:00 GMT+0"
+      ng-reflect-goal-periods="[object Object]"
+    >
+      <section>
+        <div
+          class="headers"
+        >
+          <!--bindings={
+  "ng-reflect-ng-for-of": "Mon,Tues,Wed,Thu,Fri,Sat,Sun"
+}-->
+          <div
+            class="day-header"
+          >
+             Mon 
+          </div>
+          <div
+            class="day-header"
+          >
+             Tues 
+          </div>
+          <div
+            class="day-header"
+          >
+             Wed 
+          </div>
+          <div
+            class="day-header"
+          >
+             Thu 
+          </div>
+          <div
+            class="day-header"
+          >
+             Fri 
+          </div>
+          <div
+            class="day-header"
+          >
+             Sat 
+          </div>
+          <div
+            class="day-header"
+          >
+             Sun 
+          </div>
+        </div>
+        <div
+          class="data"
+        >
+          <!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object",
+  "ng-reflect-ng-for-track-by": "weeksTrackBy(idx, item) {\\n    "
+}-->
+          <!---->
+          <!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object",
+  "ng-reflect-ng-for-track-by": "daysTrackBy(idx, item) {\\n     "
+}-->
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                29
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                30
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                31
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                01
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                02
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                03
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                04
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <!---->
+          <!---->
+          <!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object",
+  "ng-reflect-ng-for-track-by": "daysTrackBy(idx, item) {\\n     "
+}-->
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                05
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                06
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                07
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                08
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                09
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                10
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                11
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <!---->
+          <!---->
+          <!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object",
+  "ng-reflect-ng-for-track-by": "daysTrackBy(idx, item) {\\n     "
+}-->
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                12
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                13
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                14
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                15
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                16
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                17
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                18
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <!---->
+          <!---->
+          <!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object",
+  "ng-reflect-ng-for-track-by": "daysTrackBy(idx, item) {\\n     "
+}-->
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                19
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                20
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                21
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                22
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                23
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth highlitedDay"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                24
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                25
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <!---->
+          <!---->
+          <!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object",
+  "ng-reflect-ng-for-track-by": "daysTrackBy(idx, item) {\\n     "
+}-->
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                26
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                27
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                28
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                29
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day currentMonth"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                30
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                01
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <app-day
+            ng-reflect-day-date="[object Object]"
+            ng-reflect-highlited="Sat Apr 24 2021 00:00:00 GMT+0"
+          >
+            <div
+              class="day"
+              makedroppable=""
+              ng-reflect-drop-context="[object Object]"
+              ng-reflect-klass="day"
+              ng-reflect-ng-class="[object Object]"
+            >
+              <div
+                class="day-date"
+              >
+                02
+              </div>
+              <div>
+                <p
+                  class="headline"
+                >
+                  Goals
+                </p>
+                <app-todolist
+                  ng-reflect-editable="false"
+                  ng-reflect-goals=""
+                >
+                  <div
+                    class="todo-wrapper"
+                  >
+                    <div
+                      class="todo-list-wrapper"
+                    >
+                      <ul
+                        class="list-group"
+                      >
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}-->
+                      </ul>
+                    </div>
+                    <form
+                      class="ng-untouched ng-pristine ng-valid"
+                      novalidate=""
+                    >
+                      <ion-input
+                        autocomplete="off"
+                        class="form-control ng-untouched ng-pristine ng-invalid"
+                        name="todoText"
+                        ng-reflect-autocomplete="off"
+                        ng-reflect-form="[object Object]"
+                        ng-reflect-name="todoText"
+                        ng-reflect-placeholder="Add task - Enter"
+                        placeholder="Add task - Enter"
+                      />
+                    </form>
+                  </div>
+                </app-todolist>
+                <p
+                  class="hidden"
+                >
+                   Retro 
+                </p>
+                <form
+                  class="retro ng-untouched ng-pristine ng-valid"
+                  ng-reflect-form="[object Object]"
+                  novalidate=""
+                >
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Wins
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="wins"
+                      ng-reflect-name="wins"
+                      ng-reflect-placeholder="Good things that I did today"
+                      placeholder="Good things that I did today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Obtained Knowledge
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="obtainedKnowledge"
+                      ng-reflect-name="obtainedKnowledge"
+                      ng-reflect-placeholder="What I learned today"
+                      placeholder="What I learned today"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Improvement Points
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="improvementPoints"
+                      ng-reflect-name="improvementPoints"
+                      ng-reflect-placeholder="How I will improve"
+                      placeholder="How I will improve"
+                    />
+                  </div>
+                  <div
+                    class="hidden"
+                  >
+                    <ion-label>
+                      Thoughts
+                    </ion-label>
+                    <ion-textarea
+                      class="input ng-untouched ng-pristine ng-valid"
+                      formcontrolname="thoughts"
+                      ng-reflect-name="thoughts"
+                      ng-reflect-placeholder="What is occupying my mind"
+                      placeholder="What is occupying my mind"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </app-day>
+          <!---->
+        </div>
+      </section>
+    </app-month>
+  </ion-content>
+</div>
+`;

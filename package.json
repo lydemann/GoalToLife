@@ -32,7 +32,9 @@
     "prepare": "husky install",
     "test:pr": "npm run affected:test -- --parallel",
     "service:serve": "concurrently --kill-others \"npm run build -- service --source-map --watch\" \"firebase serve --only functions\"",
-    "service:debug": "concurrently --kill-others \"npm run build -- service --source-map --watch\" \"firebase emulators:start --only functions --inspect-functions \""
+    "service:debug": "concurrently --kill-others \"npm run build -- service --source-map --watch\" \"firebase emulators:start --only functions --inspect-functions \"",
+    "firebase-local": "concurrently --kill-others \"npm run build -- service --source-map --watch\" \"firebase emulators:start \"",
+    "pr:e2e": "npm run affected:e2e"
   },
   "private": true,
   "dependencies": {

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "cli": {
-    "defaultCollection": "@datorama/akita"
+    "defaultCollection": "@ngneat/spectator"
   },
   "defaultProject": "app",
   "schematics": {
@@ -24,6 +24,12 @@
     },
     "@ionic/angular-toolkit:page": {
       "styleext": "scss"
+    },
+    "schematics": {
+      "@ngneat/spectator:spectator-component": {
+        "style": "scss",
+        "changeDetection": "OnPush"
+      }
     }
   },
   "projects": {
