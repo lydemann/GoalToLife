@@ -29,7 +29,6 @@ export class AccessTokenInterceptor implements HttpInterceptor {
         return from(user?.getIdToken() || '');
       }),
       exhaustMap((token) => {
-        const tenantId = firebase.auth().tenantId;
         let headers = req.headers;
         headers = headers.append('Authorization', token);
         const authReq = req.clone({ headers });
