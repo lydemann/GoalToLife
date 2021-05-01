@@ -18,11 +18,10 @@ export const planRoutes: Routes = [
         loadChildren: () =>
           import('./weekly/weekly.module').then((m) => m.WeeklyModule),
       },
-      // {
-      //   path: 'monthly',
-      //   resolve: [RedirectToCurrentMonthResolver],
-      //   component:
-      // },
+      {
+        path: 'monthly',
+        resolve: [RedirectToCurrentMonthResolver],
+      },
       {
         path: `monthly/:${YEAR_PARAM_KEY}/:${MONTH_PARAM_KEY}`,
         loadChildren: () =>
