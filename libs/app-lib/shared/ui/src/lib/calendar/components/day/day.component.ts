@@ -139,9 +139,9 @@ export class DayComponent
   }
 
   private isHighlited(): boolean {
-    return this._highlited.getTime() === this._dayDate.dateDate.getTime()
-      ? true
-      : false;
+    const highLightedTime = this._highlited.getTime();
+    const dayTime = this._dayDate.dateDate.getTime();
+    return highLightedTime === dayTime ? true : false;
   }
 
   /*
@@ -213,7 +213,7 @@ export class DayComponent
       this.currentClasses = {
         currentMonth: this._isCurrentMonth(),
         selectedDay: null,
-        highlitedDay: isCurrentDay,
+        highlightedDay: isCurrentDay,
       };
     }
   }

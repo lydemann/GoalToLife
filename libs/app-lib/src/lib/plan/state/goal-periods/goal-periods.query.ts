@@ -8,7 +8,7 @@ import {
 } from '@app/shared/interfaces';
 import { combineQueries, HashMap, QueryEntity } from '@datorama/akita';
 import { RouterQuery } from '@datorama/akita-ng-router-store';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { map, startWith, tap } from 'rxjs/operators';
 
 import { MONTH_PARAM_KEY, YEAR_PARAM_KEY } from '../../plan.constants';

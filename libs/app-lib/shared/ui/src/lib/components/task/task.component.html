@@ -21,7 +21,11 @@
       >
         <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
       </ion-button>
-      <ion-button color="secondary" (click)="delete.emit(task)">
+      <ion-button
+        color="secondary"
+        (click)="delete.emit(task)"
+        data-testid="delete-goal"
+      >
         <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
       </ion-button>
     </ion-buttons>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import {
   MONTH_PARAM_KEY,
   PlanFacadeService,
@@ -9,7 +9,12 @@ import {
   EditGoalModalComponent,
   EditModalComponentProps,
 } from '@app/app-lib/shared/ui';
-import { Goal, GoalPeriod, GoalPeriodStore, GoalPeriodType } from '@app/shared/interfaces';
+import {
+  Goal,
+  GoalPeriod,
+  GoalPeriodStore,
+  GoalPeriodType,
+} from '@app/shared/interfaces';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';

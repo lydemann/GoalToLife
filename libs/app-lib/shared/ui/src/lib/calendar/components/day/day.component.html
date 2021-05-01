@@ -1,6 +1,7 @@
 <div
   class="day"
   [ngClass]="currentClasses"
+  [attr.data-testid]="'day-' + (dayDate.dateDate | date: 'dd')"
   makeDroppable
   [dropContext]="{ context: 'day' }"
   (dropped)="onDropTodo($event)"

@@ -4,7 +4,7 @@ import { MONTH_PARAM_KEY, YEAR_PARAM_KEY } from '@app/app-lib';
 
 import { RedirectToCurrentMonthResolver } from './monthly/redirect-to-current-month.resolver';
 
-const routes: Routes = [
+export const planRoutes: Routes = [
   {
     path: '',
     children: [
@@ -18,10 +18,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./weekly/weekly.module').then((m) => m.WeeklyModule),
       },
-      {
-        path: 'monthly',
-        resolve: [RedirectToCurrentMonthResolver],
-      },
+      // {
+      //   path: 'monthly',
+      //   resolve: [RedirectToCurrentMonthResolver],
+      //   component:
+      // },
       {
         path: `monthly/:${YEAR_PARAM_KEY}/:${MONTH_PARAM_KEY}`,
         loadChildren: () =>
@@ -40,13 +41,14 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'monthly',
+        pathMatch: 'full',
       },
     ],
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(planRoutes)],
   exports: [RouterModule],
 })
 export class PlanRoutingModule {}
