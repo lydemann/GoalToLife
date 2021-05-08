@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
+
 import {
   MONTH_PARAM_KEY,
   PlanFacadeService,
@@ -15,9 +19,6 @@ import {
   GoalPeriodStore,
   GoalPeriodType,
 } from '@app/shared/interfaces';
-import { ModalController } from '@ionic/angular';
-import { Observable } from 'rxjs';
-import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-monthly',
@@ -104,7 +105,7 @@ export class MonthlyComponent implements OnInit {
     this.planFacadeService.updateGoal(goal);
   }
 
-  onRetroChange(goalPeriod: GoalPeriodStore) {
+  onRetroChange(goalPeriod: Partial<GoalPeriod>) {
     this.planFacadeService.updateGoalPeriod(goalPeriod);
   }
 }

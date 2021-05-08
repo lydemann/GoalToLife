@@ -1,9 +1,16 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  QueryList,
+  TrackByFunction,
+  ViewChildren,
+} from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { AppFacadeService } from '@app/app-lib';
 import { TaskComponent } from '@app/app-lib/shared/ui';
 import { Goal, GoalPeriodType, Task } from '@app/shared/interfaces';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Component({
   templateUrl: './daily.component.html',
@@ -25,13 +32,13 @@ export class DailyComponent implements OnInit {
     this.goals$ = this.appFacadeService.getGoals('2021', GoalPeriodType.DAILY);
   }
 
-  tasksTrackBy(task: Task, idx) {
-    return task.id;
-  }
+  tasksTrackBy: TrackByFunction<Goal> = (idx: number, goal: Goal) => {
+    return goal.id;
+  };
 
   onDelete(task: Task) {
     this.goals$ = this.goals$.pipe(
-      map((tasks) => tasks.filter((task) => !!task.id))
+      map((tasks) => tasks.filter((goal) => !!goal.id))
     );
 
     this.appFacadeService.deleteGoal(task);
@@ -39,7 +46,7 @@ export class DailyComponent implements OnInit {
 
   onAdd(task: Task) {
     this.goals$ = this.goals$.pipe(
-      map((tasks) => tasks.filter((task) => !!task.id))
+      map((tasks) => tasks.filter((goal) => !!goal.id))
     );
 
     this.appFacadeService.addGoal(task);
@@ -51,7 +58,7 @@ export class DailyComponent implements OnInit {
       name: '',
     } as Goal;
 
-    this.goals$ = this.goals$.pipe(map((tasks) => [...tasks, tempTask]));
+    this.goals$ = this.goals$.pipe(map((goals) => [...goals, tempTask]));
     // wait for temp task to be created in dom
     setTimeout(() => {
       this.taskComponents.last.onFocus();

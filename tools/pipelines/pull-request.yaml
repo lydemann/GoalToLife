@@ -64,7 +64,7 @@ stages:
           - script: npx cypress info
             displayName: 'Cypress info'
 
-          - script: npm run affected:e2e -- --base=origin/master --head=HEAD --headless
+          - script: npm run e2e:ci
             displayName: E2E Affected
 
           - template: templates/publish-artifacts.yml

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MONTH_PARAM_KEY, YEAR_PARAM_KEY } from '@app/app-lib';
 
+import { MONTH_PARAM_KEY, YEAR_PARAM_KEY } from '@app/app-lib';
 import { RedirectToCurrentMonthResolver } from './monthly/redirect-to-current-month.resolver';
 
 export const planRoutes: Routes = [
@@ -12,11 +12,6 @@ export const planRoutes: Routes = [
         path: 'daily',
         loadChildren: () =>
           import('./daily/daily.module').then((m) => m.DailyModule),
-      },
-      {
-        path: 'weekly',
-        loadChildren: () =>
-          import('./weekly/weekly.module').then((m) => m.WeeklyModule),
       },
       {
         path: 'monthly',

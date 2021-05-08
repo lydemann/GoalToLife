@@ -1,27 +1,28 @@
-import {Directive, ElementRef, Input, OnInit} from '@angular/core';
+import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 
-import {DropContent} from "../classes/drop-content";
-
+import { DropContent } from '../classes/drop-content';
 
 /*
  * Directive defines behaviour of "draggable" element (TODO-item in our case)
  * Encapsulates HTML5 native API
  */
 @Directive({
-  selector: '[makeDraggable]'
+  // tslint:disable-next-line: directive-selector
+  selector: '[makeDraggable]',
 })
 export class MakeDraggable implements OnInit {
   /*
    * Inputs: data to drag, draggable option and helper CSS class
    */
-  @Input('makeDraggable') data: DropContent;
-  @Input('isDraggable') draggable : boolean = true;
-  @Input('helperClass') helperClass : string;
+  @Input('makeDraggable') data: DropContent = new DropContent('', {});
+  @Input() draggable = true;
+  @Input() helperClass: string;
+  @Input() dragItemId: string | number;
 
   /*
    * Class, that is used to beautify dragging element in process
    */
-  dragClass : string = 'draggingElement';
+  dragClass = 'draggingElement';
 
   /*
    * CONSTRUCTOR
@@ -38,27 +39,27 @@ export class MakeDraggable implements OnInit {
     */
 
     // defining exception to control if element is not allowed to be draggable
-    let elementIsNotDraggableException = new Error('You are trying to make not draggable element');
+    const elementIsNotDraggableException = new Error(
+      'You are trying to make not draggable element draggable'
+    );
 
     // making element draggable
     try {
       // checking if element can be made draggable
-      if (this.draggable == false) {
+      if (this.draggable === false) {
         throw elementIsNotDraggableException;
       }
-      let element = this._elementRef.nativeElement;
-
-      element.draggable == 'true';
+      const element = this._elementRef.nativeElement;
 
       // adding event listener on start of drag-event: add styling, prepare payload
       element.addEventListener('dragstart', (event) => {
         // making helper CSS-class to manipulate dragged element
         let elementIdentifyingClass;
-        if (!this.data.hasOwnProperty('id')) {
-          let random: number = Math.round(0.5 + Math.random() * 100000);
+        if (!this.dragItemId) {
+          const random: number = Math.round(0.5 + Math.random() * 100000);
           elementIdentifyingClass = `${this.dragClass}-${random.toString()}`;
         } else {
-          elementIdentifyingClass = `${this.helperClass}-${this.data['id']}`;
+          elementIdentifyingClass = `${this.helperClass}-${this.dragItemId}`;
         }
 
         // adding drag and helper classes to dragged element
@@ -83,7 +84,7 @@ export class MakeDraggable implements OnInit {
       });
     } catch (elementIsNotDraggableException) {
       // handle exception
-      console.log (elementIsNotDraggableException.message);
+      console.log(elementIsNotDraggableException.message);
     }
   }
 }

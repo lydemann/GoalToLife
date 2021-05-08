@@ -5,7 +5,8 @@
         *ngFor="let todo of goals; let i = index"
         class="{{ todoDOMClass }}-{{ todo.id }} list-group-item"
         [draggable]="isDraggable()"
-        [makeDraggable]="todo"
+        [makeDraggable]
+        [dragItemId]="todo.id"
         [helperClass]="todoDOMClass"
         (click)="onTodoItemClick(todo, $event)"
       >

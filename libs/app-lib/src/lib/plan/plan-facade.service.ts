@@ -67,15 +67,15 @@ export class PlanFacadeService {
     });
   }
 
-  updateGoalPeriod(goalPeriod: GoalPeriodStore) {
+  updateGoalPeriod(goalPeriod: Partial<GoalPeriod>) {
     this.goalPeriodsStore.upsert(goalPeriod.date, {
       goals: [],
       ...this.goalPeriodsQuery.getEntity(goalPeriod.date),
       ...goalPeriod,
-    });
+    } as GoalPeriodStore);
     this.goalPeriodsStore.setLoading(true);
     this.planResourceService
-      .updateGoalPeriod(goalPeriod)
+      .updateGoalPeriod((goalPeriod as unknown) as GoalPeriodStore)
       .subscribe(({ errors }) => {
         if (!!errors) {
           this.goalPeriodsStateHistory.undo();
