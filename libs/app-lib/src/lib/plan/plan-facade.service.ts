@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Goal, GoalPeriod, GoalPeriodStore } from '@app/shared/interfaces';
 import { combineQueries, StateHistoryPlugin } from '@datorama/akita';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { Goal, GoalPeriod, GoalPeriodStore } from '@app/shared/interfaces';
 import { PlanResourceService } from './resource/plan-resource.service';
 import { GoalPeriodsState } from './state/goal-periods/goal-periods.model';
 import { GoalPeriodsQuery } from './state/goal-periods/goal-periods.query';
@@ -50,8 +50,8 @@ export class PlanFacadeService {
     this.planResourceService
       .getMonthlyGoalPeriods(month, year)
       .subscribe(({ data }) => {
-        this.goalPeriodsStore.addGoalPeriod(data.goalPeriod);
         this.goalPeriodsStore.setLoading(false);
+        this.goalPeriodsStore.addGoalPeriod(data.goalPeriod);
       });
   }
 

@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import {
-  getDailyGoalKey,
-  getMonthlyGoalPeriodKey,
-} from '@app/app-lib/shared/ui';
+import { Apollo, gql } from 'apollo-angular';
+
 import {
   GetGoalPeriodsInput,
   Goal,
@@ -10,7 +8,7 @@ import {
   GoalPeriodStore,
   Task,
 } from '@app/shared/interfaces';
-import { Apollo, gql } from 'apollo-angular';
+import { getDailyGoalKey, getMonthlyGoalPeriodKey } from '../../goal-utils';
 
 const getGoalPeriodsQuery = gql`
   query goalGoalPeriodsQuery(

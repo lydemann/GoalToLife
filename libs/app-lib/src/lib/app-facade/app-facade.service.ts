@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { getDailyGoalKey } from '@app/app-lib/shared/ui';
-import { Goal, GoalPeriod, GoalPeriodType, Task } from '@app/shared/interfaces';
 import { Apollo, gql } from 'apollo-angular';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map, pluck, startWith } from 'rxjs/operators';
 
+import { Goal, GoalPeriod, GoalPeriodType, Task } from '@app/shared/interfaces';
+import { getDailyGoalKey } from '../goal-utils';
 import { createInCache, removeFromCache } from '../graphql/graphql-helpers';
 
 const getGoalsQuery = gql`
@@ -74,7 +74,10 @@ export class AppFacadeService {
   private isLoadingGoalsSubject = new BehaviorSubject(false);
   isLoadingGoals$ = this.isLoadingGoalsSubject.asObservable();
 
-  getMonthlyGoalPeriods(month: number, year: number): Observable<Record<string, GoalPeriod>> {
+  getMonthlyGoalPeriods(
+    month: number,
+    year: number
+  ): Observable<Record<string, GoalPeriod>> {
     const date = new Date();
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
@@ -83,7 +86,7 @@ export class AppFacadeService {
     const toDate = getDailyGoalKey(lastDay);
 
     return this.apollo
-      .query<{goalPeriod: GoalPeriod[]}>({
+      .query<{ goalPeriod: GoalPeriod[] }>({
         query: getGoalPeriodsQuery,
         variables: {
           fromDate,
@@ -92,14 +95,17 @@ export class AppFacadeService {
       })
       .pipe(
         map(({ data }) => {
-          const goaPeriodMap = data.goalPeriod.reduce((prev, goalPeriod) => ({
-            ...prev,
-            [goalPeriod.date]: goalPeriod,
-          }), {});
+          const goaPeriodMap = data.goalPeriod.reduce(
+            (prev, goalPeriod) => ({
+              ...prev,
+              [goalPeriod.date]: goalPeriod,
+            }),
+            {}
+          );
           return goaPeriodMap;
         }),
         startWith({})
-      )
+      );
   }
 
   getGoals(scheduledDate: string, type: GoalPeriodType) {

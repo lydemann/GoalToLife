@@ -1,5 +1,9 @@
-<ion-item>
-  <ion-checkbox slot="start" [checked]="task.completed"></ion-checkbox>
+<ion-item lines="full">
+  <ion-checkbox
+    slot="start"
+    [checked]="task.completed"
+    data-testid="goal-completed"
+  ></ion-checkbox>
   <div>
     <ion-input
       #input
@@ -10,7 +14,12 @@
   </div>
   <div slot="end">
     <ion-buttons slot="primary">
-      <ion-button color="secondary" (click)="edit.emit(task)" *ngIf="!!task.id">
+      <ion-button
+        color="secondary"
+        (click)="edit.emit(task)"
+        *ngIf="!!task.id"
+        data-testid="edit-goal"
+      >
         <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
       </ion-button>
       <ion-button

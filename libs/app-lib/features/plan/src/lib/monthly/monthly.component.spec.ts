@@ -1,24 +1,9 @@
 /// <reference types="jest" />
 
-import {
-  Component,
-  CUSTOM_ELEMENTS_SCHEMA,
-  NgModule,
-  NO_ERRORS_SCHEMA,
-} from '@angular/core';
-import {
-  fakeAsync,
-  flush,
-  flushMicrotasks,
-  tick,
-  waitForAsync,
-} from '@angular/core/testing';
-import { UrlSegment } from '@angular/router';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, NgZone } from '@angular/core';
+import { fakeAsync, flush, flushMicrotasks, tick } from '@angular/core/testing';
 import { ApolloQueryResult, FetchResult } from '@apollo/client/core';
-import { MONTH_PARAM_KEY, YEAR_PARAM_KEY } from '@app/app-lib';
-import { UserService } from '@app/shared/feat-auth';
-import { GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
-import { IonicModule, IonLabel, IonTabBar, IonTabs } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 import {
   byTestId,
   createRoutingFactory,
@@ -31,6 +16,9 @@ import { AppModule } from 'apps/app/src/app/app.module';
 // tslint:disable-next-line: nx-enforce-module-boundaries
 import { PlanResourceService } from 'libs/app-lib/src/lib/plan/resource/plan-resource.service';
 import { Observable, of } from 'rxjs';
+
+import { UserService } from '@app/shared/feat-auth';
+import { GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
 
 @Component({
   template: `<router-outlet></router-outlet>`,
@@ -46,9 +34,9 @@ describe('MonthlyComponent', () => {
     declareComponent: true,
     disableAnimations: true,
     stubsEnabled: false,
-    overrideModules: [
-      // [IonicModule, { set: { declarations: [], exports: [], providers: [], schemas: [CUSTOM_ELEMENTS_SCHEMA]} }],
-    ],
+    // overrideModules: [
+    //   [IonicModule, { set: { declarations: [], exports: [], providers: [], schemas: [CUSTOM_ELEMENTS_SCHEMA]} }],
+    // ],
     imports: [AppModule],
     providers: [
       mockProvider(PlanResourceService, {
@@ -80,6 +68,7 @@ describe('MonthlyComponent', () => {
         getCurrentUser: () => of({}),
       }),
     ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
   });
 
   const todayDayOfMonth = 30;
@@ -98,20 +87,22 @@ describe('MonthlyComponent', () => {
     spectator.fixture.destroy();
   });
 
-  it('should highlight current day', async () => {
-    await spectator.router.navigate(['plan', 'monthly', todayYear, todayMonth]);
-    spectator.detectChanges();
+  // it('should highlight current day', async () => {
+  //   const ngZone = spectator.inject(NgZone);
+  //   await ngZone.run(async () =>
+  //     await spectator.router.navigate(['plan', 'monthly', todayYear, todayMonth])
+  //   );
 
-    expect(
-      spectator.queryLast(byTestId('day-' + todayDayOfMonth)).className
-    ).toMatchInlineSnapshot(`"day currentMonth highlightedDay"`);
-  });
+  //   expect(
+  //     spectator.queryLast(byTestId('day-' + todayDayOfMonth)).className
+  //   ).toMatchInlineSnapshot(`"day currentMonth highlightedDay"`);
+  // });
 
   // TODO: breaking when run together because of ionic
   // it('should have monthly goal', fakeAsync(() => {
   //   spectator.router.navigate(['plan', 'monthly', todayYear, todayMonth]);
   //   // akita combineQueries needs a tick to trigger
-  //   spectator.tick(100);
+  //   spectator.tick();
   //   spectator.detectChanges();
 
   //   expect(spectator.queryAll(byTestId('monthly-goal-period')).length).toBe(1);
@@ -121,23 +112,23 @@ describe('MonthlyComponent', () => {
   //   flushMicrotasks();
   // }));
 
-  // it('should delete monthly goal on clicking x', fakeAsync(() => {
-  //   spectator.router.navigate(['plan', 'monthly', todayYear, todayMonth]);
-  //   // akita combineQueries needs a tick to trigger
-  //   spectator.tick();
-  //   spectator.detectChanges();
+  it('should delete monthly goal on clicking x', fakeAsync(() => {
+    spectator.router.navigate(['plan', 'monthly', todayYear, todayMonth]);
+    // akita combineQueries needs a tick to trigger
+    spectator.tick();
+    spectator.detectChanges();
 
-  //   expect(spectator.queryAll(byTestId('goal')).length).toBe(1);
+    expect(spectator.queryAll(byTestId('goal')).length).toBe(1);
 
-  //   expect(spectator.query(byTestId('delete-goal'))).toBeTruthy();
-  //   spectator.click(spectator.query(byTestId('delete-goal')));
+    expect(spectator.query(byTestId('delete-goal'))).toBeTruthy();
+    spectator.click(spectator.query(byTestId('delete-goal')));
 
-  //   tick();
-  //   spectator.detectChanges();
+    tick();
+    spectator.detectChanges();
 
-  //   expect(spectator.queryAll(byTestId('goal')).length).toBe(0);
+    expect(spectator.queryAll(byTestId('goal')).length).toBe(0);
 
-  //   flush();
-  //   flushMicrotasks();
-  // }));
+    flush();
+    flushMicrotasks();
+  }));
 });

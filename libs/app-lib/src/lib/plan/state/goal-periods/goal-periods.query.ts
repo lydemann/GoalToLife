@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { getMonthlyGoalPeriodKey } from '@app/app-lib/shared/ui';
+import { combineQueries, HashMap, QueryEntity } from '@datorama/akita';
+import { RouterQuery } from '@datorama/akita-ng-router-store';
+import { combineLatest, Observable } from 'rxjs';
+import { map, startWith, tap } from 'rxjs/operators';
+
 import {
   Goal,
   GoalPeriod,
   GoalPeriodStore,
   GoalPeriodType,
 } from '@app/shared/interfaces';
-import { combineQueries, HashMap, QueryEntity } from '@datorama/akita';
-import { RouterQuery } from '@datorama/akita-ng-router-store';
-import { combineLatest, Observable } from 'rxjs';
-import { map, startWith, tap } from 'rxjs/operators';
-
+import { getMonthlyGoalPeriodKey } from '../../../goal-utils';
 import { MONTH_PARAM_KEY, YEAR_PARAM_KEY } from '../../plan.constants';
 import { GoalsQuery } from '../goals/goals.query';
 import { GoalPeriodsState } from './goal-periods.model';
@@ -53,6 +53,10 @@ export class GoalPeriodsQuery extends QueryEntity<
       }),
       startWith({})
     );
+
+    routerQuery.selectParams<string>(YEAR_PARAM_KEY).subscribe((data) => {
+      console.log(data);
+    });
 
     this.monthlyGoalPeriod$ = combineQueries([
       routerQuery.selectParams<string>(YEAR_PARAM_KEY),

@@ -12,11 +12,11 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
-import { getDailyGoalKey } from '../../../utils/goal-utils';
+import { getDailyGoalKey } from '@app/app-lib';
+import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
 import { DayDate } from '../../classes/day-date';
 import { TODOItem } from '../../classes/todo-item';
 

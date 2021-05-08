@@ -3,7 +3,10 @@
 <form [formGroup]="formGroup" (submit)="onSubmit()">
   <ion-item>
     <ion-label>Completed</ion-label>
-    <ion-checkbox formControlName="completed"></ion-checkbox>
+    <ion-checkbox
+      data-testid="toggle-goal-completed"
+      formControlName="completed"
+    ></ion-checkbox>
   </ion-item>
 
   <ion-item>
@@ -16,7 +19,7 @@
     <!-- TODO: multi auto complete select here -->
     <ion-textarea formControlName="name"></ion-textarea>
   </ion-item>
-<!-- 
+  <!-- 
   <ion-item>
     <ion-label>Keep in current date until completed</ion-label>
     <ion-checkbox formControlName="currentDateUntilCompleted"></ion-checkbox>
@@ -41,5 +44,7 @@
     </ion-item>
   </ng-container> -->
 
-  <ion-button type="submit" expand="full">Submit</ion-button>
+  <ion-button type="submit" data-testid="submit-goal" expand="full"
+    >Submit</ion-button
+  >
 </form>
