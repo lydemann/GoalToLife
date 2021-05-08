@@ -54,10 +54,6 @@ export class GoalPeriodsQuery extends QueryEntity<
       startWith({})
     );
 
-    routerQuery.selectParams<string>(YEAR_PARAM_KEY).subscribe((data) => {
-      console.log(data);
-    });
-
     this.monthlyGoalPeriod$ = combineQueries([
       routerQuery.selectParams<string>(YEAR_PARAM_KEY),
       routerQuery.selectParams<string>(MONTH_PARAM_KEY),

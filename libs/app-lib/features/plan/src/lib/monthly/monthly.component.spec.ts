@@ -83,9 +83,7 @@ describe('MonthlyComponent', () => {
     planResourceService = spectator.inject(PlanResourceService);
   });
 
-  afterEach(() => {
-    spectator.fixture.destroy();
-  });
+  afterEach(() => {});
 
   // it('should highlight current day', async () => {
   //   const ngZone = spectator.inject(NgZone);
