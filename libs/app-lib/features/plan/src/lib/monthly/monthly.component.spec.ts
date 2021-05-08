@@ -3,7 +3,6 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, NgZone } from '@angular/core';
 import { fakeAsync, flush, flushMicrotasks, tick } from '@angular/core/testing';
 import { ApolloQueryResult, FetchResult } from '@apollo/client/core';
-import { IonicModule } from '@ionic/angular';
 import {
   byTestId,
   createRoutingFactory,
@@ -32,11 +31,7 @@ describe('MonthlyComponent', () => {
   const createComponent = createRoutingFactory({
     component: RoutingComponent,
     declareComponent: true,
-    disableAnimations: true,
     stubsEnabled: false,
-    // overrideModules: [
-    //   [IonicModule, { set: { declarations: [], exports: [], providers: [], schemas: [CUSTOM_ELEMENTS_SCHEMA]} }],
-    // ],
     imports: [AppModule],
     providers: [
       mockProvider(PlanResourceService, {

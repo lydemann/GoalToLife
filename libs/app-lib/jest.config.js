@@ -22,4 +22,5 @@ module.exports = {
     'jest-preset-angular/build/serializers/html-comment'
   ],
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  roots: ["<rootDir>/src/"]
 };
