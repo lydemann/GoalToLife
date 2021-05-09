@@ -53,8 +53,6 @@ stages:
               failIfCoverageEmpty: false
 
       - job: E2ETestAffected
-        pool:
-          vmImage: 'windows-2019'
         steps:
           - template: templates/npm-setup.yml
             parameters:
@@ -66,13 +64,7 @@ stages:
           - script: npx cypress info
             displayName: 'Cypress info'
 
-          - script: npm install -g firebase-tools
-            displayName: Install firebase tools
-
-          - script: npm run nx -- run-many --target build --all
-            displayName: Build all
-
-          - script: firebase emulators:exec --import e2e-seed 'npm run nx -- e2e app-e2e --headless'
+          - script: npm run e2e:ci
             displayName: Run e2e tests
 
           - template: templates/publish-artifacts.yml
