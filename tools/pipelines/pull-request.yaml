@@ -53,8 +53,6 @@ stages:
               failIfCoverageEmpty: false
 
       - job: E2ETestAffected
-        pool:
-          vmImage: 'ubuntu-latest'
         steps:
           - template: templates/npm-setup.yml
             parameters:
