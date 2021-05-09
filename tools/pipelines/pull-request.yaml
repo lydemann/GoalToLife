@@ -72,7 +72,7 @@ stages:
           - script: npm run nx -- run-many --target build --all
             displayName: Build all
 
-          - script: firebase emulators:exec --import e2e-seed 'nx e2e app-e2e --headless'
+          - script: firebase emulators:exec --import e2e-seed 'npm run nx -- e2e app-e2e --headless'
             displayName: Run e2e tests
 
           - template: templates/publish-artifacts.yml
