@@ -54,7 +54,7 @@ stages:
 
       - job: E2ETestAffected
         pool:
-          vmImage: 'ubuntu-latest'
+          vmImage: 'macOS-latest'
         steps:
           - template: templates/npm-setup.yml
             parameters:
