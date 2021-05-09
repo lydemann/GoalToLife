@@ -66,8 +66,14 @@ stages:
           - script: npx cypress info
             displayName: 'Cypress info'
 
-          - script: npm run e2e:ci
-            displayName: E2E Affected
+          - script: npm install -g firebase-tools
+            displayName: Install firebase tools
+
+          - script: npm run nx -- run-many --target build --all
+            displayName: Build all
+
+          - script: firebase emulators:exec --import e2e-seed 'nx e2e app-e2e --headless'
+            displayName: Run e2e tests
 
           - template: templates/publish-artifacts.yml
             parameters:
