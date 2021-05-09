@@ -39,7 +39,8 @@
     "service:debug": "concurrently --kill-others \"npm run build -- service --source-map --watch\" \"firebase emulators:start --only functions --inspect-functions \"",
     "stop:emulator": "lsof -t -i:8081 -i:8085 | xargs kill -9",
     "firebase:local": "nx run-many --target build --all && npm run stop:emulator && firebase emulators:start --import e2e-seed",
-    "e2e:ci": "nx run-many --target build --all && npm run stop:emulator && firebase emulators:exec --import e2e-seed 'nx e2e app-e2e --headless'",
+    "e2e:pr": "nx run-many --target build --all && npm run stop:emulator && firebase emulators:exec --import e2e-seed 'nx e2e app-e2e --headless'",
+    "e2e:ci": "nx run-many --target build --all && firebase emulators:exec --import e2e-seed 'nx e2e app-e2e --headless'",
     "codecov": "codecov -t "
   },
   "private": true,
