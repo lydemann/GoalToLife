@@ -1,3 +1,7 @@
+<ion-progress-bar
+  type="indeterminate"
+  *ngIf="isLoading$ | async"
+></ion-progress-bar>
 <app-header
   [title]="'March, 2021'"
   [backText]="'Quarterly'"
@@ -11,11 +15,20 @@
   [scrollY]="true"
   class="content"
 >
-  <div class="ion-padding-top ion-text-center">
+  <div
+    class="ion-padding-top ion-text-center"
+    *ngIf="currentMonthGoalPeriod$ | async as currentMonthGoalPeriod"
+  >
     <app-task-group
       [title]="'Monthly goals'"
-      [tasks]="goalsForPeriod"
+      data-testid="monthly-goal-period"
+      [tasks]="currentMonthGoalPeriod.goals"
+      [date]="currentMonthGoalPeriod.date"
       [isMain]="true"
+      [goalPeriodType]="monthlyGoalPeriodType"
+      (addGoal)="onAddGoal($event)"
+      (deleteGoal)="onDeleteGoal($event)"
+      (editGoal)="onEditGoal($event)"
     ></app-task-group>
 
     <!-- <app-task-group
@@ -35,10 +48,11 @@
     [calendarDate]="calendarDate"
     [currentDate]="currentDate"
     [goalPeriods]="goalPeriods$ | async"
-    (addTodo)="onAddTodo($event)"
-    (deleteTodo)="onDeleteTodo($event)"
-    (editTodo)="onEditTodo($event)"
+    (addTodo)="onAddGoal($event)"
+    (deleteTodo)="onDeleteGoal($event)"
+    (editTodo)="onEditGoal($event)"
     (toggleComplete)="onToggleComplete($event)"
+    (retroChange)="onRetroChange($event)"
     >Loading month ...</app-month
   >
 </ion-content>

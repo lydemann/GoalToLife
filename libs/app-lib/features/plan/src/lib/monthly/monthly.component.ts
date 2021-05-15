@@ -1,13 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { PlanFacadeService } from '@app/app-lib';
+import { ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
+
+import {
+  MONTH_PARAM_KEY,
+  PlanFacadeService,
+  YEAR_PARAM_KEY,
+} from '@app/app-lib';
 import {
   EditGoalModalComponent,
   EditModalComponentProps,
 } from '@app/app-lib/shared/ui';
-import { Goal, GoalPeriod } from '@app/shared/interfaces';
-import { ModalController } from '@ionic/angular';
-import { Observable } from 'rxjs';
-import { v4 as uuidv4 } from 'uuid';
+import {
+  Goal,
+  GoalPeriod,
+  GoalPeriodStore,
+  GoalPeriodType,
+} from '@app/shared/interfaces';
 
 @Component({
   selector: 'app-monthly',
@@ -15,18 +26,11 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./monthly.component.scss'],
 })
 export class MonthlyComponent implements OnInit {
+  isLoading$: Observable<boolean>;
   goalPeriods$: Observable<Record<string, GoalPeriod>>;
-  goalsForPeriod: Goal[] = [
-    {
-      id: 'weekly-goal-1',
-      name: 'Finish feature xyz',
-    } as Goal,
-    {
-      id: 'weekly-goal-2',
-      name: 'Finish feature xyz 2',
-    } as Goal,
-  ];
+  currentMonthGoalPeriod$: Observable<GoalPeriod>;
   categories$: Observable<string[]>;
+  monthlyGoalPeriodType = GoalPeriodType.MONTHLY;
 
   calendarDate: Date;
   private _currentDate: Date;
@@ -40,11 +44,16 @@ export class MonthlyComponent implements OnInit {
 
   constructor(
     private planFacadeService: PlanFacadeService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.currentDate = new Date();
+    const params = this.activatedRoute.snapshot.params;
+    const year = params[YEAR_PARAM_KEY];
+    const month = params[MONTH_PARAM_KEY];
+    const dateOfMonth = new Date().getDate();
+    this.currentDate = new Date(year, month, dateOfMonth);
     this.calendarDate = new Date(this._currentDate.setHours(0, 0, 0, 0));
     this.calendarDate.setMonth(this.calendarDate.getMonth(), 1); // avoiding problems with 29th,30th,31st days
 
@@ -56,6 +65,9 @@ export class MonthlyComponent implements OnInit {
       this.calendarDate.getMonth(),
       this.calendarDate.getFullYear()
     );
+    this.currentMonthGoalPeriod$ = this.planFacadeService.currentMonthGoalPeriod$;
+
+    this.isLoading$ = this.planFacadeService.isLoading$;
   }
 
   monthChanges(changeResult: any): void {
@@ -64,17 +76,18 @@ export class MonthlyComponent implements OnInit {
       this.calendarDate.getMonth(),
       this.calendarDate.getFullYear()
     );
+    // TODO: update path params on month change
   }
 
-  onAddTodo(goal: Goal) {
+  onAddGoal(goal: Goal) {
     this.planFacadeService.addGoal({ ...goal, id: uuidv4() });
   }
 
-  onDeleteTodo(goal: Goal) {
+  onDeleteGoal(goal: Goal) {
     this.planFacadeService.deleteGoal(goal);
   }
 
-  async onEditTodo(goal: Goal) {
+  async onEditGoal(goal: Goal) {
     const modal = await this.modalController.create({
       component: EditGoalModalComponent,
       componentProps: {
@@ -90,5 +103,9 @@ export class MonthlyComponent implements OnInit {
 
   onToggleComplete(goal: Goal) {
     this.planFacadeService.updateGoal(goal);
+  }
+
+  onRetroChange(goalPeriod: Partial<GoalPeriod>) {
+    this.planFacadeService.updateGoalPeriod(goalPeriod);
   }
 }

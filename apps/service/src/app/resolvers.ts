@@ -1,7 +1,7 @@
 import {
   goalMutationResolvers,
   goalQueryResolvers,
-} from './goal/goal-resolvers';
+} from './goal-period/goal-period.resolvers';
 
 export const resolvers = {
   Query: {

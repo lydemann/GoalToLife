@@ -1,11 +1,14 @@
 import {
-  Component,
-  OnInit,
   ChangeDetectionStrategy,
-  Input,
+  Component,
+  EventEmitter,
   HostBinding,
+  Input,
+  OnInit,
+  Output,
 } from '@angular/core';
-import { Task } from '@app/shared/interfaces';
+import { FormControl, Validators } from '@angular/forms';
+import { Goal, GoalPeriodType, Task } from '@app/shared/interfaces';
 
 @Component({
   selector: 'app-task-group',
@@ -18,14 +21,42 @@ export class TaskGroupComponent implements OnInit {
   @HostBinding('class.main')
   @Input()
   isMain: boolean;
-  @Input() tasks: Task[];
+  @Input() tasks: Goal[];
+  @Input() date: string;
+  @Input() goalPeriodType: GoalPeriodType;
   @Input() titleLink: string;
+  @Output() addGoal = new EventEmitter<Goal>();
+  @Output() deleteGoal = new EventEmitter<Goal>();
+  @Output() editGoal = new EventEmitter<Goal>();
+  todoTextControl: FormControl;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.todoTextControl = new FormControl(null, [Validators.required]);
+  }
 
-  tasksTrackBy(task: Task, idx) {
+  tasksTrackBy(idx: number, task: Task) {
     return task.id;
+  }
+
+  onAddTODO(event: Event): void {
+    event.preventDefault();
+
+    // TODO: check if valid, using require validator
+    if (this.todoTextControl.invalid) {
+      return;
+    }
+
+    this.addGoal.emit({
+      name: this.todoTextControl.value,
+      type: this.goalPeriodType,
+      scheduledDate: this.date,
+    } as Goal);
+    this.todoTextControl.reset();
+  }
+
+  onKeydown(event) {
+    event.preventDefault();
   }
 }

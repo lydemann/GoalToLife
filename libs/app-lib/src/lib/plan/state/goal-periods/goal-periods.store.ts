@@ -37,7 +37,7 @@ export class GoalPeriodsStore extends EntityStore<GoalPeriodsState> {
         ...goalP,
         goals: goalP.goals.map((goal) => goal.id),
       }));
-      super.add(goalPeriodStore);
+      super.set(goalPeriodStore);
     } else {
       goals = [...goalPeriod.goals];
       super.add({
@@ -52,7 +52,11 @@ export class GoalPeriodsStore extends EntityStore<GoalPeriodsState> {
   addGoal(goal: Goal) {
     const goalPeriod =
       this.getValue().entities[goal.scheduledDate] ||
-      ({ goals: [], date: goal.scheduledDate } as GoalPeriodStore);
+      ({
+        goals: [],
+        date: goal.scheduledDate,
+        type: goal.type,
+      } as GoalPeriodStore);
     const updatedGoalPeriod = produce(goalPeriod, (draft) => {
       draft.goals = [...draft.goals, goal.id];
       return draft;

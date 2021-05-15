@@ -1,11 +1,13 @@
 {
   "version": 1,
   "cli": {
-    "defaultCollection": "@datorama/akita"
+    "defaultCollection": "@ngneat/spectator"
   },
   "defaultProject": "app",
   "schematics": {
     "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
       "unitTestRunner": "jest",
       "e2eTestRunner": "cypress"
     },
@@ -13,6 +15,8 @@
       "style": "scss"
     },
     "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
       "unitTestRunner": "jest"
     },
     "@schematics/angular:component": {
@@ -24,6 +28,12 @@
     },
     "@ionic/angular-toolkit:page": {
       "styleext": "scss"
+    },
+    "schematics": {
+      "@ngneat/spectator:spectator-component": {
+        "style": "scss",
+        "changeDetection": "OnPush"
+      }
     }
   },
   "projects": {
@@ -192,34 +202,6 @@
         }
       }
     },
-    "app-e2e": {
-      "root": "apps/app-e2e",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "apps/app-e2e/protractor.conf.js",
-            "devServerTarget": "app:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "app:serve:production"
-            },
-            "ci": {
-              "devServerTarget": "app:serve:ci"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "apps/app-e2e/tsconfig.json",
-            "exclude": ["**/node_modules/**"]
-          }
-        }
-      }
-    },
     "app-lib": {
       "root": "libs/app-lib",
       "sourceRoot": "libs/app-lib/src",
@@ -332,10 +314,7 @@
               "libs/app-lib/shared/ui/tsconfig.lib.json",
               "libs/app-lib/shared/ui/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/app-lib/shared/ui/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/app-lib/shared/ui/**/*"]
           }
         },
         "test": {
@@ -372,6 +351,32 @@
           "options": {
             "jestConfig": "libs/app-lib/features/plan/jest.config.js",
             "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "app-e2e": {
+      "root": "apps/app-e2e",
+      "sourceRoot": "apps/app-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/app-e2e/cypress.json",
+            "tsConfig": "apps/app-e2e/tsconfig.e2e.json",
+            "baseUrl": "http://localhost:5002"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/app-e2e/**/*.{js,ts}"]
           }
         }
       }

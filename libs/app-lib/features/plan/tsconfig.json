@@ -2,6 +2,11 @@
   "extends": "../../../../tsconfig.json",
   "files": [],
   "include": [],
+  "compilerOptions": {
+    "types": ["node", "jest"],
+    "emitDecoratorMetadata": true,
+    "target": "es2015"
+  },
   "references": [
     {
       "path": "./tsconfig.lib.json"

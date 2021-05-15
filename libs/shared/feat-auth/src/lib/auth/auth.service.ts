@@ -6,7 +6,10 @@ import firebase from 'firebase';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(public afAuth: AngularFireAuth) {}
+  constructor(public afAuth: AngularFireAuth) {
+    const auth = firebase.auth();
+    auth.useEmulator('http://localhost:9099');
+  }
   doRegister(value) {
     return new Promise<any>((resolve, reject) => {
       firebase

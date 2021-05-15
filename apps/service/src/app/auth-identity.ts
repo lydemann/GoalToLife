@@ -2,8 +2,7 @@ import express from 'express';
 import { auth } from 'firebase-admin';
 
 export interface AuthIdentity extends auth.DecodedIdToken {
-  admin: boolean;
-  schoolId: string;
+  hasPremium: boolean;
 }
 
 export interface RequestContext {

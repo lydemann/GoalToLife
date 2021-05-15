@@ -4,11 +4,12 @@
       <h1 class="brand">GoalToLife</h1>
     </div>
     <div class="form-wrapper">
-      <form [formGroup]="loginForm">
+      <form [formGroup]="loginForm" (submit)="tryLogin(loginForm.value)">
         <div class="form-group">
           <label>Email</label>
           <input
             type="email"
+            data-testid="email-input"
             formControlName="email"
             data-test="email"
             class="form-control"
@@ -18,6 +19,7 @@
           <label>Password</label>
           <input
             type="password"
+            data-testid="password-input"
             data-test="password"
             class="form-control"
             formControlName="password"
@@ -27,7 +29,7 @@
         <div class="button-wrapper">
           <ion-button
             type="submit"
-            data-test="login-btn"
+            data-testid="login-btn"
             (click)="tryLogin(loginForm.value)"
             class="submit-btn"
           >

@@ -33,6 +33,9 @@
       "enabled": true,
       "port": 4000
     },
+    "hosting": {
+      "port": "5002"
+    },
     "auth": {
       "port": "9099"
     },

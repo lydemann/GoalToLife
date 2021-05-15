@@ -39,8 +39,8 @@
             "order": 20
           },
           {
-            "name": "course_client_app",
-            "match": "^@course-client",
+            "name": "app",
+            "match": "^@app",
             "order": 20
           },
           {
@@ -106,16 +106,12 @@
             "onlyDependOnLibsWithTags": ["scope:shared"]
           },
           {
-            "sourceTag": "scope:course-client",
-            "onlyDependOnLibsWithTags": ["scope:course-client", "scope:shared"]
+            "sourceTag": "scope:app",
+            "onlyDependOnLibsWithTags": ["scope:app", "scope:shared"]
           },
           {
-            "sourceTag": "scope:course-admin",
-            "onlyDependOnLibsWithTags": ["scope:course-admin", "scope:shared"]
-          },
-          {
-            "sourceTag": "scope:course-service",
-            "onlyDependOnLibsWithTags": ["scope:course-client", "scope:shared"]
+            "sourceTag": "scope:service",
+            "onlyDependOnLibsWithTags": ["scope:app", "scope:shared"]
           },
           {
             "sourceTag": "type:util",
@@ -123,7 +119,7 @@
           },
           {
             "sourceTag": "type:feat",
-            "onlyDependOnLibsWithTags": ["type:shared"]
+            "onlyDependOnLibsWithTags": ["scope:shared"]
           },
           {
             "sourceTag": "type:ui",

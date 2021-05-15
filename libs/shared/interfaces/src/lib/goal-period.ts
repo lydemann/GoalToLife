@@ -12,22 +12,23 @@ export enum GoalPeriodType {
 /*
     A task period represents tasks over a period: eg. week, month, quarter or year
 */
-export interface GoalPeriod {
-  date: string;
+export interface GoalPeriod extends Omit<GoalPeriodStore, 'goals'> {
   goals: Goal[];
-  wins: string[];
-  type: GoalPeriodType;
-  improvementPoints: string[];
-  obtainedKnowledge: string[];
-  thoughts: string[];
 }
 
 export interface GoalPeriodStore {
   date: string;
   goals: string[];
-  wins: string[];
   type: GoalPeriodType;
-  improvementPoints: string[];
-  obtainedKnowledge: string[];
-  thoughts: string[];
+  // retro
+  wins: string;
+  improvementPoints: string;
+  obtainedKnowledge: string;
+  thoughts: string;
+}
+
+export interface GetGoalPeriodsInput {
+  dates: string[];
+  fromDate: string;
+  toDate: string;
 }

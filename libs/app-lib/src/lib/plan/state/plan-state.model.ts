@@ -1,6 +1,6 @@
-import { Goal, GoalPeriodStore } from '@app/shared/interfaces';
+import { EntityState } from '@datorama/akita';
 
-import { EntityState } from './entity-state.model';
+import { Goal, GoalPeriodStore } from '@app/shared/interfaces';
 
 export interface PlanState {
   goalsState: EntityState<Goal>;

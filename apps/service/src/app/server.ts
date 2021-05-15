@@ -1,46 +1,31 @@
 import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 import responseCachePlugin from 'apollo-server-plugin-response-cache';
 import * as express from 'express';
+import admin from 'firebase-admin';
 
-import { RequestContext } from './auth-identity';
+import { AuthIdentity, RequestContext } from './auth-identity';
 import { resolvers } from './resolvers';
 import { typeDefs } from './schema';
-// import admin from 'firebase-admin';
 
 // import { AuthIdentity, RequestContext } from './auth-identity';
 
-/* Async verification with user token */
-// const verifyToken = async ({ authorization, schoolid }) => {
-//   // if (!environment.production) {
-//   //   console.log('Running with mock data');
-//   //   return {
-//   //     admin: true,
-//   //     uid: 'XHjUUmEkvPc0Ye8SZlvtBTAAt622',
-//   //     schoolId: 'christianlydemann-eyy6e',
-//   //   } as AuthIdentity;
-//   // }
-
-//   const newToken = authorization.replace('Bearer ', '');
-//   // TODO: disable for local env and set admin true
-//   const header = await admin
-//     .auth()
-//     .verifyIdToken(newToken)
-//     .then((decodedToken) => {
-//       if (decodedToken.firebase.tenant !== schoolid) {
-//         throw new AuthenticationError("User doesn't have access to school");
-//       }
-
-//       return {
-//         ...decodedToken,
-//         schoolId: schoolid,
-//       } as AuthIdentity;
-//     })
-//     .catch(function (error) {
-//       // Handle error
-//       throw new AuthenticationError('No Access: Invalid id token');
-//     });
-//   return header;
-// };
+const verifyToken = async ({ authorization, schoolid }) => {
+  const newToken = authorization.replace('Bearer ', '');
+  // TODO: disable for local env and set admin true
+  const header = await admin
+    .auth()
+    .verifyIdToken(newToken)
+    .then((decodedToken) => {
+      return {
+        ...decodedToken,
+      } as AuthIdentity;
+    })
+    .catch(function (error) {
+      // Handle error
+      throw new AuthenticationError('No Access: Invalid id token');
+    });
+  return header;
+};
 
 export function gqlServer() {
   const app = express();
@@ -56,10 +41,10 @@ export function gqlServer() {
         } as RequestContext;
       }
 
-      // const auth = await verifyToken(req.headers as any);
+      const auth = await verifyToken(req.headers as any);
 
       return {
-        // auth: auth || {},
+        auth: auth || {},
         req,
         res,
       } as RequestContext;

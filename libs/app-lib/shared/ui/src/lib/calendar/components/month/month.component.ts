@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -6,9 +7,9 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { Goal, GoalPeriod as GoalPeriod } from '@app/shared/interfaces';
 
-import { getDailyGoalKey } from '../../../utils/goal-utils';
+import { getDailyGoalKey } from '@app/app-lib';
+import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
 import { DayDate } from '../../classes/day-date';
 import { Week } from '../../classes/weeks';
 
@@ -16,6 +17,7 @@ import { Week } from '../../classes/weeks';
   selector: 'app-month',
   templateUrl: './month.component.html',
   styleUrls: ['month.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MonthComponent implements OnInit, OnChanges {
   /*
@@ -50,6 +52,7 @@ export class MonthComponent implements OnInit, OnChanges {
   @Output() deleteTodo = new EventEmitter<Goal>();
   @Output() editTodo = new EventEmitter<Goal>();
   @Output() toggleComplete = new EventEmitter<Goal>();
+  @Output() retroChange = new EventEmitter<Partial<GoalPeriod>>();
 
   get currentDate() {
     return this._currentDate;
@@ -73,11 +76,11 @@ export class MonthComponent implements OnInit, OnChanges {
     this.weeks = [];
   }
 
-  weeksTrackBy(item: Week, idx) {
-    return idx;
+  weeksTrackBy(idx, item: Week) {
+    return item.weekNumber;
   }
-  daysTrackBy(item: DayDate, idx) {
-    return idx;
+  daysTrackBy(idx, item: DayDate) {
+    return item.date;
   }
 
   /*
@@ -97,17 +100,51 @@ export class MonthComponent implements OnInit, OnChanges {
     let date: Date = new Date(start.setHours(0, 0, 0, 0));
     for (let i = 0; i < 7; i++) {
       const dailyGoalKey = getDailyGoalKey(date);
-      const goals = this.goalPeriods[dailyGoalKey]?.goals || [];
+      const goalPeriod =
+        this.goalPeriods[dailyGoalKey] ||
+        ({ type: GoalPeriodType.DAILY, goals: [] } as GoalPeriod);
       const isSelected = date?.getTime() === this.selected?.getTime();
       days.push({
-        date,
+        ...goalPeriod,
+        dateDate: date,
         month,
-        goals,
         isSelected,
       });
       date = this._addDays(date, 1);
     }
     return days;
+  }
+
+  private getWeekNumber(date: Date) {
+    /* For a given date, get the ISO week number
+     *
+     * Based on information at:
+     *
+     *    http://www.merlyn.demon.co.uk/weekcalc.htm#WNR
+     *
+     * Algorithm is to find nearest thursday, it's year
+     * is the year of the week number. Then get weeks
+     * between that date and the first day of that year.
+     *
+     * Note that dates in one year can be weeks of previous
+     * or next year, overlap is up to 3 days.
+     *
+     * e.g. 2014/12/29 is Monday in week  1 of 2015
+     *      2012/1/1   is Sunday in week 52 of 2011
+     */
+    // Copy date so don't modify original
+    date = new Date(
+      Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
+    );
+    // Set to nearest Thursday: current date + 4 - current day number
+    // Make Sunday's day number 7
+    date.setUTCDate(date.getUTCDate() + 4 - (date.getUTCDay() || 7));
+    // Get first day of year
+    const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+    // Calculate full weeks to nearest Thursday
+    const weekNo = Math.ceil(((+date - +yearStart) / 86400000 + 1) / 7);
+    // Return array of year and week number
+    return weekNo;
   }
 
   /*
@@ -130,7 +167,10 @@ export class MonthComponent implements OnInit, OnChanges {
 
     // there are max 48 cells (6 weeks) in our monthly calendar (checked against various apps and tested against Jan-2017)
     for (let i = 0; i < 6; i++) {
-      this.weeks.push({ days: this._buildWeek(firstDay, month) });
+      this.weeks.push({
+        weekNumber: this.getWeekNumber(firstDay),
+        days: this._buildWeek(firstDay, month),
+      });
       firstDay = this._addDays(firstDay, 7);
     }
 
