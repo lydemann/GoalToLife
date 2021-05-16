@@ -9,28 +9,31 @@ const routes: Routes = [
     children: [
       {
         path: 'plan',
-        loadChildren: () => import('@app/app-lib/features/plan').then(m => m.PlanModule)
+        loadChildren: () =>
+          import('@app/app-lib/features/plan').then((m) => m.PlanModule),
       },
       {
         path: 'inbox',
-        loadChildren: () => import('../inbox/inbox.module').then((m) => m.InboxModule)
+        loadChildren: () =>
+          import('../inbox/inbox.module').then((m) => m.InboxModule),
       },
       {
         path: 'settings',
-        loadChildren: () => import('../settings/settings.module').then((m) => m.SettingsModule)
+        loadChildren: () =>
+          import('../settings/settings.module').then((m) => m.SettingsModule),
       },
       {
         path: '',
-        redirectTo: '/plan',
-        pathMatch: 'full'
-      }
-    ]
+        redirectTo: '/plan/monthly',
+        pathMatch: 'full',
+      },
+    ],
   },
   {
     path: '',
-    redirectTo: '/plan',
-    pathMatch: 'full'
-  }
+    redirectTo: '/plan/monthly',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

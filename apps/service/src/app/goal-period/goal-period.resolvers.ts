@@ -1,3 +1,6 @@
+import { ApolloError } from 'apollo-server-express';
+import firebase from 'firebase';
+
 import {
   GetGoalPeriodsInput,
   Goal,
@@ -5,9 +8,6 @@ import {
   GoalPeriodStore,
   GoalPeriodType,
 } from '@app/shared/interfaces';
-import { ApolloError } from 'apollo-server-express';
-import firebase from 'firebase';
-
 import { firestoreDB } from '../firestore';
 import { createResolver } from '../utils/create-resolver';
 
@@ -70,7 +70,7 @@ export const goalQueryResolvers = {
         const goalPeriodSnapshot = await firestoreDB
           .collection(`/users/${uid}/goalPeriods`)
           // TODO: get for type
-          .where('date', 'in', ['2021-3'])
+          .where('date', 'in', dates)
           .get();
 
         if (goalPeriodSnapshot.docs[0]) {
@@ -167,6 +167,8 @@ export const goalMutationResolvers = {
         } else {
           updatedGoals = [...prevGoalPeriod.goals, newGoalRef.id];
         }
+        console.log(prevGoalPeriod);
+
         await goalPeriodRef.set({
           ...prevGoalPeriod,
           type,

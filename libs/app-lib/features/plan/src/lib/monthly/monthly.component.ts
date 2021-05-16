@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
@@ -32,8 +33,18 @@ export class MonthlyComponent implements OnInit {
   categories$: Observable<string[]>;
   monthlyGoalPeriodType = GoalPeriodType.MONTHLY;
 
-  calendarDate: Date;
   private _currentDate: Date;
+  monthDate: string;
+
+  private _calendarDate: Date;
+  public get calendarDate(): Date {
+    return this._calendarDate;
+  }
+  public set calendarDate(v: Date) {
+    this._calendarDate = v;
+    this.monthDate = formatDate(this._calendarDate, 'MMMM YYYY', 'en-us');
+  }
+
   set currentDate(currentDate: Date) {
     this._currentDate = currentDate;
   }
