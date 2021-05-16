@@ -1,8 +1,6 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   EventEmitter,
   Input,
   OnChanges,
@@ -11,25 +9,24 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 import { getDailyGoalKey } from '@app/app-lib';
 import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
-import { CalendarDate } from '../../classes/day-date';
-import { TODOItem } from '../../classes/todo-item';
+import { CalendarDate } from '../../calendar/classes/day-date';
+import { TODOItem } from '../../calendar/classes/todo-item';
 
-/*
- * This component is used to render "day" with all the contents
- */
+export const SAVE_RETRO_FORM_DEBOUNCE_TIME = 500;
+
 @Component({
-  selector: 'app-day',
-  templateUrl: './day.component.html',
-  styleUrls: ['day.component.scss'],
+  selector: 'app-goal-period',
+  templateUrl: './goal-period.component.html',
+  styleUrls: ['./goal-period.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DayComponent
-  implements OnInit, AfterViewInit, OnChanges, OnDestroy {
+export class GoalPeriodComponent implements OnInit, OnChanges, OnDestroy {
   /*
    * PRIVATE variables
    * date (date + month) - used to define whether day is in currently selected month and for further TODO-list logic
@@ -38,10 +35,11 @@ export class DayComponent
    * trigger to alert that refresh of contained todos is required
    */
   private _dayDate: CalendarDate;
-  private _selected: Date;
-  private _highlited: Date;
+  private _refreshRequired: Date;
   private destroy$ = new Subject();
   retroForm: FormGroup;
+  @Input() goalPeriodType: GoalPeriodType = GoalPeriodType.DAILY;
+  @Input() selected: boolean;
   @Output() addTodo = new EventEmitter<Goal>();
   @Output() deleteTodo = new EventEmitter<Goal>();
   @Output() editTodo = new EventEmitter<Goal>();
@@ -50,7 +48,7 @@ export class DayComponent
   blurRetroInput: any;
 
   /*
-   * Getters, setters and inputs
+   * Getters, setters
    */
 
   @Input() set calendarDate(calendarDate: CalendarDate) {
@@ -61,42 +59,20 @@ export class DayComponent
     return this._dayDate;
   }
 
-  @Input() set selected(selected: Date) {
-    this._selected = selected;
+  get refreshRequired(): Date {
+    return this._refreshRequired;
   }
 
-  get selected() {
-    return this._selected;
+  set refreshRequired(value: Date) {
+    this._refreshRequired = value;
   }
 
-  @Input() set highlited(highlited: Date) {
-    this._highlited = highlited;
-  }
+  constructor(private formBuilder: FormBuilder) {}
 
   /*
    * PUBLIC VARIABLES to manage interaction
    */
-  currentClasses = {};
   droppedTodo: TODOItem;
-
-  /*
-   * CONSTRUCTOR
-   * nothing interesting here
-   */
-  constructor(private host: ElementRef<HTMLElement>) {}
-
-  ngAfterViewInit(): void {
-    const isCurrentDay = this.isHighlited();
-    if (isCurrentDay) {
-      setTimeout(() => {
-        this.host.nativeElement.scrollIntoView({
-          behavior: 'smooth',
-          inline: 'center',
-          block: 'center',
-        });
-      }, 300);
-    }
-  }
 
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -104,20 +80,12 @@ export class DayComponent
   }
 
   /*
-   * Setting day as active
+   * Handler for onTodoListChange event: used to trigger todolist refresh
    */
-  setActiveState() {
-    this.selected = this._dayDate.dateDate;
-  }
-
-  private isSelected(): boolean {
-    return this._selected === this._dayDate.dateDate ? true : false;
-  }
-
-  private isHighlited(): boolean {
-    const highLightedTime = this._highlited.getTime();
-    const dayTime = this._dayDate.dateDate.getTime();
-    return highLightedTime === dayTime ? true : false;
+  onTodoListChange(event: any): void {
+    if (typeof event === 'boolean') {
+      this.refreshRequired = new Date();
+    }
   }
 
   onAddTodo(goal: Goal) {
@@ -145,26 +113,32 @@ export class DayComponent
    */
   ngOnInit(): void {}
 
-  private _isCurrentMonth(): boolean {
-    return this._dayDate.dateDate.getMonth() === this._dayDate.month
-      ? true
-      : false;
-  }
-
   /*
    * Listening to changes to set day as current
    */
   ngOnChanges(changes: SimpleChanges): void {
-    this.currentClasses['selectedDay'] = this.isSelected();
-    this.calendarDate.isSelected =
-      this.calendarDate.dateDate?.getTime() === this.selected?.getTime();
     if (changes['calendarDate']) {
-      const isCurrentDay = this.isHighlited();
-      this.currentClasses = {
-        currentMonth: this._isCurrentMonth(),
-        selectedDay: null,
-        highlightedDay: isCurrentDay,
-      };
+      this.retroForm = this.formBuilder.group({
+        wins: this.calendarDate.wins,
+        obtainedKnowledge: this.calendarDate.obtainedKnowledge,
+        improvementPoints: this.calendarDate.improvementPoints,
+        thoughts: this.calendarDate.thoughts,
+      });
+      this.retroForm.valueChanges
+        .pipe(
+          debounceTime(SAVE_RETRO_FORM_DEBOUNCE_TIME),
+          distinctUntilChanged(
+            (prev, cur) => JSON.stringify(prev) === JSON.stringify(cur)
+          ),
+          takeUntil(this.destroy$)
+        )
+        .subscribe(() => {
+          this.retroChange.emit({
+            ...this.retroForm.value,
+            date: getDailyGoalKey(this.calendarDate.dateDate),
+            type: this.goalPeriodType,
+          });
+        });
     }
   }
 }

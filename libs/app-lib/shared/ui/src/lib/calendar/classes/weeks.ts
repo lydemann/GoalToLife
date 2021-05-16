@@ -1,6 +1,6 @@
-import { DayDate } from './day-date';
+import { CalendarDate } from './day-date';
 
 export interface Week {
   weekNumber: number;
-  days: DayDate[];
+  days: CalendarDate[];
 }

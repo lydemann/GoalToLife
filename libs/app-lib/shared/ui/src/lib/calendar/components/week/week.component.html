@@ -1,0 +1,10 @@
+<app-goal-period
+  [goalPeriodType]="'WEEKLY'"
+  [calendarDate]="calendarDate"
+  (addTodo)="onAddTodo($event)"
+  (deleteTodo)="onDeleteTodo($event)"
+  (editTodo)="editTodo.next($event)"
+  (toggleComplete)="toggleComplete.emit($event)"
+  (retroChange)="retroChange.emit($event)"
+>
+</app-goal-period>

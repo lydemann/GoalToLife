@@ -10,7 +10,7 @@ import {
 
 import { getDailyGoalKey } from '@app/app-lib';
 import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
-import { DayDate } from '../../classes/day-date';
+import { CalendarDate } from '../../classes/day-date';
 import { Week } from '../../classes/weeks';
 
 @Component({
@@ -62,7 +62,7 @@ export class MonthComponent implements OnInit, OnChanges {
    * PUBLIC VARIABLES to manage interaction and render UI
    */
   weeks: Week[];
-  days: DayDate[];
+  days: CalendarDate[];
   selected: Date;
   highlited: Date;
   dayHeaders: string[];
@@ -79,7 +79,7 @@ export class MonthComponent implements OnInit, OnChanges {
   weeksTrackBy(idx, item: Week) {
     return item.weekNumber;
   }
-  daysTrackBy(idx, item: DayDate) {
+  daysTrackBy(idx, item: CalendarDate) {
     return item.date;
   }
 
@@ -95,8 +95,8 @@ export class MonthComponent implements OnInit, OnChanges {
   /*
    * Helper method to build week: generates sequence of days and sets their attributes
    */
-  private _buildWeek(start: Date, month: number): DayDate[] {
-    const days: DayDate[] = [];
+  private _buildWeek(start: Date, month: number): CalendarDate[] {
+    const days: CalendarDate[] = [];
     let date: Date = new Date(start.setHours(0, 0, 0, 0));
     for (let i = 0; i < 7; i++) {
       const dailyGoalKey = getDailyGoalKey(date);
@@ -191,8 +191,8 @@ export class MonthComponent implements OnInit, OnChanges {
   }
 
   // handle click on day - set day as "selected"
-  onDayClick(dayDate: Date): void {
-    this.selected = dayDate;
+  onDayClick(calendarDate: Date): void {
+    this.selected = calendarDate;
   }
 
   // highlighting "today" day

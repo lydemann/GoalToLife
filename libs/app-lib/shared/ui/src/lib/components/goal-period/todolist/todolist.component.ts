@@ -1,22 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   EventEmitter,
   Input,
   OnChanges,
   OnInit,
   Output,
-  TemplateRef,
   ViewChild,
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { Goal, GoalPeriodType } from '@app/shared/interfaces';
 import { IonTextarea } from '@ionic/angular';
-import { Error } from 'tslint/lib/error';
 
-import { TODOItem } from '../../classes/todo-item';
-import { TODOService } from '../../services/todo.service';
+import { Goal, GoalPeriodType } from '@app/shared/interfaces';
+import { TODOItem } from '../../../calendar/classes/todo-item';
+import { TODOService } from '../../../calendar/services/todo.service';
 
 @Component({
   selector: 'app-todolist',
@@ -68,11 +65,11 @@ export class TODOListComponent implements OnInit, OnChanges {
   //   return this._todos;
   // }
 
-  get dayDate(): Date {
+  get calendarDate(): Date {
     return this._dayDate;
   }
 
-  @Input() set dayDate(value: Date) {
+  @Input() set calendarDate(value: Date) {
     this._dayDate = value;
   }
 
@@ -136,7 +133,7 @@ export class TODOListComponent implements OnInit, OnChanges {
   }
 
   // handling drag-and-drop's drop event to store TODO
-  onDrop(event: any, data?: any): void {
+  onDrop(data?: any): void {
     // target is day (generally)
     if (data === undefined) {
       // if drop into empty space in day, then - update date and put the item into beginning of the list
@@ -165,7 +162,7 @@ export class TODOListComponent implements OnInit, OnChanges {
 
     if (changes.hasOwnProperty('droppedTodo')) {
       if (changes.droppedTodo.currentValue !== undefined) {
-        this.onDrop(changes.droppedTodo.currentValue);
+        this.onDrop();
       }
     } else {
       this.getTODOList();

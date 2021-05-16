@@ -3,22 +3,20 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
+import { GoalPeriodModule } from '../components/goal-period/goal-period.module';
 import { TaskModule } from '../components/task/task.module';
+import { DragAndDropModule } from '../drag-and-drop/drag-and-drop.module';
 import { CalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
 import { DayComponent } from './components/day/day.component';
 import { MonthComponent } from './components/month/month.component';
-import { TODOListComponent } from './components/todolist/todolist.component';
-import { MakeDraggable } from './directives/make-draggable.directive';
-import { MakeDroppable } from './directives/make-droppable.directive';
+import { WeekComponent } from './components/week/week.component';
 
 @NgModule({
   declarations: [
     CalendarHeaderComponent,
     MonthComponent,
     DayComponent,
-    TODOListComponent,
-    MakeDraggable,
-    MakeDroppable,
+    WeekComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +24,8 @@ import { MakeDroppable } from './directives/make-droppable.directive';
     ReactiveFormsModule,
     TaskModule,
     IonicModule,
+    GoalPeriodModule,
+    DragAndDropModule,
   ],
   providers: [],
   exports: [CalendarHeaderComponent, MonthComponent],

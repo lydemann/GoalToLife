@@ -1,32 +1,43 @@
 import { DOCUMENT } from '@angular/common';
-import {Directive, ElementRef, OnInit, Input, Inject, Output, EventEmitter} from '@angular/core';
-import {DropContent} from "../classes/drop-content";
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+
+import { DropContent } from './drop-content';
 
 @Directive({
-  selector: '[makeDroppable]'
+  selector: '[appMakeDroppable]',
 })
 export class MakeDroppable implements OnInit {
   /*
    * Input: context of drop: list, day, ... (for further processing)
    */
-  @Input() dropContext : any;
+  @Input() dropContext: any;
 
   /*
-    * Output: emitting event with data, that was dropped
+   * Output: emitting event with data, that was dropped
    */
   @Output() dropped: EventEmitter<any> = new EventEmitter();
 
   /*
    * Class, that is used to beautify dropzone element in process
    */
-  dropClass : string = 'draggingElementOverArea';
+  dropClass = 'draggingElementOverArea';
 
   /*
    * CONSTRUCTOR
    * ElementRef and DOCUMENT token are injected to use HTML5 API and support process
    */
-  constructor(private _elementRef: ElementRef,
-              @Inject(DOCUMENT) private _document) {}
+  constructor(
+    private _elementRef: ElementRef,
+    @Inject(DOCUMENT) private _document
+  ) {}
 
   /*
    * Adding event listeners in this lifecycle hook handler
@@ -34,7 +45,7 @@ export class MakeDroppable implements OnInit {
   ngOnInit() {
     // As soon as all 100+ tries with HostListener failed, I've made it with native JS
     // Problems included abscence of animation, partial event firing, etc.
-    let element = this._elementRef.nativeElement;
+    const element = this._elementRef.nativeElement;
 
     // adding event listener on entering valid dropzone: add CSS class
     element.addEventListener('dragenter', () => {
@@ -60,16 +71,19 @@ export class MakeDroppable implements OnInit {
       element.classList.remove(this.dropClass);
 
       // preparing payload to emit
-      let data : DropContent = new DropContent(this.dropContext['context'],
-                                               JSON.parse(event.dataTransfer.getData('text')),
-                                               JSON.parse(event.dataTransfer.getData('text'))['elementClass']
+      const data: DropContent = new DropContent(
+        this.dropContext['context'],
+        JSON.parse(event.dataTransfer.getData('text')),
+        JSON.parse(event.dataTransfer.getData('text'))['elementClass']
       );
       this.dropped.emit(data);
 
       // some direct DOM manipulation (I know that it's bad practice, but I got stuck with drag and drop,
       // so this solution is used
-      let elementsToHide = this._document.querySelectorAll(`.${data.elementClass}`);
-      for (let i=0;i<elementsToHide.length;i++) {
+      const elementsToHide = this._document.querySelectorAll(
+        `.${data.elementClass}`
+      );
+      for (let i = 0; i < elementsToHide.length; i++) {
         elementsToHide[i].remove();
       }
     });

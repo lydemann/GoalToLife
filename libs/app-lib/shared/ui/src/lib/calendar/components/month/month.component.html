@@ -1,7 +1,7 @@
 <section>
   <div class="headers">
     <div class="day-header" *ngFor="let dayHeader of dayHeaders">
-      {{ dayHeader }}
+      <div>{{ dayHeader }}</div>
     </div>
   </div>
   <div class="data">
@@ -11,7 +11,7 @@
     >
       <app-day
         *ngFor="let day of week.days; trackBy: daysTrackBy"
-        [dayDate]="day"
+        [calendarDate]="day"
         [selected]="selected"
         [highlited]="highlited"
         (click)="onDayClick(day.dateDate)"

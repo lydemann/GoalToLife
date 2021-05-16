@@ -14,12 +14,7 @@ import {
   EditGoalModalComponent,
   EditModalComponentProps,
 } from '@app/app-lib/shared/ui';
-import {
-  Goal,
-  GoalPeriod,
-  GoalPeriodStore,
-  GoalPeriodType,
-} from '@app/shared/interfaces';
+import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
 
 @Component({
   selector: 'app-monthly',

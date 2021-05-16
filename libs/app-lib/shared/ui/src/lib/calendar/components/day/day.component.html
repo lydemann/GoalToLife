@@ -1,73 +1,24 @@
 <div
   class="day"
   [ngClass]="currentClasses"
-  [attr.data-testid]="'day-' + (dayDate.dateDate | date: 'dd')"
-  makeDroppable
+  [attr.data-testid]="'day-' + (calendarDate.dateDate | date: 'dd')"
+  appMakeDroppable
   [dropContext]="{ context: 'day' }"
   (dropped)="onDropTodo($event)"
   (click)="(setActiveState)"
 >
   <!-- <i class="bg-icon fa fa-arrow-up"></i> -->
-  <div class="day-date">{{ dayDate.dateDate | date: 'dd' }}</div>
-  <div>
-    <p class="headline">Goals</p>
-    <app-todolist
-      [goals]="dayDate.goals"
-      [editable]="dayDate.isSelected"
-      [dayDate]="dayDate.dateDate"
-      [droppedTodo]="droppedTodo"
-      [refreshRequired]="refreshRequired"
-      (addTodo)="onAddTodo($event)"
-      (deleteTodo)="onDeleteTodo($event)"
-      (editTodo)="editTodo.next($event)"
-      (toggleComplete)="toggleComplete.emit($event)"
-    ></app-todolist>
-
-    <p
-      [class.hidden]="
-        !dayDate.wins &&
-        !dayDate.obtainedKnowledge &&
-        !dayDate.improvementPoints &&
-        !dayDate.thoughts
-      "
-    >
-      Retro
-    </p>
-    <form class="retro" [formGroup]="retroForm">
-      <div [class.hidden]="!dayDate.isSelected && !dayDate.wins">
-        <ion-label>Wins</ion-label>
-        <ion-textarea
-          class="input"
-          formControlName="wins"
-          placeholder="Good things that I did today"
-        ></ion-textarea>
-      </div>
-      <div [class.hidden]="!dayDate.isSelected && !dayDate.obtainedKnowledge">
-        <ion-label>Obtained Knowledge</ion-label>
-        <ion-textarea
-          class="input"
-          placeholder="What I learned today"
-          formControlName="obtainedKnowledge"
-        ></ion-textarea>
-      </div>
-      <div [class.hidden]="!dayDate.isSelected && !dayDate.improvementPoints">
-        <ion-label>Improvement Points</ion-label>
-        <ion-textarea
-          class="input"
-          placeholder="How I will improve"
-          formControlName="improvementPoints"
-        ></ion-textarea>
-      </div>
-      <div [class.hidden]="!dayDate.isSelected && !dayDate.thoughts">
-        <ion-label>Thoughts</ion-label>
-        <ion-textarea
-          class="input"
-          formControlName="thoughts"
-          placeholder="What is occupying my mind"
-        ></ion-textarea>
-      </div>
-    </form>
-  </div>
+  <div class="day-date">{{ calendarDate.dateDate | date: 'dd' }}</div>
+  <app-goal-period
+    [goalPeriodType]="'DAILY'"
+    [calendarDate]="calendarDate"
+    (addTodo)="onAddTodo($event)"
+    (deleteTodo)="onDeleteTodo($event)"
+    (editTodo)="editTodo.next($event)"
+    (toggleComplete)="toggleComplete.emit($event)"
+    (retroChange)="retroChange.emit($event)"
+    [selected]="selected"
+  ></app-goal-period>
 </div>
 <!-- <popover-content #todoPopover
                  placement="auto right"
@@ -76,7 +27,7 @@
 >
   <app-todolist
     [editable]="true"
-    [dayDate]="dayDate.date"
+    [calendarDate]="calendarDate.date"
     [droppedTodo]="droppedTodo"
     (onTodoListChange)="onTodoListChange($event)"
   ></app-todolist>
