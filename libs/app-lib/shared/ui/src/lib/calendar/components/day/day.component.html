@@ -1,16 +1,16 @@
 <div
   class="day"
   [ngClass]="currentClasses"
-  [attr.data-testid]="'day-' + (calendarDate.dateDate | date: 'dd')"
+  [attr.data-testid]="'day-' + formattedDate"
   appMakeDroppable
   [dropContext]="{ context: 'day' }"
   (dropped)="onDropTodo($event)"
   (click)="(setActiveState)"
 >
   <!-- <i class="bg-icon fa fa-arrow-up"></i> -->
-  <div class="day-date">{{ calendarDate.dateDate | date: 'dd' }}</div>
+  <div class="day-date">{{ formattedDate }}</div>
   <app-goal-period
-    [goalPeriodType]="'DAILY'"
+    [goalPeriodType]="goalPeriodType"
     [calendarDate]="calendarDate"
     (addTodo)="onAddTodo($event)"
     (deleteTodo)="onDeleteTodo($event)"

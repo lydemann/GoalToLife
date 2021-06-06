@@ -41,7 +41,7 @@
       background: #ffffff;
 
       app-day {
-        width: calc(100% * 1 / 7);
+        width: calc(100% * 1 / 8);
       }
     }
   }
@@ -63,7 +63,7 @@
     .data {
       flex-direction: column;
       app-day {
-        height: calc(100% * 1 / 7);
+        height: calc(100% * 1 / 8);
       }
     }
   }

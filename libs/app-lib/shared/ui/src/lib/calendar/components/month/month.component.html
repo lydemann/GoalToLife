@@ -10,6 +10,18 @@
       *ngFor="let week of weeks; trackBy: weeksTrackBy"
     >
       <app-day
+        [calendarDate]="week.days[0]"
+        [isWeek]="true"
+        [selected]="selected"
+        [highlited]="highlited"
+        (click)="onDayClick(week.days[0].dateDate)"
+        (addTodo)="onAddTodo($event)"
+        (deleteTodo)="onDeleteTodo($event)"
+        (editTodo)="editTodo.next($event)"
+        (toggleComplete)="toggleComplete.emit($event)"
+        (retroChange)="retroChange.emit($event)"
+      ></app-day>
+      <app-day
         *ngFor="let day of week.days; trackBy: daysTrackBy"
         [calendarDate]="day"
         [selected]="selected"

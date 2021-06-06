@@ -8,7 +8,7 @@ import {
   Output,
 } from '@angular/core';
 
-import { getDailyGoalKey } from '@app/app-lib';
+import { getDailyGoalKey, getWeeklyGoalKey } from '@app/app-lib';
 import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
 import { CalendarDate } from '../../classes/day-date';
 import { Week } from '../../classes/weeks';
@@ -72,7 +72,16 @@ export class MonthComponent implements OnInit, OnChanges {
    * initializing headers of day (week: Monday -> Sunday)
    */
   constructor() {
-    this.dayHeaders = ['Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    this.dayHeaders = [
+      'Week',
+      'Mon',
+      'Tues',
+      'Wed',
+      'Thu',
+      'Fri',
+      'Sat',
+      'Sun',
+    ];
     this.weeks = [];
   }
 
@@ -152,26 +161,33 @@ export class MonthComponent implements OnInit, OnChanges {
    */
   private _buildMonth(): void {
     const month: number = this._calendarDate.getMonth();
-    let firstDay: Date = this._calendarDate;
+    let firstDayOfWeek: Date = this._calendarDate;
 
     /* getting start date of month (weird part):
        not calendar one, but 35-cell one - not necessary this is 1st of, e.g., January
     */
-    while (firstDay.getDay() === 0 ? 7 : firstDay.getDay() >= 1) {
-      if (firstDay.getDay() === 1) {
+    while (firstDayOfWeek.getDay() === 0 ? 7 : firstDayOfWeek.getDay() >= 1) {
+      if (firstDayOfWeek.getDay() === 1) {
         break;
       } else {
-        firstDay = this._addDays(firstDay, -1);
+        firstDayOfWeek = this._addDays(firstDayOfWeek, -1);
       }
     }
 
     // there are max 48 cells (6 weeks) in our monthly calendar (checked against various apps and tested against Jan-2017)
     for (let i = 0; i < 6; i++) {
+      const days = this._buildWeek(firstDayOfWeek, month);
+      const weeklyGoalPeriodKey = getWeeklyGoalKey(firstDayOfWeek);
+      const weeklyGoal = this.goalPeriods[weeklyGoalPeriodKey];
       this.weeks.push({
-        weekNumber: this.getWeekNumber(firstDay),
-        days: this._buildWeek(firstDay, month),
+        weekNumber: this.getWeekNumber(firstDayOfWeek),
+        days,
+        dateDate: firstDayOfWeek,
+        isSelected: false,
+        ...weeklyGoal,
       });
-      firstDay = this._addDays(firstDay, 7);
+
+      firstDayOfWeek = this._addDays(firstDayOfWeek, 7);
     }
 
     // Removing last week if it does not belong to current month (checking only 1st day)

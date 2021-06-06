@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -14,8 +15,9 @@ import {
 import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 
-import { getDailyGoalKey } from '@app/app-lib';
+import { getGoalKey } from '@app/app-lib';
 import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
+import { getWeekNumber } from '@app/shared/utils';
 import { CalendarDate } from '../../classes/day-date';
 import { TODOItem } from '../../classes/todo-item';
 
@@ -42,17 +44,6 @@ export class DayComponent
   private _highlited: Date;
   private destroy$ = new Subject();
   retroForm: FormGroup;
-  @Output() addTodo = new EventEmitter<Goal>();
-  @Output() deleteTodo = new EventEmitter<Goal>();
-  @Output() editTodo = new EventEmitter<Goal>();
-  @Output() toggleComplete = new EventEmitter<Goal>();
-  @Output() retroChange = new EventEmitter<Partial<GoalPeriod>>();
-  blurRetroInput: any;
-
-  /*
-   * Getters, setters and inputs
-   */
-
   @Input() set calendarDate(calendarDate: CalendarDate) {
     this._dayDate = calendarDate;
   }
@@ -73,11 +64,30 @@ export class DayComponent
     this._highlited = highlited;
   }
 
+  private _isWeek: boolean;
+  public get isWeek(): boolean {
+    return this._isWeek;
+  }
+  @Input()
+  public set isWeek(isWeek: boolean) {
+    this._isWeek = isWeek;
+    this.goalPeriodType = isWeek ? GoalPeriodType.WEEKLY : GoalPeriodType.DAILY;
+  }
+
+  @Output() addTodo = new EventEmitter<Goal>();
+  @Output() deleteTodo = new EventEmitter<Goal>();
+  @Output() editTodo = new EventEmitter<Goal>();
+  @Output() toggleComplete = new EventEmitter<Goal>();
+  @Output() retroChange = new EventEmitter<Partial<GoalPeriod>>();
+  blurRetroInput: any;
+
   /*
    * PUBLIC VARIABLES to manage interaction
    */
   currentClasses = {};
   droppedTodo: TODOItem;
+  goalPeriodType: GoalPeriodType = GoalPeriodType.DAILY;
+  formattedDate: string;
 
   /*
    * CONSTRUCTOR
@@ -121,11 +131,11 @@ export class DayComponent
   }
 
   onAddTodo(goal: Goal) {
-    const dailyGoalKey = getDailyGoalKey(this.calendarDate.dateDate);
+    const goalKey = getGoalKey(this.calendarDate.dateDate, this.goalPeriodType);
     this.addTodo.next({
       ...goal,
-      type: GoalPeriodType.DAILY,
-      scheduledDate: dailyGoalKey,
+      type: this.goalPeriodType,
+      scheduledDate: goalKey,
     });
   }
 
@@ -155,6 +165,13 @@ export class DayComponent
    * Listening to changes to set day as current
    */
   ngOnChanges(changes: SimpleChanges): void {
+    if (this.isWeek) {
+      const weekNumber = getWeekNumber(this.calendarDate.dateDate);
+      this.formattedDate = `Week: ${weekNumber}`;
+    } else {
+      this.formattedDate = formatDate(this.calendarDate.dateDate, 'dd', 'en');
+    }
+
     this.currentClasses['selectedDay'] = this.isSelected();
     this.calendarDate.isSelected =
       this.calendarDate.dateDate?.getTime() === this.selected?.getTime();

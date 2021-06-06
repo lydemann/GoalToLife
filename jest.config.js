@@ -7,5 +7,6 @@ module.exports = {
     '<rootDir>/libs/app-lib/shared/app-shared',
     '<rootDir>/libs/app-lib/features/plan',
     '<rootDir>/apps/app',
+    '<rootDir>/libs/shared/utils',
   ],
 };

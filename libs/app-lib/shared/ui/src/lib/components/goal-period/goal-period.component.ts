@@ -13,7 +13,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
-import { getDailyGoalKey } from '@app/app-lib';
+import { getGoalKey } from '@app/app-lib';
 import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
 import { CalendarDate } from '../../calendar/classes/day-date';
 import { TODOItem } from '../../calendar/classes/todo-item';
@@ -89,11 +89,11 @@ export class GoalPeriodComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onAddTodo(goal: Goal) {
-    const dailyGoalKey = getDailyGoalKey(this.calendarDate.dateDate);
+    const goalKey = getGoalKey(this.calendarDate.dateDate, this.goalPeriodType);
     this.addTodo.next({
       ...goal,
-      type: GoalPeriodType.DAILY,
-      scheduledDate: dailyGoalKey,
+      type: this.goalPeriodType,
+      scheduledDate: goalKey,
     });
   }
 
@@ -135,7 +135,7 @@ export class GoalPeriodComponent implements OnInit, OnChanges, OnDestroy {
         .subscribe(() => {
           this.retroChange.emit({
             ...this.retroForm.value,
-            date: getDailyGoalKey(this.calendarDate.dateDate),
+            date: getGoalKey(this.calendarDate.dateDate, this.goalPeriodType),
             type: this.goalPeriodType,
           });
         });
