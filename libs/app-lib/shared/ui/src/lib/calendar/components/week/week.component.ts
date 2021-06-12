@@ -7,8 +7,8 @@ import {
   Output,
 } from '@angular/core';
 
-import { getDailyGoalKey } from '@app/app-lib';
 import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
+import { getGoalKey } from '@app/shared/utils';
 import { CalendarDate } from '../../classes';
 
 @Component({
@@ -30,6 +30,8 @@ export class WeekComponent implements OnInit {
   @Output() toggleComplete = new EventEmitter<Goal>();
   @Output() retroChange = new EventEmitter<Partial<GoalPeriod>>();
 
+  goalPeriodType = GoalPeriodType.WEEKLY;
+
   constructor() {}
 
   ngOnInit() {}
@@ -38,11 +40,11 @@ export class WeekComponent implements OnInit {
     this.deleteTodo.next(goal);
   }
   onAddTodo(goal: Goal) {
-    const dailyGoalKey = getDailyGoalKey(this.calendarDate.dateDate);
+    const goalKey = getGoalKey(this.calendarDate.dateDate, this.goalPeriodType);
     this.addTodo.next({
       ...goal,
-      type: GoalPeriodType.WEEKLY,
-      scheduledDate: dailyGoalKey,
+      type: this.goalPeriodType,
+      scheduledDate: goalKey,
     });
   }
 }

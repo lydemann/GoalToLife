@@ -8,8 +8,8 @@ import {
   Output,
 } from '@angular/core';
 
-import { getDailyGoalKey, getWeeklyGoalKey } from '@app/app-lib';
 import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
+import { getDailyGoalKey, getWeeklyGoalKey } from '@app/shared/utils';
 import { CalendarDate } from '../../classes/day-date';
 import { Week } from '../../classes/weeks';
 
@@ -178,13 +178,14 @@ export class MonthComponent implements OnInit, OnChanges {
     for (let i = 0; i < 6; i++) {
       const days = this._buildWeek(firstDayOfWeek, month);
       const weeklyGoalPeriodKey = getWeeklyGoalKey(firstDayOfWeek);
-      const weeklyGoal = this.goalPeriods[weeklyGoalPeriodKey];
+      const weeklyGoalPeriod = this.goalPeriods[weeklyGoalPeriodKey];
       this.weeks.push({
         weekNumber: this.getWeekNumber(firstDayOfWeek),
         days,
         dateDate: firstDayOfWeek,
         isSelected: false,
-        ...weeklyGoal,
+        month,
+        ...weeklyGoalPeriod,
       });
 
       firstDayOfWeek = this._addDays(firstDayOfWeek, 7);

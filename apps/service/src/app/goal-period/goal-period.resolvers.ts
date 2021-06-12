@@ -8,9 +8,13 @@ import {
   GoalPeriodStore,
   GoalPeriodType,
 } from '@app/shared/interfaces';
+import {
+  getWeeklyGoalKey,
+  getWeeklyGoalKeyFromWeekumber,
+  getWeekNumber,
+} from '@app/shared/utils';
 import { firestoreDB } from '../firestore';
 import { createResolver } from '../utils/create-resolver';
-
 interface GoalsInput {
   scheduledDate: string;
 }
@@ -53,17 +57,32 @@ export const goalQueryResolvers = {
       const goalPeriods = [];
 
       if (!!toDate || !!fromDate) {
-        const goalPeriodSnapshotrange = await firestoreDB
+        const weeks = getWeeksBetweenDates(fromDate, toDate);
+        const weekDateKeys = weeks.map((week) =>
+          getWeeklyGoalKeyFromWeekumber(week.year, week.weekNumber)
+        );
+        console.log(weekDateKeys);
+        const goalPeriodSnapshotrangeWeeks = await firestoreDB
           .collection(`/users/${uid}/goalPeriods`)
-          // TODO: get for type
+          .where('date', 'in', weekDateKeys)
+          .get();
+        const goalPeriodsFromRangeWeeks = goalPeriodSnapshotrangeWeeks.docs.map(
+          (doc) => doc.data() as GoalPeriodStore
+        );
+
+        const goalPeriodSnapshotrangeDays = await firestoreDB
+          .collection(`/users/${uid}/goalPeriods`)
           .where('date', '<=', toDate)
           .where('date', '>=', fromDate)
           .get();
-
-        const goalPeriodsFromRangeQuery = goalPeriodSnapshotrange.docs.map(
+        const goalPeriodsFromRangeDays = goalPeriodSnapshotrangeDays.docs.map(
           (doc) => doc.data() as GoalPeriodStore
         );
-        goalPeriods.push(...goalPeriodsFromRangeQuery);
+
+        goalPeriods.push(
+          ...goalPeriodsFromRangeWeeks,
+          ...goalPeriodsFromRangeDays
+        );
       }
 
       if (dates) {
@@ -217,3 +236,14 @@ export const goalMutationResolvers = {
     }
   ),
 };
+function getWeeksBetweenDates(fromDate: string, toDate: string) {
+  const weekNumbersBetweenDates: { weekNumber: number; year: number }[] = [];
+  const from = new Date(fromDate);
+  const to = new Date(toDate);
+  while (from < to || (fromDate && !toDate)) {
+    const weekNumber = getWeekNumber(from);
+    weekNumbersBetweenDates.push({ weekNumber, year: from.getFullYear() });
+    from.setDate(from.getDate() + 7);
+  }
+  return weekNumbersBetweenDates;
+}

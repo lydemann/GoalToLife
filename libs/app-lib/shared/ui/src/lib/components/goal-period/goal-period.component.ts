@@ -13,8 +13,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
-import { getGoalKey } from '@app/app-lib';
 import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
+import { getGoalKey } from '@app/shared/utils';
 import { CalendarDate } from '../../calendar/classes/day-date';
 import { TODOItem } from '../../calendar/classes/todo-item';
 
@@ -39,7 +39,6 @@ export class GoalPeriodComponent implements OnInit, OnChanges, OnDestroy {
   private destroy$ = new Subject();
   retroForm: FormGroup;
   @Input() goalPeriodType: GoalPeriodType = GoalPeriodType.DAILY;
-  @Input() selected: boolean;
   @Output() addTodo = new EventEmitter<Goal>();
   @Output() deleteTodo = new EventEmitter<Goal>();
   @Output() editTodo = new EventEmitter<Goal>();

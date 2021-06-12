@@ -10,7 +10,7 @@ import {
   GoalPeriodStore,
   GoalPeriodType,
 } from '@app/shared/interfaces';
-import { getMonthlyGoalPeriodKey } from '../../../goal-utils';
+import { getMonthlyGoalPeriodKey } from '@app/shared/utils';
 import { MONTH_PARAM_KEY, YEAR_PARAM_KEY } from '../../plan.constants';
 import { GoalsQuery } from '../goals/goals.query';
 import { GoalPeriodsState } from './goal-periods.model';
@@ -27,7 +27,7 @@ export class GoalPeriodsQuery extends QueryEntity<
   GoalPeriodsState,
   GoalPeriodStore
 > {
-  dailyGoalPeriods$: Observable<Record<string, GoalPeriod>>;
+  goalPeriods: Observable<Record<string, GoalPeriod>>;
   isLoadingGoalPeriods$: Observable<boolean>;
   monthlyGoalPeriod$: Observable<GoalPeriod>;
 
@@ -38,14 +38,8 @@ export class GoalPeriodsQuery extends QueryEntity<
   ) {
     super(store);
 
-    this.dailyGoalPeriods$ = combineQueries([
-      this.selectAll().pipe(
-        map((goalPeriods) =>
-          goalPeriods.filter(
-            (goalPeriod) => goalPeriod.type === GoalPeriodType.DAILY
-          )
-        )
-      ),
+    this.goalPeriods = combineQueries([
+      this.selectAll(),
       this.goalsQuery.select((state) => state.entities),
     ]).pipe(
       map(([goalPeriods, goalEntities]) => {

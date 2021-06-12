@@ -16,6 +16,7 @@
     "lib": ["es2018", "dom"],
     "typeRoots": ["node_modules/@types"],
     "paths": {
+      "@app/app/*": ["apps/app/src/*"],
       "@app/app-lib": ["libs/app-lib/src/index.ts"],
       "@app/app-lib/features/plan": ["libs/app-lib/features/plan/src/index.ts"],
       "@app/app-lib/shared/ui": ["libs/app-lib/shared/ui/src/index.ts"],

@@ -15,9 +15,8 @@ import {
 import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 
-import { getGoalKey } from '@app/app-lib';
 import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
-import { getWeekNumber } from '@app/shared/utils';
+import { getGoalKey, getWeekNumber } from '@app/shared/utils';
 import { CalendarDate } from '../../classes/day-date';
 import { TODOItem } from '../../classes/todo-item';
 

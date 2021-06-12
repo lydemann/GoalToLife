@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, map, pluck, startWith } from 'rxjs/operators';
+import { catchError, map, startWith } from 'rxjs/operators';
 
 import { Goal, GoalPeriod, GoalPeriodType, Task } from '@app/shared/interfaces';
-import { getDailyGoalKey } from '../goal-utils';
+import { getDailyGoalKey } from '@app/shared/utils';
 import { createInCache, removeFromCache } from '../graphql/graphql-helpers';
 
 const getGoalsQuery = gql`

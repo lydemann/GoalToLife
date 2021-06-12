@@ -10,7 +10,7 @@
       *ngFor="let week of weeks; trackBy: weeksTrackBy"
     >
       <app-day
-        [calendarDate]="week.days[0]"
+        [calendarDate]="week"
         [isWeek]="true"
         [selected]="selected"
         [highlited]="highlited"

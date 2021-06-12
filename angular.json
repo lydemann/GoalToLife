@@ -52,6 +52,7 @@
             "main": "apps/app/src/main.ts",
             "polyfills": "apps/app/src/polyfills.ts",
             "tsConfig": "apps/app/tsconfig.app.json",
+            "sourceMap": true,
             "assets": [
               {
                 "glob": "**/*",

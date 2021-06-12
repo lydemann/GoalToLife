@@ -29,7 +29,7 @@ export class PlanFacadeService {
     private goalPeriodsQuery: GoalPeriodsQuery,
     private goalsQuery: GoalsQuery
   ) {
-    this.goalPeriods$ = this.goalPeriodsQuery.dailyGoalPeriods$;
+    this.goalPeriods$ = this.goalPeriodsQuery.goalPeriods;
     this.isLoading$ = combineQueries([
       this.goalPeriodsQuery.selectLoading(),
       this.goalsQuery.selectLoading(),

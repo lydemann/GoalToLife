@@ -8,7 +8,7 @@ import {
   GoalPeriodStore,
   Task,
 } from '@app/shared/interfaces';
-import { getDailyGoalKey, getMonthlyGoalPeriodKey } from '../../goal-utils';
+import { getDailyGoalKey, getMonthlyGoalPeriodKey } from '@app/shared/utils';
 
 const getGoalPeriodsQuery = gql`
   query goalGoalPeriodsQuery(
