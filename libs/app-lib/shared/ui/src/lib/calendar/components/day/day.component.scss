@@ -35,6 +35,14 @@
     }
   }
 
+  &.week {
+    background-color: #efeaea;
+    color: #000000;
+    & > .day-date {
+      color: #000000;
+    }
+  }
+
   &:hover {
     box-shadow: inset 1px 1px 6px #eeeeee;
   }

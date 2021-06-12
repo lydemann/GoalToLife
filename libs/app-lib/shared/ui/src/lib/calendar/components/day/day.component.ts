@@ -180,6 +180,7 @@ export class DayComponent
         currentMonth: this._isCurrentMonth(),
         selectedDay: null,
         highlightedDay: isCurrentDay,
+        week: this.isWeek,
       };
     }
   }
