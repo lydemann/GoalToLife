@@ -9,7 +9,6 @@ import {
   GoalPeriodType,
 } from '@app/shared/interfaces';
 import {
-  getWeeklyGoalKey,
   getWeeklyGoalKeyFromWeekumber,
   getWeekNumber,
 } from '@app/shared/utils';

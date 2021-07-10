@@ -35,7 +35,7 @@
       "tags": ["scope:app"]
     },
     "shared-utils": {
-      "tags": ["scope:shared type:util"]
+      "tags": ["scope:shared", "type:util"]
     }
   }
 }

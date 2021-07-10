@@ -21,6 +21,8 @@ import { getGoalKey, getWeekNumber } from '@app/shared/utils';
 import { CalendarDate } from '../../classes/day-date';
 import { TODOItem } from '../../classes/todo-item';
 
+export const SAVE_RETRO_FORM_DEBOUNCE_TIME = 500;
+
 /*
  * This component is used to render "day" with all the contents
  */
