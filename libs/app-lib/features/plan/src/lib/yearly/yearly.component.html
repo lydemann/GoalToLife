@@ -11,6 +11,7 @@
     <app-goal-period
       *ngIf="currentYearGoalPeriod$ | async as currentYearGoalPeriod"
       [date]="date"
+      [isSelected]="true"
       [goalPeriod]="currentYearGoalPeriod"
       (addTodo)="onAddGoal($event)"
       (deleteTodo)="onDeleteGoal($event)"
@@ -29,8 +30,10 @@
   >
     <h3>{{ 'Quarter ' + (index + 1) }}</h3>
     <app-goal-period
+      (click)="setSelectedQuarter(index + 1)"
       *ngIf="quarterGoalPeriod"
       [date]="quarterGoalPeriod.calendarDate"
+      [isSelected]="getIsSelectedQuarter(index + 1)"
       [goalPeriod]="quarterGoalPeriod"
       (addTodo)="onAddGoal($event)"
       (deleteTodo)="onDeleteGoal($event)"

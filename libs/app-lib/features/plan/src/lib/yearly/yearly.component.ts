@@ -27,6 +27,7 @@ export class YearlyComponent implements OnInit {
   currentYearGoalPeriod$: Observable<GoalPeriod>;
   quarterGoalPeriods$: Observable<GoalPeriod[]>;
   date: Date = new Date();
+  selectedQuarter: number;
 
   constructor(
     private appFacadeService: AppFacadeService,
@@ -43,6 +44,14 @@ export class YearlyComponent implements OnInit {
     this.currentYearGoalPeriod$ = this.planFacadeService.currentYearGoalPeriod$;
     this.quarterGoalPeriods$ = this.planFacadeService.quarterGoalPeriods$;
     this.date = new Date(year, 0);
+  }
+
+  setSelectedQuarter(quarter: number) {
+    this.selectedQuarter = quarter;
+  }
+
+  getIsSelectedQuarter(quarter: number) {
+    return quarter === this.selectedQuarter;
   }
 
   onAddGoal(goal: Goal) {
