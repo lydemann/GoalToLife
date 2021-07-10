@@ -1,8 +1,7 @@
-<p class="headline" *ngIf="calendarDate.goals?.length > 0">Goals</p>
 <app-todolist
-  [goals]="calendarDate.goals"
-  [editable]="calendarDate.isSelected"
-  [calendarDate]="calendarDate.dateDate"
+  [goals]="goalPeriod.goals"
+  [editable]="isSelected"
+  [calendarDate]="date"
   [droppedTodo]="droppedTodo"
   [refreshRequired]="refreshRequired"
   (addTodo)="onAddTodo($event)"
@@ -13,16 +12,16 @@
 
 <p
   [class.hidden]="
-    !calendarDate.wins &&
-    !calendarDate.obtainedKnowledge &&
-    !calendarDate.improvementPoints &&
-    !calendarDate.thoughts
+    !goalPeriod.wins &&
+    !goalPeriod.obtainedKnowledge &&
+    !goalPeriod.improvementPoints &&
+    !goalPeriod.thoughts
   "
 >
   Retro
 </p>
 <form class="retro" [formGroup]="retroForm">
-  <div [class.hidden]="!calendarDate.isSelected && !calendarDate.wins">
+  <div [class.hidden]="!isSelected && !goalPeriod.wins">
     <ion-label>Wins</ion-label>
     <ion-textarea
       class="input"
@@ -30,9 +29,7 @@
       placeholder="Good things that I did today"
     ></ion-textarea>
   </div>
-  <div
-    [class.hidden]="!calendarDate.isSelected && !calendarDate.obtainedKnowledge"
-  >
+  <div [class.hidden]="!isSelected && !goalPeriod.obtainedKnowledge">
     <ion-label>Obtained Knowledge</ion-label>
     <ion-textarea
       class="input"
@@ -40,9 +37,7 @@
       formControlName="obtainedKnowledge"
     ></ion-textarea>
   </div>
-  <div
-    [class.hidden]="!calendarDate.isSelected && !calendarDate.improvementPoints"
-  >
+  <div [class.hidden]="!isSelected && !goalPeriod.improvementPoints">
     <ion-label>Improvement Points</ion-label>
     <ion-textarea
       class="input"
@@ -50,7 +45,7 @@
       formControlName="improvementPoints"
     ></ion-textarea>
   </div>
-  <div [class.hidden]="!calendarDate.isSelected && !calendarDate.thoughts">
+  <div [class.hidden]="!isSelected && !goalPeriod.thoughts">
     <ion-label>Thoughts</ion-label>
     <ion-textarea
       class="input"

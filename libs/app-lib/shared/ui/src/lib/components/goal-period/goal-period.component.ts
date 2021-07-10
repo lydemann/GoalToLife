@@ -15,7 +15,6 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
 import { getGoalKey } from '@app/shared/utils';
-import { CalendarDate } from '../../calendar/classes/day-date';
 import { TODOItem } from '../../calendar/classes/todo-item';
 
 export const SAVE_RETRO_FORM_DEBOUNCE_TIME = 500;
@@ -28,35 +27,26 @@ export const SAVE_RETRO_FORM_DEBOUNCE_TIME = 500;
 })
 export class GoalPeriodComponent implements OnInit, OnChanges, OnDestroy {
   /*
-   * PRIVATE variables
    * date (date + month) - used to define whether day is in currently selected month and for further TODO-list logic
    * selected day - selected day
    * highlighted day - some important day ("today" in our case)
    * trigger to alert that refresh of contained todos is required
    */
-  private _dayDate: CalendarDate;
-  private _refreshRequired: Date;
-  private destroy$ = new Subject();
-  retroForm: FormGroup;
-  @Input() goalPeriodType: GoalPeriodType = GoalPeriodType.DAILY;
+
+  // TODO: select on click
+  @Input() isSelected: boolean;
+  @Input() goalPeriod: GoalPeriod = { goals: [] } as GoalPeriod;
+  get goalPeriodType(): GoalPeriodType {
+    return this.goalPeriod.type;
+  }
+  @Input() date: Date;
   @Output() addTodo = new EventEmitter<Goal>();
   @Output() deleteTodo = new EventEmitter<Goal>();
   @Output() editTodo = new EventEmitter<Goal>();
   @Output() toggleComplete = new EventEmitter<Goal>();
   @Output() retroChange = new EventEmitter<Partial<GoalPeriod>>();
   blurRetroInput: any;
-
-  /*
-   * Getters, setters
-   */
-
-  @Input() set calendarDate(calendarDate: CalendarDate) {
-    this._dayDate = calendarDate;
-  }
-
-  get calendarDate(): CalendarDate {
-    return this._dayDate;
-  }
+  retroForm: FormGroup;
 
   get refreshRequired(): Date {
     return this._refreshRequired;
@@ -65,6 +55,9 @@ export class GoalPeriodComponent implements OnInit, OnChanges, OnDestroy {
   set refreshRequired(value: Date) {
     this._refreshRequired = value;
   }
+
+  private _refreshRequired: Date;
+  private destroy$ = new Subject();
 
   constructor(private formBuilder: FormBuilder) {}
 
@@ -88,7 +81,7 @@ export class GoalPeriodComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onAddTodo(goal: Goal) {
-    const goalKey = getGoalKey(this.calendarDate.dateDate, this.goalPeriodType);
+    const goalKey = getGoalKey(this.date, this.goalPeriodType);
     this.addTodo.next({
       ...goal,
       type: this.goalPeriodType,
@@ -116,12 +109,12 @@ export class GoalPeriodComponent implements OnInit, OnChanges, OnDestroy {
    * Listening to changes to set day as current
    */
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['calendarDate']) {
+    if (changes.goalPeriod) {
       this.retroForm = this.formBuilder.group({
-        wins: this.calendarDate.wins,
-        obtainedKnowledge: this.calendarDate.obtainedKnowledge,
-        improvementPoints: this.calendarDate.improvementPoints,
-        thoughts: this.calendarDate.thoughts,
+        wins: this.goalPeriod.wins,
+        obtainedKnowledge: this.goalPeriod.obtainedKnowledge,
+        improvementPoints: this.goalPeriod.improvementPoints,
+        thoughts: this.goalPeriod.thoughts,
       });
       this.retroForm.valueChanges
         .pipe(
@@ -134,7 +127,7 @@ export class GoalPeriodComponent implements OnInit, OnChanges, OnDestroy {
         .subscribe(() => {
           this.retroChange.emit({
             ...this.retroForm.value,
-            date: getGoalKey(this.calendarDate.dateDate, this.goalPeriodType),
+            date: getGoalKey(this.date, this.goalPeriodType),
             type: this.goalPeriodType,
           });
         });

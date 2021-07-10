@@ -9,7 +9,7 @@ export interface Goal {
   type: GoalPeriodType;
   subGoals: Goal[];
   categories: string[];
-  scheduledDate?: string; // eg. 2021, 2021/q2, 2021/04, 2021/w13, 2021/04/04
+  scheduledDate?: string; // eg. 2021, 2021-q2, 2021-04, 2021-w13, 2021-04-04
   parentGoal: Goal;
   completed: boolean;
   lastUpdated: Date;

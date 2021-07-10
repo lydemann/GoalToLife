@@ -8,7 +8,12 @@ import {
   GoalPeriodStore,
   Task,
 } from '@app/shared/interfaces';
-import { getDailyGoalKey, getMonthlyGoalPeriodKey } from '@app/shared/utils';
+import {
+  getDailyGoalKey,
+  getMonthlyGoalPeriodKey,
+  getQuarterlyGoalPeriodKey,
+  getYearlyGoalPeriodKey,
+} from '@app/shared/utils';
 
 const getGoalPeriodsQuery = gql`
   query goalGoalPeriodsQuery(
@@ -39,6 +44,20 @@ const getGoalPeriodsQuery = gql`
 })
 export class PlanResourceService {
   constructor(private apollo: Apollo) {}
+
+  getYearlyGoalPeriods(year: number) {
+    const yearlyGoalPeriodKey = getYearlyGoalPeriodKey(year);
+    const quarterlyGoalPeriodKeys = [1, 2, 3, 4].map((quarter) =>
+      getQuarterlyGoalPeriodKey(year, quarter)
+    );
+    const dates = [yearlyGoalPeriodKey, ...quarterlyGoalPeriodKeys];
+    return this.apollo.query<{ goalPeriod: GoalPeriod[] }>({
+      query: getGoalPeriodsQuery,
+      variables: {
+        dates,
+      } as GetGoalPeriodsInput,
+    });
+  }
 
   getMonthlyGoalPeriods(month: number, year: number) {
     const firstDay = new Date(year, month, 1);

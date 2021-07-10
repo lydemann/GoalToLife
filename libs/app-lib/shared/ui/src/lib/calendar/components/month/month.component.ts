@@ -114,8 +114,8 @@ export class MonthComponent implements OnInit, OnChanges {
         ({ type: GoalPeriodType.DAILY, goals: [] } as GoalPeriod);
       const isSelected = date?.getTime() === this.selected?.getTime();
       days.push({
-        ...goalPeriod,
-        dateDate: date,
+        goalPeriod,
+        date: date,
         month,
         isSelected,
       });
@@ -178,14 +178,16 @@ export class MonthComponent implements OnInit, OnChanges {
     for (let i = 0; i < 6; i++) {
       const days = this._buildWeek(firstDayOfWeek, month);
       const weeklyGoalPeriodKey = getWeeklyGoalKey(firstDayOfWeek);
-      const weeklyGoalPeriod = this.goalPeriods[weeklyGoalPeriodKey];
+      const weeklyGoalPeriod =
+        this.goalPeriods[weeklyGoalPeriodKey] ||
+        ({ type: GoalPeriodType.WEEKLY, goals: [] } as GoalPeriod);
       this.weeks.push({
         weekNumber: this.getWeekNumber(firstDayOfWeek),
         days,
-        dateDate: firstDayOfWeek,
+        date: firstDayOfWeek,
         isSelected: false,
         month,
-        ...weeklyGoalPeriod,
+        goalPeriod: weeklyGoalPeriod,
       });
 
       firstDayOfWeek = this._addDays(firstDayOfWeek, 7);

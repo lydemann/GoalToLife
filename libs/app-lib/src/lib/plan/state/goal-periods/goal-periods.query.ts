@@ -10,7 +10,11 @@ import {
   GoalPeriodStore,
   GoalPeriodType,
 } from '@app/shared/interfaces';
-import { getMonthlyGoalPeriodKey } from '@app/shared/utils';
+import {
+  getMonthlyGoalPeriodKey,
+  getQuarterlyGoalPeriodKey,
+  getYearlyGoalPeriodKey,
+} from '@app/shared/utils';
 import { MONTH_PARAM_KEY, YEAR_PARAM_KEY } from '../../plan.constants';
 import { GoalsQuery } from '../goals/goals.query';
 import { GoalPeriodsState } from './goal-periods.model';
@@ -30,6 +34,8 @@ export class GoalPeriodsQuery extends QueryEntity<
   goalPeriods: Observable<Record<string, GoalPeriod>>;
   isLoadingGoalPeriods$: Observable<boolean>;
   monthlyGoalPeriod$: Observable<GoalPeriod>;
+  currentYearGoalPeriod$: Observable<GoalPeriod>;
+  quarterGoalPeriods$: Observable<GoalPeriod[]>;
 
   constructor(
     protected store: GoalPeriodsStore,
@@ -67,6 +73,57 @@ export class GoalPeriodsQuery extends QueryEntity<
         return this.enrichGoalPeriod(currentMonthlyGoalPeriod, goalEntities);
       })
     );
+
+    this.currentYearGoalPeriod$ = combineQueries([
+      routerQuery.selectParams<string>(YEAR_PARAM_KEY),
+      this.selectAll({ asObject: true }),
+      this.goalsQuery.select((state) => state.entities),
+    ]).pipe(
+      map(([year, goalPeriodsEntities, goalEntities]) => {
+        const yearDateKey = getYearlyGoalPeriodKey(+year);
+        const existingGoalPeriod = goalPeriodsEntities[yearDateKey];
+        const currentMonthlyGoalPeriod = {
+          goals: [],
+          date: yearDateKey,
+          type: GoalPeriodType.YEARLY,
+          ...existingGoalPeriod,
+        } as GoalPeriodStore;
+
+        return this.enrichGoalPeriod(currentMonthlyGoalPeriod, goalEntities);
+      })
+    );
+
+    this.quarterGoalPeriods$ = combineQueries([
+      routerQuery.selectParams<string>(YEAR_PARAM_KEY),
+      this.selectAll({ asObject: true }),
+      this.goalsQuery.select((state) => state.entities),
+    ]).pipe(
+      map(([year, goalPeriodsEntities, goalEntities]) => {
+        const quarterDateKeys = [1, 2, 3, 4].map((quarter) => [
+          getQuarterlyGoalPeriodKey(+year, quarter),
+          quarter,
+        ]);
+        return quarterDateKeys.map(([quarterDateKey, quarter]) => {
+          const existingGoalPeriod = goalPeriodsEntities[quarterDateKey];
+          const currentMonthlyGoalPeriod = {
+            goals: [],
+            date: quarterDateKey,
+            type: GoalPeriodType.QUARTERLY,
+            ...existingGoalPeriod,
+          } as GoalPeriodStore;
+
+          return {
+            ...this.enrichGoalPeriod(currentMonthlyGoalPeriod, goalEntities),
+            calendarDate: this.getFirstDateInQuarter(+year, +quarter),
+          };
+        });
+      })
+    );
+  }
+
+  private getFirstDateInQuarter(year: number, quarter: number) {
+    const month = (quarter - 1) * 3;
+    return new Date(year, month, 1);
   }
 
   private enrichGoalPeriod(

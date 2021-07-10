@@ -5,6 +5,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  HostListener,
   Input,
   OnChanges,
   OnDestroy,
@@ -43,6 +44,7 @@ export class DayComponent
   private _highlited: Date;
   private destroy$ = new Subject();
   retroForm: FormGroup;
+  isSelected: boolean;
   @Input() set calendarDate(calendarDate: CalendarDate) {
     this._dayDate = calendarDate;
   }
@@ -92,19 +94,21 @@ export class DayComponent
    * CONSTRUCTOR
    * nothing interesting here
    */
-  constructor(private host: ElementRef<HTMLElement>) {}
+  constructor(private host: ElementRef<HTMLElement>) {
+    // TODO: handle clicked outside deselect
+  }
 
   ngAfterViewInit(): void {
-    const isCurrentDay = this.isHighlited();
-    if (isCurrentDay) {
-      setTimeout(() => {
-        this.host.nativeElement.scrollIntoView({
-          behavior: 'smooth',
-          inline: 'center',
-          block: 'center',
-        });
-      }, 300);
-    }
+    // const isCurrentDay = this.isHighlited();
+    // if (isCurrentDay) {
+    //   setTimeout(() => {
+    //     this.host.nativeElement.scrollIntoView({
+    //       behavior: 'smooth',
+    //       inline: 'center',
+    //       block: 'center',
+    //     });
+    //   }, 300);
+    //}
   }
 
   ngOnDestroy(): void {
@@ -112,25 +116,32 @@ export class DayComponent
     this.destroy$.complete();
   }
 
+  @HostListener('document:click', ['$event'])
+  clickOutside(event) {
+    if (!this.host.nativeElement.contains(event.target)) {
+      this.isSelected = false;
+    }
+  }
+
   /*
    * Setting day as active
    */
   setActiveState() {
-    this.selected = this._dayDate.dateDate;
+    this.isSelected = true;
   }
 
-  private isSelected(): boolean {
-    return this._selected === this._dayDate.dateDate ? true : false;
+  private getIsSelected(): boolean {
+    return this._selected === this._dayDate.date ? true : false;
   }
 
   private isHighlited(): boolean {
     const highLightedTime = this._highlited.getTime();
-    const dayTime = this._dayDate.dateDate.getTime();
+    const dayTime = this._dayDate.date.getTime();
     return highLightedTime === dayTime ? true : false;
   }
 
   onAddTodo(goal: Goal) {
-    const goalKey = getGoalKey(this.calendarDate.dateDate, this.goalPeriodType);
+    const goalKey = getGoalKey(this.calendarDate.date, this.goalPeriodType);
     this.addTodo.next({
       ...goal,
       type: this.goalPeriodType,
@@ -155,9 +166,7 @@ export class DayComponent
   ngOnInit(): void {}
 
   private _isCurrentMonth(): boolean {
-    return this._dayDate.dateDate.getMonth() === this._dayDate.month
-      ? true
-      : false;
+    return this._dayDate.date.getMonth() === this._dayDate.month ? true : false;
   }
 
   /*
@@ -165,15 +174,15 @@ export class DayComponent
    */
   ngOnChanges(changes: SimpleChanges): void {
     if (this.isWeek) {
-      const weekNumber = getWeekNumber(this.calendarDate.dateDate);
+      const weekNumber = getWeekNumber(this.calendarDate.date);
       this.formattedDate = `Week: ${weekNumber}`;
     } else {
-      this.formattedDate = formatDate(this.calendarDate.dateDate, 'dd', 'en');
+      this.formattedDate = formatDate(this.calendarDate.date, 'dd', 'en');
     }
 
-    this.currentClasses['selectedDay'] = this.isSelected();
+    this.currentClasses['selectedDay'] = this.getIsSelected();
     this.calendarDate.isSelected =
-      this.calendarDate.dateDate?.getTime() === this.selected?.getTime();
+      this.calendarDate.date?.getTime() === this.selected?.getTime();
     if (changes['calendarDate']) {
       const isCurrentDay = this.isHighlited();
       this.currentClasses = {

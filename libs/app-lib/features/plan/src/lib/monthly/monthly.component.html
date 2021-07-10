@@ -4,8 +4,8 @@
 ></ion-progress-bar>
 <app-header
   [title]="monthDate"
-  [backText]="'Quarterly'"
-  [backUrl]="'/plan/quarterly'"
+  [backText]="'Yearly'"
+  [backUrl]="'/plan/yearly/' + calendarDate.getFullYear()"
   [categories]="categories$ | async"
 ></app-header>
 
@@ -19,17 +19,17 @@
     class="ion-padding-top ion-text-center"
     *ngIf="currentMonthGoalPeriod$ | async as currentMonthGoalPeriod"
   >
-    <app-task-group
-      [title]="'Monthly goals'"
-      data-testid="monthly-goal-period"
-      [tasks]="currentMonthGoalPeriod.goals"
-      [date]="currentMonthGoalPeriod.date"
-      [isMain]="true"
-      [goalPeriodType]="monthlyGoalPeriodType"
-      (addGoal)="onAddGoal($event)"
-      (deleteGoal)="onDeleteGoal($event)"
-      (editGoal)="onEditGoal($event)"
-    ></app-task-group>
+    <h3>Monthly goals</h3>
+    <app-goal-period
+      [date]="calendarDate"
+      [goalPeriod]="currentMonthGoalPeriod"
+      (addTodo)="onAddGoal($event)"
+      (deleteTodo)="onDeleteGoal($event)"
+      (editTodo)="onEditGoal($event)"
+      (toggleComplete)="onToggleComplete($event)"
+      (retroChange)="onRetroChange($event)"
+    >
+    </app-goal-period>
 
     <!-- <app-task-group
       *ngFor="let taskPeriod of taskPeriods$ | async"

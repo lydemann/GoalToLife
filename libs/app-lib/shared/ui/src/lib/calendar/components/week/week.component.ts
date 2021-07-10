@@ -19,8 +19,10 @@ import { CalendarDate } from '../../classes';
 })
 export class WeekComponent implements OnInit {
   @Input() calendarDate: CalendarDate = {
-    dateDate: new Date(),
-    goals: [],
+    date: new Date(),
+    goalPeriod: {
+      goals: [],
+    } as any,
     isSelected: false,
     month: 4,
   };
@@ -40,7 +42,7 @@ export class WeekComponent implements OnInit {
     this.deleteTodo.next(goal);
   }
   onAddTodo(goal: Goal) {
-    const goalKey = getGoalKey(this.calendarDate.dateDate, this.goalPeriodType);
+    const goalKey = getGoalKey(this.calendarDate.date, this.goalPeriodType);
     this.addTodo.next({
       ...goal,
       type: this.goalPeriodType,

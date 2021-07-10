@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Goal, GoalPeriod, GoalPeriodStore } from '@app/shared/interfaces';
 import { EntityStore, OrArray, StoreConfig } from '@datorama/akita';
 import produce from 'immer';
 
+import { Goal, GoalPeriod, GoalPeriodStore } from '@app/shared/interfaces';
 import { GoalsStore } from '../goals/goals.store';
 import { GoalPeriodsState } from './goal-periods.model';
 
@@ -37,7 +37,7 @@ export class GoalPeriodsStore extends EntityStore<GoalPeriodsState> {
         ...goalP,
         goals: goalP.goals.map((goal) => goal.id),
       }));
-      super.set(goalPeriodStore);
+      super.upsertMany(goalPeriodStore);
     } else {
       goals = [...goalPeriod.goals];
       super.add({

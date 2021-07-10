@@ -52,7 +52,6 @@
             "main": "apps/app/src/main.ts",
             "polyfills": "apps/app/src/polyfills.ts",
             "tsConfig": "apps/app/tsconfig.app.json",
-            "sourceMap": true,
             "assets": [
               {
                 "glob": "**/*",
@@ -98,6 +97,14 @@
                 }
               ]
             },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
             "ci": {
               "progress": false
             }
@@ -112,10 +119,15 @@
             "production": {
               "browserTarget": "app:build:production"
             },
+
+            "development": {
+              "browserTarget": "app:build:development"
+            },
             "ci": {
               "progress": false
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

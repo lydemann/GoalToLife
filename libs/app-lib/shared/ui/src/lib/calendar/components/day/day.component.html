@@ -5,13 +5,14 @@
   appMakeDroppable
   [dropContext]="{ context: 'day' }"
   (dropped)="onDropTodo($event)"
-  (click)="(setActiveState)"
+  (click)="setActiveState()"
 >
   <!-- <i class="bg-icon fa fa-arrow-up"></i> -->
   <div class="day-date">{{ formattedDate }}</div>
   <app-goal-period
-    [goalPeriodType]="goalPeriodType"
-    [calendarDate]="calendarDate"
+    [goalPeriod]="calendarDate.goalPeriod"
+    [date]="calendarDate?.date"
+    [isSelected]="isSelected"
     (addTodo)="onAddTodo($event)"
     (deleteTodo)="onDeleteTodo($event)"
     (editTodo)="editTodo.next($event)"
