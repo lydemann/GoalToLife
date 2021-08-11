@@ -80,6 +80,7 @@
         "@typescript-eslint/no-empty-function": "off",
         "@typescript-eslint/no-namespace": "off",
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/ban-types": "off",
         "import/no-deprecated": "warn",
         "import/order": "error",
         "no-console": "error",

@@ -1,3 +1,4 @@
+import { promises } from 'dns';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { ApolloQueryResult, FetchResult } from '@apollo/client/core';
 import { RouterQuery } from '@datorama/akita-ng-router-store';
@@ -7,7 +8,6 @@ import {
   SpectatorService,
   SpyObject,
 } from '@ngneat/spectator/jest';
-import { promises } from 'dns';
 import { Observable, of } from 'rxjs';
 import { first } from 'rxjs/operators';
 

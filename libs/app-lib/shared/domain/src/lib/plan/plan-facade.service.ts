@@ -60,7 +60,7 @@ export class PlanFacadeService {
     this.goalsStore.setLoading(true);
     this.planResourceService.addGoal(goal).subscribe(({ errors }) => {
       this.goalsStore.setLoading(false);
-      if (!!errors) {
+      if (errors) {
         this.goalsStore.setError(errors[0]);
         return;
       }
@@ -77,7 +77,7 @@ export class PlanFacadeService {
     this.planResourceService
       .updateGoalPeriod(goalPeriod as unknown as GoalPeriodStore)
       .subscribe(({ errors }) => {
-        if (!!errors) {
+        if (errors) {
           this.goalPeriodsStateHistory.undo();
           this.goalPeriodsStore.setError(errors[0]);
           this.goalPeriodsStore.setLoading(false);
@@ -90,7 +90,7 @@ export class PlanFacadeService {
   updateGoal(goal: Goal) {
     this.goalsStore.upsert(goal.id, goal);
     this.planResourceService.updateGoal(goal).subscribe(({ errors }) => {
-      if (!!errors) {
+      if (errors) {
         this.goalsStore.setError(errors[0]);
         return;
       }
@@ -100,7 +100,7 @@ export class PlanFacadeService {
   deleteGoal(goal: Goal) {
     this.goalPeriodsStore.deleteGoal(goal);
     this.planResourceService.deleteGoal(goal).subscribe(({ errors }) => {
-      if (!!errors) {
+      if (errors) {
         // TODO: revert
         this.goalsStore.setError(errors[0]);
         return;

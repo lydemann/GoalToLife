@@ -28,7 +28,7 @@ export class GoalPeriodsQuery extends QueryEntity<
   GoalPeriodStore
 > {
   dailyGoalPeriods$: Observable<Record<string, GoalPeriod>>;
-  isLoadingGoalPeriods$: Observable<boolean>;
+  isLoadingGoalPeriods$!: Observable<boolean>;
   monthlyGoalPeriod$: Observable<GoalPeriod>;
 
   constructor(

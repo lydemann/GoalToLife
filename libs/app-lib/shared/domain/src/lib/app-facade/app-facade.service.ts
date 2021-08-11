@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, map, pluck, startWith } from 'rxjs/operators';
+import { catchError, map, startWith } from 'rxjs/operators';
 
 import { Goal, GoalPeriod, GoalPeriodType, Task } from '@app/shared/domain';
 import { getDailyGoalKey } from '../goal-utils';

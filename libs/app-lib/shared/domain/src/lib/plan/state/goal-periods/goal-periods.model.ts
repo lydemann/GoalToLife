@@ -7,5 +7,4 @@ import { EntityState } from '@datorama/akita';
  * @export
  * @interface GoalPeriodsState
  */
-export interface GoalPeriodsState
-  extends EntityState<GoalPeriodStore, string> {}
+export type GoalPeriodsState = EntityState<GoalPeriodStore, string>;
