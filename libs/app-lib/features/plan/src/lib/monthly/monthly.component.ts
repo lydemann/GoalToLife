@@ -94,7 +94,9 @@ export class MonthlyComponent implements OnInit {
     await modal.present();
     const { data } = await modal.onWillDismiss<Goal>();
 
-    this.planFacadeService.updateGoal(data);
+    if (data) {
+      this.planFacadeService.updateGoal(data);
+    }
   }
 
   onToggleComplete(goal: Goal) {
