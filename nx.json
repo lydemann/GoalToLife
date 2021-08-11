@@ -18,6 +18,9 @@
       "tags": [],
       "implicitDependencies": ["app"]
     },
+    "app-lib-features-inbox": {
+      "tags": ["scope:inbox", "scope:app", "type:feature"]
+    },
     "app-lib-features-plan": {
       "tags": ["type:feature", "scope:app"]
     },

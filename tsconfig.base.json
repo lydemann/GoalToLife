@@ -16,14 +16,17 @@
     "lib": ["es2018", "dom"],
     "typeRoots": ["node_modules/@types"],
     "paths": {
-      "@app/app/*": ["apps/app/src/*"],
       "@app/app-lib": ["libs/app-lib/src/index.ts"],
+      "@app/app-lib/features/inbox": [
+        "libs/app-lib/features/inbox/src/index.ts"
+      ],
       "@app/app-lib/features/plan": ["libs/app-lib/features/plan/src/index.ts"],
       "@app/app-lib/shared/domain": ["libs/app-lib/shared/domain/src/index.ts"],
       "@app/app-lib/shared/ui": ["libs/app-lib/shared/ui/src/index.ts"],
+      "@app/app/*": ["apps/app/src/*"],
       "@app/shared/domain": ["libs/shared/domain/src/index.ts"],
-      "@app/shared/util": ["libs/shared/util/src/index.ts"],
-      "@app/shared/domain-auth": ["libs/shared/domain-auth/src/index.ts"]
+      "@app/shared/domain-auth": ["libs/shared/domain-auth/src/index.ts"],
+      "@app/shared/util": ["libs/shared/util/src/index.ts"]
     },
     "allowSyntheticDefaultImports": true,
     "rootDir": "."

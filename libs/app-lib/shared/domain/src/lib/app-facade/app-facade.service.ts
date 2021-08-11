@@ -3,7 +3,7 @@ import { Apollo, gql } from 'apollo-angular';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map, startWith } from 'rxjs/operators';
 
-import { Goal, GoalPeriod, GoalPeriodType, Task } from '@app/shared/domain';
+import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/domain';
 import { getDailyGoalKey } from '../goal-utils';
 import { createInCache, removeFromCache } from '../graphql/graphql-helpers';
 
@@ -39,17 +39,17 @@ export class AppFacadeService {
       id: '1',
       name: 'Do laundry',
       categories: [],
-    } as Task,
+    } as Goal,
     {
       id: '2',
       name: 'Buy milk',
       categories: ['groceries'],
-    } as Task,
+    } as Goal,
     {
       id: '3',
       name: 'Run 10k',
       categories: ['fitness'],
-    } as Task,
+    } as Goal,
   ]);
   taskInbox$ = this.dailyTasks$;
   dailyCategories$: Observable<string[]> = this.dailyTasks$.pipe(
@@ -170,7 +170,7 @@ export class AppFacadeService {
       .subscribe();
   }
 
-  deleteGoal(goal: Task) {
+  deleteGoal(goal: Goal) {
     const mutation = gql`
       mutation deleteGoal($id: String!) {
         deleteGoal(id: $id)

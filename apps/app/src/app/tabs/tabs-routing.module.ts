@@ -15,7 +15,7 @@ const routes: Routes = [
       {
         path: 'inbox',
         loadChildren: () =>
-          import('../inbox/inbox.module').then((m) => m.InboxModule),
+          import('@app/app-lib/features/inbox').then((m) => m.InboxModule),
       },
       {
         path: 'settings',

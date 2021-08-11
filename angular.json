@@ -127,7 +127,6 @@
             "production": {
               "browserTarget": "app:build:production"
             },
-
             "development": {
               "browserTarget": "app:build:development"
             },
@@ -244,6 +243,31 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/app-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "app-lib-features-inbox": {
+      "projectType": "library",
+      "root": "libs/app-lib/features/inbox",
+      "sourceRoot": "libs/app-lib/features/inbox/src",
+      "prefix": "app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/app-lib/features/inbox"],
+          "options": {
+            "jestConfig": "libs/app-lib/features/inbox/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/app-lib/features/inbox/src/**/*.ts",
+              "libs/app-lib/features/inbox/src/**/*.html"
+            ]
           }
         }
       }
@@ -374,31 +398,6 @@
         }
       }
     },
-    "shared-domain-auth": {
-      "projectType": "library",
-      "root": "libs/shared/domain-auth",
-      "sourceRoot": "libs/shared/domain-auth/src",
-      "prefix": "app",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/domain-auth"],
-          "options": {
-            "jestConfig": "libs/shared/domain-auth/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/shared/domain-auth/src/**/*.ts",
-              "libs/shared/domain-auth/src/**/*.html"
-            ]
-          }
-        }
-      }
-    },
     "shared-domain": {
       "projectType": "library",
       "root": "libs/shared/domain",
@@ -419,6 +418,31 @@
             "lintFilePatterns": [
               "libs/shared/domain/src/**/*.ts",
               "libs/shared/domain/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "shared-domain-auth": {
+      "projectType": "library",
+      "root": "libs/shared/domain-auth",
+      "sourceRoot": "libs/shared/domain-auth/src",
+      "prefix": "app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/domain-auth"],
+          "options": {
+            "jestConfig": "libs/shared/domain-auth/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/domain-auth/src/**/*.ts",
+              "libs/shared/domain-auth/src/**/*.html"
             ]
           }
         }

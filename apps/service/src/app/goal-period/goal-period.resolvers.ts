@@ -48,6 +48,16 @@ export const goalQueryResolvers = {
       );
     }
   ),
+  inboxGoals: createResolver<null>(async (_, args, { auth: { uid } }) => {
+    // TODO: setup security
+    const snapshot = await firestoreDB.collection(`/users/${uid}/goals`).get();
+
+    return snapshot.docs
+      .map((doc) => ({ id: doc.id, ...doc.data() } as Goal))
+      .filter((goal) => {
+        return !goal.scheduledDate;
+      });
+  }),
   goalPeriod: createResolver<GetGoalPeriodsInput>(
     async (_, { fromDate, toDate, dates }, { auth: { uid } }) => {
       const goalPeriods = [];

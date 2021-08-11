@@ -6,7 +6,6 @@ import {
   Goal,
   GoalPeriod,
   GoalPeriodStore,
-  Task,
 } from '@app/shared/domain';
 import {
   getDailyGoalKey,
@@ -188,7 +187,7 @@ export class PlanResourceService {
     });
   }
 
-  deleteGoal(goal: Task) {
+  deleteGoal(goal: Goal) {
     const mutation = gql`
       mutation deleteGoal($id: String!) {
         deleteGoal(id: $id)

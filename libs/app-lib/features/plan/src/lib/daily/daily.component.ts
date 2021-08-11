@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 
 import { AppFacadeService } from '@app/app-lib/shared/domain';
 import { TaskComponent } from '@app/app-lib/shared/ui';
-import { Goal, GoalPeriodType, Task } from '@app/shared/domain';
+import { Goal, GoalPeriodType } from '@app/shared/domain';
 
 @Component({
   templateUrl: './daily.component.html',
@@ -36,7 +36,7 @@ export class DailyComponent implements OnInit {
     return goal.id;
   };
 
-  onDelete(task: Task) {
+  onDelete(task: Goal) {
     this.goals$ = this.goals$.pipe(
       map((tasks) => tasks.filter((goal) => !!goal.id))
     );
@@ -44,7 +44,7 @@ export class DailyComponent implements OnInit {
     this.appFacadeService.deleteGoal(task);
   }
 
-  onAdd(task: Task) {
+  onAdd(task: Goal) {
     this.goals$ = this.goals$.pipe(
       map((tasks) => tasks.filter((goal) => !!goal.id))
     );

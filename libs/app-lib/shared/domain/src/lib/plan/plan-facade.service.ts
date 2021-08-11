@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { combineQueries, StateHistoryPlugin } from '@datorama/akita';
-import { combineLatest, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Goal, GoalPeriod, GoalPeriodStore } from '@app/shared/domain';
