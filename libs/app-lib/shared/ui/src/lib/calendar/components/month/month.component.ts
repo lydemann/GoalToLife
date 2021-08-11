@@ -8,8 +8,8 @@ import {
   Output,
 } from '@angular/core';
 
-import { getDailyGoalKey } from '@app/app-lib';
-import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
+import { getDailyGoalKey } from '@app/app-lib/shared/domain';
+import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/domain';
 import { DayDate } from '../../classes/day-date';
 import { Week } from '../../classes/weeks';
 

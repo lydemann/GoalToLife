@@ -7,15 +7,43 @@
     "nx.json": "*",
     "tsconfig.json": "*"
   },
-  "affected": { "defaultBase": "master" },
+  "affected": {
+    "defaultBase": "master"
+  },
   "npmScope": "app",
   "projects": {
-    "app": { "tags": [] },
-    "app-e2e": { "tags": [], "implicitDependencies": ["app"] },
-    "app-lib": { "tags": ["scope:app", "type:app"] },
-    "shared-interfaces": { "tags": ["scope:shared"] },
-    "service": { "tags": ["scope:service", "type:app"] },
-    "app-lib-features-plan": { "tags": ["type:feat", "scope:app"] },
-    "app-lib-shared-ui": { "tags": ["scope:app"] }
+    "app": {
+      "tags": ["type:app", "scope:app"]
+    },
+    "app-e2e": {
+      "tags": [],
+      "implicitDependencies": ["app"]
+    },
+    "app-lib-features-plan": {
+      "tags": ["type:feat", "scope:app"]
+    },
+    "app-lib-shared-domain": {
+      "tags": ["scope:app", "type:domain"]
+    },
+    "app-lib-shared-ui": {
+      "tags": ["scope:app"]
+    },
+    "service": {
+      "tags": ["scope:service", "type:app"]
+    },
+    "shared-domain": {
+      "tags": ["scope:shared", "type:domain"]
+    },
+    "shared-domain-auth": {
+      "tags": ["scope:shared", "type:domain", "scope:auth"]
+    }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
   }
 }

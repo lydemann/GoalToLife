@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Goal } from '@app/shared/interfaces';
+import { Goal } from '@app/shared/domain';
 import { ModalController } from '@ionic/angular';
 
 export interface EditModalComponentProps {

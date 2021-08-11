@@ -8,17 +8,12 @@ import {
   MONTH_PARAM_KEY,
   PlanFacadeService,
   YEAR_PARAM_KEY,
-} from '@app/app-lib';
+} from '@app/app-lib/shared/domain';
 import {
   EditGoalModalComponent,
   EditModalComponentProps,
 } from '@app/app-lib/shared/ui';
-import {
-  Goal,
-  GoalPeriod,
-  GoalPeriodStore,
-  GoalPeriodType,
-} from '@app/shared/interfaces';
+import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/domain';
 
 @Component({
   selector: 'app-monthly',
@@ -65,7 +60,8 @@ export class MonthlyComponent implements OnInit {
       this.calendarDate.getMonth(),
       this.calendarDate.getFullYear()
     );
-    this.currentMonthGoalPeriod$ = this.planFacadeService.currentMonthGoalPeriod$;
+    this.currentMonthGoalPeriod$ =
+      this.planFacadeService.currentMonthGoalPeriod$;
 
     this.isLoading$ = this.planFacadeService.isLoading$;
   }

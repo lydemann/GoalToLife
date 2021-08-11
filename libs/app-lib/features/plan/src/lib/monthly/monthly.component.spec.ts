@@ -16,8 +16,8 @@ import { AppModule } from 'apps/app/src/app/app.module';
 import { PlanResourceService } from 'libs/app-lib/src/lib/plan/resource/plan-resource.service';
 import { Observable, of } from 'rxjs';
 
-import { UserService } from '@app/shared/feat-auth';
-import { GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
+import { UserService } from '@app/shared/domain-auth';
+import { GoalPeriod, GoalPeriodType } from '@app/shared/domain';
 
 @Component({
   template: `<router-outlet></router-outlet>`,

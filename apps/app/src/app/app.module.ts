@@ -3,7 +3,11 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { Endpoints, ENDPOINTS_TOKEN, GraphQLModule } from '@app/app-lib';
+import {
+  Endpoints,
+  ENDPOINTS_TOKEN,
+  GraphQLModule,
+} from '@app/app-lib/shared/domain';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { LocalStorageModule } from 'angular-2-local-storage';
@@ -13,7 +17,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
-import { SharedFeatAuthModule } from '@app/shared/feat-auth';
+import { SharedFeatureAuthModule } from '@app/shared/domain-auth';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCs89L7bIdvZ6ziG6R053mED0f9HHeuEik',
@@ -47,7 +51,7 @@ export function endpointsFactory() {
     }),
     environment.production ? [] : AkitaNgDevtools.forRoot(),
     AkitaNgRouterStoreModule,
-    SharedFeatAuthModule,
+    SharedFeatureAuthModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

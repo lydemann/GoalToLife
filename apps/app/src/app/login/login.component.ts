@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import { AuthService } from '@app/shared/feat-auth';
+import { AuthService } from '@app/shared/domain-auth';
 
 @Component({
   selector: 'app-login',

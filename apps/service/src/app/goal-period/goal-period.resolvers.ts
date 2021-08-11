@@ -4,7 +4,7 @@ import {
   GoalPeriod,
   GoalPeriodStore,
   GoalPeriodType,
-} from '@app/shared/interfaces';
+} from '@app/shared/domain';
 import { ApolloError } from 'apollo-server-express';
 import firebase from 'firebase';
 

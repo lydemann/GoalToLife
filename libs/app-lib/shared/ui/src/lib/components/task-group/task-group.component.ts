@@ -8,7 +8,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { Goal, GoalPeriodType, Task } from '@app/shared/interfaces';
+import { Goal, GoalPeriodType, Task } from '@app/shared/domain';
 
 @Component({
   selector: 'app-task-group',

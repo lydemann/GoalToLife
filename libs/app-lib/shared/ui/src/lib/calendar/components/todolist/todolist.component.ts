@@ -11,7 +11,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { Goal, GoalPeriodType } from '@app/shared/interfaces';
+import { Goal, GoalPeriodType } from '@app/shared/domain';
 import { IonTextarea } from '@ionic/angular';
 import { Error } from 'tslint/lib/error';
 

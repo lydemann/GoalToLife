@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AppFacadeService } from '@app/app-lib';
-import { Goal, GoalPeriod } from '@app/shared/interfaces';
+import { AppFacadeService } from '@app/app-lib/shared/domain';
+import { Goal, GoalPeriod } from '@app/shared/domain';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-yearly',
   templateUrl: './yearly.component.html',
-  styleUrls: ['./yearly.component.scss']
+  styleUrls: ['./yearly.component.scss'],
 })
 export class YearlyComponent implements OnInit {
   taskPeriods$: Observable<GoalPeriod[]>;

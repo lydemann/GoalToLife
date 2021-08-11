@@ -1,4 +1,4 @@
-import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
+import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/domain';
 
 /*
  Class, that describes day (month field is used to decide, whether day is in current month)

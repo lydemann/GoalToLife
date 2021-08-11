@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { AppFacadeService } from '@app/app-lib';
-import { Task } from '@app/shared/interfaces';
+import { AppFacadeService } from '@app/app-lib/shared/domain';
+import { Task } from '@app/shared/domain';
 import { Observable } from 'rxjs';
 
 @Component({

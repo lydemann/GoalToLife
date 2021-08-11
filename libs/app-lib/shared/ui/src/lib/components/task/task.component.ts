@@ -10,7 +10,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { Goal, Task } from '@app/shared/interfaces';
+import { Goal, Task } from '@app/shared/domain';
 import { IonInput } from '@ionic/angular';
 
 export const tempIdPrefix = 'temp';

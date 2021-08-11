@@ -8,9 +8,9 @@ import {
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { AppFacadeService } from '@app/app-lib';
+import { AppFacadeService } from '@app/app-lib/shared/domain';
 import { TaskComponent } from '@app/app-lib/shared/ui';
-import { Goal, GoalPeriodType, Task } from '@app/shared/interfaces';
+import { Goal, GoalPeriodType, Task } from '@app/shared/domain';
 
 @Component({
   templateUrl: './daily.component.html',

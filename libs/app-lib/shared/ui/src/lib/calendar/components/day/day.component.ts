@@ -15,8 +15,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
-import { getDailyGoalKey } from '@app/app-lib';
-import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/interfaces';
+import { getDailyGoalKey } from '@app/app-lib/shared/domain';
+import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/domain';
 import { DayDate } from '../../classes/day-date';
 import { TODOItem } from '../../classes/todo-item';
 
@@ -32,7 +32,8 @@ export const SAVE_RETRO_FORM_DEBOUNCE_TIME = 500;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DayComponent
-  implements OnInit, AfterViewInit, OnChanges, OnDestroy {
+  implements OnInit, AfterViewInit, OnChanges, OnDestroy
+{
   /*
    * PRIVATE variables
    * date (date + month) - used to define whether day is in currently selected month and for further TODO-list logic
