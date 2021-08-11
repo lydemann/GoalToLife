@@ -6,5 +6,6 @@ module.exports = {
     '<rootDir>/libs/app-lib/feat-plan',
     '<rootDir>/libs/app-lib/shared/app-shared',
     '<rootDir>/apps/app',
+    '<rootDir>/libs/shared/utils',
   ],
 };

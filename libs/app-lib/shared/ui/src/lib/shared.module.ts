@@ -1,10 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { TaskModule } from './components/task/task.module';
+
+import { CalendarModule } from './calendar/calendar.module';
+import { GoalPeriodModule } from './components/goal-period/goal-period.module';
 import { HeaderModule } from './components/header/header.module';
 import { TaskGroupModule } from './components/task-group/task-group.module';
-import { CalendarModule } from './calendar/calendar.module';
+import { TaskModule } from './components/task/task.module';
 
 const exportedModules = [
   CommonModule,
@@ -12,7 +14,8 @@ const exportedModules = [
   TaskModule,
   HeaderModule,
   TaskGroupModule,
-  CalendarModule
+  CalendarModule,
+  GoalPeriodModule,
 ];
 
 @NgModule({

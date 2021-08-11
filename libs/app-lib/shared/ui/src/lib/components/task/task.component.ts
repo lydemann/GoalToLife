@@ -52,7 +52,7 @@ export class TaskComponent implements OnInit {
 
   @HostListener('document:keydown.enter', ['$event'])
   onAdd() {
-    if (!!this.task.id) {
+    if (this.task.id) {
       return;
     }
 

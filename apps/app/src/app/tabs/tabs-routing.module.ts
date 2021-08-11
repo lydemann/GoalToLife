@@ -24,14 +24,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/plan',
+        redirectTo: '/plan/monthly',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/plan',
+    redirectTo: '/plan/monthly',
     pathMatch: 'full',
   },
 ];

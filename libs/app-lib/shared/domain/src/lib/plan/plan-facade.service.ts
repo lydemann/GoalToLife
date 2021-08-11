@@ -21,6 +21,8 @@ export class PlanFacadeService {
   goalPeriodsStateHistory: StateHistoryPlugin<GoalPeriodsState>;
   isLoading$: Observable<boolean>;
   currentMonthGoalPeriod$: Observable<GoalPeriod>;
+  currentYearGoalPeriod$: Observable<GoalPeriod>;
+  quarterGoalPeriods$: Observable<GoalPeriod[]>;
 
   constructor(
     private planResourceService: PlanResourceService,
@@ -29,7 +31,7 @@ export class PlanFacadeService {
     private goalPeriodsQuery: GoalPeriodsQuery,
     private goalsQuery: GoalsQuery
   ) {
-    this.goalPeriods$ = this.goalPeriodsQuery.dailyGoalPeriods$;
+    this.goalPeriods$ = this.goalPeriodsQuery.goalPeriods;
     this.isLoading$ = combineQueries([
       this.goalPeriodsQuery.selectLoading(),
       this.goalsQuery.selectLoading(),
@@ -43,6 +45,18 @@ export class PlanFacadeService {
       this.goalPeriodsQuery
     );
     this.currentMonthGoalPeriod$ = this.goalPeriodsQuery.monthlyGoalPeriod$;
+    this.currentYearGoalPeriod$ = this.goalPeriodsQuery.currentYearGoalPeriod$;
+    this.quarterGoalPeriods$ = this.goalPeriodsQuery.quarterGoalPeriods$;
+  }
+
+  fetchYearlyAndQuarterlyGoalPeriods(year: number) {
+    this.goalPeriodsStore.setLoading(true);
+    this.planResourceService
+      .getYearlyGoalPeriods(year)
+      .subscribe(({ data }) => {
+        this.goalPeriodsStore.setLoading(false);
+        this.goalPeriodsStore.addGoalPeriod(data.goalPeriod);
+      });
   }
 
   fetchMonthlyGoalPeriods(month: number, year: number) {

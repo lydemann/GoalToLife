@@ -1,20 +1,19 @@
 import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 
-import { DropContent } from '../classes/drop-content';
+import { DropContent } from './drop-content';
 
 /*
  * Directive defines behaviour of "draggable" element (TODO-item in our case)
  * Encapsulates HTML5 native API
  */
 @Directive({
-  // tslint:disable-next-line: directive-selector
-  selector: '[makeDraggable]',
+  selector: '[appMakeDraggable]',
 })
-export class MakeDraggable implements OnInit {
+export class MakeDraggableDirective implements OnInit {
   /*
    * Inputs: data to drag, draggable option and helper CSS class
    */
-  @Input('makeDraggable') data: DropContent = new DropContent('', {});
+  @Input() appMakeDraggable: DropContent = new DropContent('', {});
   @Input() draggable = true;
   @Input() helperClass: string;
   @Input() dragItemId: string | number;
@@ -67,13 +66,16 @@ export class MakeDraggable implements OnInit {
         element.classList.add(elementIdentifyingClass);
 
         // putting class data into event (it'll be needed shortly, on drop)
-        this.data.elementClass = elementIdentifyingClass;
+        this.appMakeDraggable.elementClass = elementIdentifyingClass;
 
         /* preparing drag data: move element to another location and put some payload in it
            (our "TODO" in case of current application)
          */
         event.dataTransfer.effectAllowed = 'move';
-        event.dataTransfer.setData('text', JSON.stringify(this.data));
+        event.dataTransfer.setData(
+          'text',
+          JSON.stringify(this.appMakeDraggable)
+        );
         event.dataTransfer.setData('elementClass', elementIdentifyingClass);
       });
 
@@ -84,6 +86,7 @@ export class MakeDraggable implements OnInit {
       });
     } catch (elementIsNotDraggableException) {
       // handle exception
+      // eslint-disable-next-line no-console
       console.log(elementIsNotDraggableException.message);
     }
   }

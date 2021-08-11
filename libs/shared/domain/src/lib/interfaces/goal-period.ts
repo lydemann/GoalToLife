@@ -14,6 +14,7 @@ export enum GoalPeriodType {
 */
 export interface GoalPeriod extends Omit<GoalPeriodStore, 'goals'> {
   goals: Goal[];
+  calendarDate?: Date;
 }
 
 export interface GoalPeriodStore {
@@ -29,6 +30,6 @@ export interface GoalPeriodStore {
 
 export interface GetGoalPeriodsInput {
   dates: string[];
-  fromDate: string;
-  toDate: string;
+  fromDate?: string;
+  toDate?: string;
 }

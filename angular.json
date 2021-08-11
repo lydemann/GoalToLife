@@ -105,6 +105,14 @@
                 }
               ]
             },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
             "ci": {
               "progress": false
             }
@@ -119,10 +127,15 @@
             "production": {
               "browserTarget": "app:build:production"
             },
+
+            "development": {
+              "browserTarget": "app:build:development"
+            },
             "ci": {
               "progress": false
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -407,6 +420,27 @@
               "libs/shared/domain/src/**/*.ts",
               "libs/shared/domain/src/**/*.html"
             ]
+          }
+        }
+      }
+    },
+    "shared-utils": {
+      "root": "libs/shared/utils",
+      "sourceRoot": "libs/shared/utils/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/shared/utils/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/utils"],
+          "options": {
+            "jestConfig": "libs/shared/utils/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }

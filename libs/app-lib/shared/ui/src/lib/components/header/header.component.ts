@@ -1,8 +1,8 @@
 import {
-  Component,
-  OnInit,
   ChangeDetectionStrategy,
+  Component,
   Input,
+  OnInit,
 } from '@angular/core';
 import { IonSelect, NavController } from '@ionic/angular';
 
@@ -12,15 +12,13 @@ import { IonSelect, NavController } from '@ionic/angular';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   @Input() backUrl: string;
   @Input() backText: string;
   @Input() title: string;
   @Input() categories: string[] = [];
 
   constructor(private navCtrl: NavController) {}
-
-  ngOnInit() {}
 
   onNavigateBack() {
     this.navCtrl.navigateForward(this.backUrl, { animated: false });

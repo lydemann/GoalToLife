@@ -1,3 +1,4 @@
+import { getWeeklyGoalKey } from '@app/shared/util';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,7 +11,7 @@ import {
 
 import { getDailyGoalKey } from '@app/app-lib/shared/domain';
 import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/domain';
-import { DayDate } from '../../classes/day-date';
+import { CalendarDate } from '../../classes/day-date';
 import { Week } from '../../classes/weeks';
 
 @Component({
@@ -54,15 +55,11 @@ export class MonthComponent implements OnInit, OnChanges {
   @Output() toggleComplete = new EventEmitter<Goal>();
   @Output() retroChange = new EventEmitter<Partial<GoalPeriod>>();
 
-  get currentDate() {
-    return this._currentDate;
-  }
-
   /*
    * PUBLIC VARIABLES to manage interaction and render UI
    */
   weeks: Week[];
-  days: DayDate[];
+  days: CalendarDate[];
   selected: Date;
   highlited: Date;
   dayHeaders: string[];
@@ -72,14 +69,23 @@ export class MonthComponent implements OnInit, OnChanges {
    * initializing headers of day (week: Monday -> Sunday)
    */
   constructor() {
-    this.dayHeaders = ['Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    this.dayHeaders = [
+      'Week',
+      'Mon',
+      'Tues',
+      'Wed',
+      'Thu',
+      'Fri',
+      'Sat',
+      'Sun',
+    ];
     this.weeks = [];
   }
 
   weeksTrackBy(idx, item: Week) {
     return item.weekNumber;
   }
-  daysTrackBy(idx, item: DayDate) {
+  daysTrackBy(idx, item: CalendarDate) {
     return item.date;
   }
 
@@ -95,8 +101,8 @@ export class MonthComponent implements OnInit, OnChanges {
   /*
    * Helper method to build week: generates sequence of days and sets their attributes
    */
-  private _buildWeek(start: Date, month: number): DayDate[] {
-    const days: DayDate[] = [];
+  private _buildWeek(start: Date, month: number): CalendarDate[] {
+    const days: CalendarDate[] = [];
     let date: Date = new Date(start.setHours(0, 0, 0, 0));
     for (let i = 0; i < 7; i++) {
       const dailyGoalKey = getDailyGoalKey(date);
@@ -105,8 +111,8 @@ export class MonthComponent implements OnInit, OnChanges {
         ({ type: GoalPeriodType.DAILY, goals: [] } as GoalPeriod);
       const isSelected = date?.getTime() === this.selected?.getTime();
       days.push({
-        ...goalPeriod,
-        dateDate: date,
+        goalPeriod,
+        date: date,
         month,
         isSelected,
       });
@@ -152,26 +158,36 @@ export class MonthComponent implements OnInit, OnChanges {
    */
   private _buildMonth(): void {
     const month: number = this._calendarDate.getMonth();
-    let firstDay: Date = this._calendarDate;
+    let firstDayOfWeek: Date = this._calendarDate;
 
     /* getting start date of month (weird part):
        not calendar one, but 35-cell one - not necessary this is 1st of, e.g., January
     */
-    while (firstDay.getDay() === 0 ? 7 : firstDay.getDay() >= 1) {
-      if (firstDay.getDay() === 1) {
+    while (firstDayOfWeek.getDay() === 0 ? 7 : firstDayOfWeek.getDay() >= 1) {
+      if (firstDayOfWeek.getDay() === 1) {
         break;
       } else {
-        firstDay = this._addDays(firstDay, -1);
+        firstDayOfWeek = this._addDays(firstDayOfWeek, -1);
       }
     }
 
     // there are max 48 cells (6 weeks) in our monthly calendar (checked against various apps and tested against Jan-2017)
     for (let i = 0; i < 6; i++) {
+      const days = this._buildWeek(firstDayOfWeek, month);
+      const weeklyGoalPeriodKey = getWeeklyGoalKey(firstDayOfWeek);
+      const weeklyGoalPeriod =
+        this.goalPeriods[weeklyGoalPeriodKey] ||
+        ({ type: GoalPeriodType.WEEKLY, goals: [] } as GoalPeriod);
       this.weeks.push({
-        weekNumber: this.getWeekNumber(firstDay),
-        days: this._buildWeek(firstDay, month),
+        weekNumber: this.getWeekNumber(firstDayOfWeek),
+        days,
+        date: firstDayOfWeek,
+        isSelected: false,
+        month,
+        goalPeriod: weeklyGoalPeriod,
       });
-      firstDay = this._addDays(firstDay, 7);
+
+      firstDayOfWeek = this._addDays(firstDayOfWeek, 7);
     }
 
     // Removing last week if it does not belong to current month (checking only 1st day)
@@ -191,8 +207,8 @@ export class MonthComponent implements OnInit, OnChanges {
   }
 
   // handle click on day - set day as "selected"
-  onDayClick(dayDate: Date): void {
-    this.selected = dayDate;
+  onDayClick(calendarDate: Date): void {
+    this.selected = calendarDate;
   }
 
   // highlighting "today" day
