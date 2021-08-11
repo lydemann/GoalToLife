@@ -2,7 +2,6 @@
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": "*",
-    "tslint.json": "*",
     ".eslintrc.json": "*",
     "nx.json": "*",
     "tsconfig.json": "*"
@@ -20,13 +19,13 @@
       "implicitDependencies": ["app"]
     },
     "app-lib-features-plan": {
-      "tags": ["type:feat", "scope:app"]
+      "tags": ["type:feature", "scope:app"]
     },
     "app-lib-shared-domain": {
       "tags": ["scope:app", "type:domain"]
     },
     "app-lib-shared-ui": {
-      "tags": ["scope:app"]
+      "tags": ["scope:app", "type:ui"]
     },
     "service": {
       "tags": ["scope:service", "type:app"]

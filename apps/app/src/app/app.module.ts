@@ -11,13 +11,13 @@ import {
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { LocalStorageModule } from 'angular-2-local-storage';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
+import { SharedFeatureAuthModule } from '@app/shared/domain-auth';
 import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
-import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
-import { SharedFeatureAuthModule } from '@app/shared/domain-auth';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCs89L7bIdvZ6ziG6R053mED0f9HHeuEik',

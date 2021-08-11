@@ -1,19 +1,16 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   EventEmitter,
   Input,
   OnChanges,
   OnInit,
   Output,
-  TemplateRef,
   ViewChild,
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Goal, GoalPeriodType } from '@app/shared/domain';
 import { IonTextarea } from '@ionic/angular';
-import { Error } from 'tslint/lib/error';
 
 import { TODOItem } from '../../classes/todo-item';
 import { TODOService } from '../../services/todo.service';
@@ -94,7 +91,7 @@ export class TODOListComponent implements OnInit, OnChanges {
    * Output: emitting true if list of TODOs changed
    */
   @Output()
-  listChanged: EventEmitter<Boolean> = new EventEmitter();
+  listChanged: EventEmitter<boolean> = new EventEmitter();
 
   isDraggable(): boolean {
     return this.draggable;
@@ -163,7 +160,7 @@ export class TODOListComponent implements OnInit, OnChanges {
     this._draggable = !this.editable;
     this.getTODOList();
 
-    if (changes.hasOwnProperty('droppedTodo')) {
+    if (changes['droppedTodo']) {
       if (changes.droppedTodo.currentValue !== undefined) {
         this.onDrop(changes.droppedTodo.currentValue);
       }

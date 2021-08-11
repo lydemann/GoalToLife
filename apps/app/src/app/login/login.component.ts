@@ -34,6 +34,7 @@ export class LoginComponent {
         this.router.navigate(['plan']);
       },
       (err) => {
+        // eslint-disable-next-line no-console
         console.log(err);
         this.errorMessage = err.message;
       }
