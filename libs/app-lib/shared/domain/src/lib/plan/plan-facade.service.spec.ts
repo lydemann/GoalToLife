@@ -1,4 +1,3 @@
-import { promises } from 'dns';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { ApolloQueryResult, FetchResult } from '@apollo/client/core';
 import { RouterQuery } from '@datorama/akita-ng-router-store';
@@ -55,10 +54,12 @@ describe('PlanFacadeService', () => {
           goalPeriod: [
             {
               date: '2021/4',
-              goals: [],
-            },
+              goals: [] as Goal[],
+            } as GoalPeriod,
           ],
         },
+        loading: false,
+        networkStatus: {} as any,
       } as ApolloQueryResult<{ goalPeriod: GoalPeriod[] }>;
       planResourceService.getMonthlyGoalPeriods.andReturn(
         of(goalPeriodResponse)
@@ -91,7 +92,7 @@ describe('PlanFacadeService', () => {
           goalPeriod: [
             {
               date: '2021/4',
-              goals: [],
+              goals: [] as Goal[],
             },
           ],
         },
