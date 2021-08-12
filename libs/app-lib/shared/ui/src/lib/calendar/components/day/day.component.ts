@@ -98,9 +98,6 @@ export class DayComponent implements OnChanges, OnDestroy {
   constructor(private host: ElementRef<HTMLElement>) {
     // TODO: handle clicked outside deselect
   }
-  ngAfterViewInit(): void {
-    throw new Error('Method not implemented.');
-  }
 
   // ngAfterViewInit(): void {
   // const isCurrentDay = this.isHighlited();

@@ -6,7 +6,8 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
-    "types": [],
+    "types": ["node", "jest"],
+    "emitDecoratorMetadata": true,
     "lib": ["dom", "es2018"]
   },
   "exclude": ["src/test-setup.ts", "**/*.spec.ts"],

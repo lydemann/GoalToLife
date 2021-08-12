@@ -67,10 +67,6 @@ export class MonthlyComponent implements OnInit {
 
     this.goalPeriods$ = this.planFacadeService.goalPeriods$;
 
-    this.planFacadeService.fetchMonthlyGoalPeriods(
-      this.calendarDate.getMonth(),
-      this.calendarDate.getFullYear()
-    );
     this.currentMonthGoalPeriod$ =
       this.planFacadeService.currentMonthGoalPeriod$;
 

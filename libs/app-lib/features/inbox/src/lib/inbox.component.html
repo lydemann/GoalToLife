@@ -6,14 +6,15 @@
       <app-task
         *ngFor="let goal of goals$ | async"
         [task]="goal"
-        (delete)="onDelete(goal)"
+        (delete)="onDeleteGoal(goal)"
+        (edit)="onEditGoal(goal)"
       ></app-task>
     </ion-list>
-    <form (submit)="onAddTodo($event)">
+    <form (submit)="onAddGoal($event)">
       <ion-input
         #addTodoText
         (keydown.enter)="onKeydown($event)"
-        (keyup.enter)="onAddTodo($event)"
+        (keyup.enter)="onAddGoal($event)"
         [formControl]="todoTextControl"
         class="form-control"
         name="todoText"

@@ -1,8 +1,14 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { InboxFacadeService } from '@app/app-lib/shared/domain';
-import { Goal } from '@app/shared/domain';
+import {
+  EditGoalModalComponent,
+  EditModalComponentProps,
+} from '@app/app-lib/shared/ui';
+import { Goal, GoalPeriodType } from '@app/shared/domain';
+import { ModalController } from '@ionic/angular';
 import { Observable, BehaviorSubject, of } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -17,25 +23,56 @@ export class InboxComponent implements OnInit {
   isLoadingGoals$ = new BehaviorSubject<boolean>(false);
   todoTextControl!: FormControl;
 
-  constructor(private inboxFacade: InboxFacadeService) {}
+  constructor(
+    private inboxFacade: InboxFacadeService,
+    private modalController: ModalController
+  ) {}
 
   ngOnInit() {
     this.goals$ = this.inboxFacade.inboxGoals$.pipe(
-      map(({ loading, data }) => {
-        this.isLoadingGoals$.next(loading);
-        return data.inboxGoals;
+      map((inboxGoals) => {
+        return inboxGoals;
       })
     );
     this.todoTextControl = new FormControl(null, [Validators.required]);
   }
 
-  onAddTodo(goal: Goal) {}
+  onAddGoal(event: Event) {
+    this.inboxFacade.addGoal({
+      id: uuidv4(),
+      name: this.todoTextControl.value,
+      type: GoalPeriodType.DAILY,
+      scheduledDate: '',
+    } as Goal);
+
+    this.todoTextControl.reset();
+  }
+
+  onUpdateGoalTodo(goal: Goal) {
+    this.inboxFacade.updateGoal(goal);
+  }
 
   onKeydown(event: Event) {
     event.preventDefault();
   }
 
-  onDelete(task: Goal) {
-    // this.inboxFacade.deleteGoal(task);
+  onDeleteGoal(task: Goal) {
+    this.inboxFacade.deleteGoal(task);
+  }
+
+  async onEditGoal(goal: Goal) {
+    const modal = await this.modalController.create({
+      component: EditGoalModalComponent,
+      componentProps: {
+        goal,
+      } as EditModalComponentProps,
+    });
+
+    await modal.present();
+    const { data } = await modal.onWillDismiss<Goal>();
+
+    if (data) {
+      this.inboxFacade.updateGoal(data);
+    }
   }
 }

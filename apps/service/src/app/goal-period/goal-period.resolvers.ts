@@ -175,33 +175,13 @@ export const goalMutationResolvers = {
       } as Goal;
       await newGoalRef.set(newGoal);
 
-      if (scheduledDate) {
-        const goalPeriodRef = firestoreDB
-          .collection(`/users/${uid}/goalPeriods`)
-          .doc(scheduledDate);
-
-        const prevGoalPeriodSnap = await goalPeriodRef.get();
-        const prevGoalPeriod: GoalPeriodStore =
-          (prevGoalPeriodSnap.data() as GoalPeriodStore) ||
-          ({ date: scheduledDate, goals: [] } as GoalPeriodStore);
-        const prevGoals = prevGoalPeriod.goals;
-        let updatedGoals = [...prevGoals];
-        const hasExistingGoalPeriod =
-          goalIndex !== null && goalIndex >= 0 && goalIndex <= prevGoals.length;
-        if (hasExistingGoalPeriod) {
-          updatedGoals.splice(goalIndex, 0, newGoalRef.id);
-        } else {
-          updatedGoals = [...prevGoalPeriod.goals, newGoalRef.id];
-        }
-        // eslint-disable-next-line no-console
-        console.log(prevGoalPeriod);
-
-        await goalPeriodRef.set({
-          ...prevGoalPeriod,
-          type,
-          goals: updatedGoals,
-        } as GoalPeriodStore);
-      }
+      await updateGoalPeriod(
+        scheduledDate,
+        uid,
+        newGoalRef.id,
+        type,
+        goalIndex
+      );
 
       return newGoal;
     }
@@ -216,6 +196,12 @@ export const goalMutationResolvers = {
       }
 
       await goalRef.update(payload);
+      await updateGoalPeriod(
+        payload.scheduledDate,
+        uid,
+        goalRef.id,
+        payload.type
+      );
       return await goalSnapShot.data();
     }
   ),
@@ -244,6 +230,40 @@ export const goalMutationResolvers = {
     }
   ),
 };
+async function updateGoalPeriod(
+  scheduledDate: string,
+  uid: string,
+  goalId,
+  type: GoalPeriodType,
+  goalIndex?: number
+) {
+  if (scheduledDate) {
+    const goalPeriodRef = firestoreDB
+      .collection(`/users/${uid}/goalPeriods`)
+      .doc(scheduledDate);
+
+    const prevGoalPeriodSnap = await goalPeriodRef.get();
+    const prevGoalPeriod: GoalPeriodStore =
+      (prevGoalPeriodSnap.data() as GoalPeriodStore) ||
+      ({ date: scheduledDate, goals: [] } as GoalPeriodStore);
+    const prevGoals = prevGoalPeriod.goals;
+    let updatedGoals = [...prevGoals];
+    const hasGoal =
+      goalIndex !== null && goalIndex >= 0 && goalIndex <= prevGoals.length;
+    if (hasGoal) {
+      updatedGoals.splice(goalIndex, 0, goalId);
+    } else {
+      updatedGoals = [...prevGoalPeriod.goals, goalId];
+    }
+
+    await goalPeriodRef.set({
+      ...prevGoalPeriod,
+      type,
+      goals: updatedGoals,
+    } as GoalPeriodStore);
+  }
+}
+
 function getWeeksBetweenDates(fromDate: string, toDate: string) {
   const weekNumbersBetweenDates: { weekNumber: number; year: number }[] = [];
   const from = new Date(fromDate);
