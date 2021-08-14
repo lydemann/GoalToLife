@@ -15,9 +15,9 @@ import { GoalsStore } from './state/goals/goals.store';
   providedIn: 'root',
 })
 export class PlanFacadeService {
-  monthlyCategories$: Observable<string[]>;
+  monthlyCategories$!: Observable<string[]>;
   goalPeriods$: Observable<Record<string, GoalPeriod>>;
-  isLoadingGoalPeriods$: Observable<boolean>;
+  isLoadingGoalPeriods$!: Observable<boolean>;
   goalPeriodsStateHistory: StateHistoryPlugin<GoalPeriodsState>;
   isLoading$: Observable<boolean>;
   currentMonthGoalPeriod$: Observable<GoalPeriod>;
@@ -82,9 +82,9 @@ export class PlanFacadeService {
   }
 
   updateGoalPeriod(goalPeriod: Partial<GoalPeriod>) {
-    this.goalPeriodsStore.upsert(goalPeriod.date, {
+    this.goalPeriodsStore.upsert(goalPeriod.date as string, {
       goals: [],
-      ...this.goalPeriodsQuery.getEntity(goalPeriod.date),
+      ...this.goalPeriodsQuery.getEntity(goalPeriod.date as string),
       ...goalPeriod,
     } as GoalPeriodStore);
     this.goalPeriodsStore.setLoading(true);

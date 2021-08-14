@@ -71,6 +71,7 @@
     "firebase-functions": "^3.13.2",
     "graphql": "^15.5.0",
     "immer": "^9.0.1",
+    "ngx-chips": "^2.2.2",
     "ngx-popover": "^0.0.16",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

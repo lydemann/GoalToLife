@@ -159,6 +159,7 @@ export class PlanResourceService {
         $type: String
         $scheduledDate: String
         $completed: Boolean
+        $categories: [String]
       ) {
         updateGoal(
           id: $id
@@ -166,11 +167,13 @@ export class PlanResourceService {
           type: $type
           scheduledDate: $scheduledDate
           completed: $completed
+          categories: $categories
         ) {
           id
           name
           scheduledDate
           completed
+          categories
         }
       }
     `;
@@ -183,6 +186,7 @@ export class PlanResourceService {
         type: goal.type,
         scheduledDate: goal.scheduledDate,
         completed: goal.completed,
+        categories: goal.categories
       } as Goal,
     });
   }

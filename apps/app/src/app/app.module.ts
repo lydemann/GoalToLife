@@ -1,16 +1,18 @@
+import { TagInputModule } from 'ngx-chips';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LocalStorageModule } from 'angular-2-local-storage';
+
 import {
   Endpoints,
   ENDPOINTS_TOKEN,
   GraphQLModule,
 } from '@app/app-lib/shared/domain';
-
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { LocalStorageModule } from 'angular-2-local-storage';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
 import { SharedFeatureAuthModule } from '@app/shared/domain-auth';
@@ -40,6 +42,8 @@ export function endpointsFactory() {
   entryComponents: [],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    TagInputModule,
     GraphQLModule,
     HttpClientModule,
     IonicModule.forRoot(),

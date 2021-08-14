@@ -248,11 +248,13 @@ async function updateGoalPeriod(
       ({ date: scheduledDate, goals: [] } as GoalPeriodStore);
     const prevGoals = prevGoalPeriod.goals;
     let updatedGoals = [...prevGoals];
-    const hasGoal =
+    const goalShouldBeMoved =
       goalIndex !== null && goalIndex >= 0 && goalIndex <= prevGoals.length;
-    if (hasGoal) {
+    if (goalShouldBeMoved) {
       updatedGoals.splice(goalIndex, 0, goalId);
-    } else {
+    }
+    const goalNotExisting = !prevGoalPeriod.goals.includes(goalId);
+    if (goalNotExisting) {
       updatedGoals = [...prevGoalPeriod.goals, goalId];
     }
 

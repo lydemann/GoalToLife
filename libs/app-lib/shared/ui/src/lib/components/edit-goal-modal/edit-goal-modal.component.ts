@@ -20,6 +20,7 @@ export interface EditModalComponentProps {
 })
 export class EditGoalModalComponent implements OnInit, EditModalComponentProps {
   @Input() goal: Goal;
+  @Input() allCategories: string[];
 
   formGroup: FormGroup;
 
@@ -33,6 +34,7 @@ export class EditGoalModalComponent implements OnInit, EditModalComponentProps {
       name: [this.goal.name, Validators.required],
       completed: this.goal.completed,
       scheduledDate: this.goal.scheduledDate || GoalPeriodType.DAILY,
+      categories: [this.goal.categories || [], []],
     });
   }
 
@@ -50,6 +52,10 @@ export class EditGoalModalComponent implements OnInit, EditModalComponentProps {
       id: this.goal.id,
       name: this.formGroup.value.name,
       completed: this.formGroup.value.completed,
+      categories:
+        this.formGroup.value.categories instanceof Array
+          ? this.formGroup.value.categories
+          : [this.formGroup.value.categories],
       type: this.goal.type,
       scheduledDate,
     } as Goal);

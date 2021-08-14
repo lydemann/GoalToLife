@@ -55,8 +55,12 @@
               },
 
               {
-                "sourceTag": "type:shared",
+                "sourceTag": "scope:shared",
                 "onlyDependOnLibsWithTags": ["scope:shared"]
+              },
+              {
+                "sourceTag": "scope:app",
+                "onlyDependOnLibsWithTags": ["scope:app", "scope:shared"]
               }
             ]
           }

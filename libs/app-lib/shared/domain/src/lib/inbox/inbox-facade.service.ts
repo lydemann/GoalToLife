@@ -93,5 +93,12 @@ export class InboxFacadeService {
       };
     });
     this.goalsStore.remove(goal.id);
+    this.planResourceService.deleteGoal(goal).subscribe(({ errors }) => {
+      if (errors) {
+        this.goalStateHistory.undo();
+        this.goalsStore.setError(errors[0]);
+        return;
+      }
+    });
   }
 }

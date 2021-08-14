@@ -16,8 +16,17 @@
 
   <ion-item>
     <ion-label>Categories</ion-label>
-    <!-- TODO: multi auto complete select here -->
-    <ion-textarea formControlName="name"></ion-textarea>
+    <tag-input
+      [clearOnBlur]="true"
+      formControlName="categories"
+      [modelAsStrings]="true"
+    >
+      <tag-input-dropdown
+        [showDropdownIfEmpty]="true"
+        [autocompleteItems]="['Item1', 'item2', 'item3']"
+      >
+      </tag-input-dropdown>
+    </tag-input>
   </ion-item>
 
   <ion-item>
