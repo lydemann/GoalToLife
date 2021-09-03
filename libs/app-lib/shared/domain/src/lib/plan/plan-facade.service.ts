@@ -31,7 +31,7 @@ export class PlanFacadeService {
     private goalPeriodsQuery: GoalPeriodsQuery,
     private goalsQuery: GoalsQuery
   ) {
-    this.goalPeriods$ = this.goalPeriodsQuery.goalPeriods;
+    this.goalPeriods$ = this.goalPeriodsQuery.goalPeriodEntities$;
     this.isLoading$ = combineQueries([
       this.goalPeriodsQuery.selectLoading(),
       this.goalsQuery.selectLoading(),
@@ -47,6 +47,23 @@ export class PlanFacadeService {
     this.currentMonthGoalPeriod$ = this.goalPeriodsQuery.monthlyGoalPeriod$;
     this.currentYearGoalPeriod$ = this.goalPeriodsQuery.currentYearGoalPeriod$;
     this.quarterGoalPeriods$ = this.goalPeriodsQuery.quarterGoalPeriods$;
+
+    this.monthlyCategories$ = this.goalPeriodsQuery.goalPeriods$.pipe(
+      map((goalPeriods) => {
+        const categories = goalPeriods
+          .reduce((prevTotalCategories: string[], cur) => {
+            const categoriesForGoalPeriod = cur.goals.reduce(
+              (prev: string[], cur) => [...prev, ...(cur.categories || [])],
+              []
+            );
+
+            return [...prevTotalCategories, ...categoriesForGoalPeriod];
+          }, [])
+          .filter((category) => !!category);
+
+        return [...new Set(categories)];
+      })
+    );
   }
 
   fetchYearlyAndQuarterlyGoalPeriods(year: number) {
@@ -82,11 +99,14 @@ export class PlanFacadeService {
   }
 
   updateGoalPeriod(goalPeriod: Partial<GoalPeriod>) {
-    this.goalPeriodsStore.upsert(goalPeriod.date as string, {
-      goals: [],
-      ...this.goalPeriodsQuery.getEntity(goalPeriod.date as string),
-      ...goalPeriod,
-    } as GoalPeriodStore);
+    this.goalPeriodsStore.upsert(
+      goalPeriod.date as string,
+      {
+        goals: [],
+        ...this.goalPeriodsQuery.getEntity(goalPeriod.date as string),
+        ...goalPeriod,
+      } as GoalPeriodStore
+    );
     this.goalPeriodsStore.setLoading(true);
     this.planResourceService
       .updateGoalPeriod(goalPeriod as unknown as GoalPeriodStore)

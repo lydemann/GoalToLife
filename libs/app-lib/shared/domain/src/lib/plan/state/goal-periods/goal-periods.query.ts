@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { combineQueries, HashMap, QueryEntity } from '@datorama/akita';
 import { RouterQuery } from '@datorama/akita-ng-router-store';
-import { combineLatest, Observable } from 'rxjs';
-import { map, startWith, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 import {
   Goal,
@@ -31,7 +31,8 @@ export class GoalPeriodsQuery extends QueryEntity<
   GoalPeriodsState,
   GoalPeriodStore
 > {
-  goalPeriods: Observable<Record<string, GoalPeriod>>;
+  goalPeriodEntities$: Observable<Record<string, GoalPeriod>>;
+  goalPeriods$: Observable<GoalPeriod[]>;
   isLoadingGoalPeriods$!: Observable<boolean>;
   monthlyGoalPeriod$: Observable<GoalPeriod>;
   currentYearGoalPeriod$: Observable<GoalPeriod>;
@@ -44,14 +45,21 @@ export class GoalPeriodsQuery extends QueryEntity<
   ) {
     super(store);
 
-    this.goalPeriods = combineQueries([
+    this.goalPeriodEntities$ = combineQueries([
       this.selectAll(),
       this.goalsQuery.select((state) => state.entities),
     ]).pipe(
       map(([goalPeriods, goalEntities]) => {
         return this.getEnrichedGoalPeriods(goalPeriods, goalEntities);
       }),
-      startWith({})
+      filter((goalPeriods) => !!goalPeriods)
+    );
+
+    this.goalPeriods$ = this.goalPeriodEntities$.pipe(
+      map((goalPeriodEntities) => {
+        const ids = this.getValue().ids || [];
+        return ids.map((id) => goalPeriodEntities[id]);
+      })
     );
 
     this.monthlyGoalPeriod$ = combineQueries([

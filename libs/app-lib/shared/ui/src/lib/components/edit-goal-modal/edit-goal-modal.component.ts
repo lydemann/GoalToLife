@@ -34,7 +34,7 @@ export class EditGoalModalComponent implements OnInit, EditModalComponentProps {
       name: [this.goal.name, Validators.required],
       completed: this.goal.completed,
       scheduledDate: this.goal.scheduledDate || GoalPeriodType.DAILY,
-      categories: [this.goal.categories || [], []],
+      categories: [this.goal.categories],
     });
   }
 
