@@ -15,7 +15,7 @@ import { GoalsStore } from './state/goals/goals.store';
   providedIn: 'root',
 })
 export class PlanFacadeService {
-  monthlyCategories$!: Observable<string[]>;
+  categories$!: Observable<string[]>;
   goalPeriods$: Observable<Record<string, GoalPeriod>>;
   isLoadingGoalPeriods$!: Observable<boolean>;
   goalPeriodsStateHistory: StateHistoryPlugin<GoalPeriodsState>;
@@ -23,6 +23,7 @@ export class PlanFacadeService {
   currentMonthGoalPeriod$: Observable<GoalPeriod>;
   currentYearGoalPeriod$: Observable<GoalPeriod>;
   quarterGoalPeriods$: Observable<GoalPeriod[]>;
+  goalPeriodsWithFilteredGoals$: Observable<Record<string, GoalPeriod>>;
 
   constructor(
     private planResourceService: PlanResourceService,
@@ -32,6 +33,8 @@ export class PlanFacadeService {
     private goalsQuery: GoalsQuery
   ) {
     this.goalPeriods$ = this.goalPeriodsQuery.goalPeriodEntities$;
+    this.goalPeriodsWithFilteredGoals$ =
+      this.goalPeriodsQuery.goalPeriodsWithFilteredGoals$;
     this.isLoading$ = combineQueries([
       this.goalPeriodsQuery.selectLoading(),
       this.goalsQuery.selectLoading(),
@@ -48,7 +51,7 @@ export class PlanFacadeService {
     this.currentYearGoalPeriod$ = this.goalPeriodsQuery.currentYearGoalPeriod$;
     this.quarterGoalPeriods$ = this.goalPeriodsQuery.quarterGoalPeriods$;
 
-    this.monthlyCategories$ = this.goalPeriodsQuery.goalPeriods$.pipe(
+    this.categories$ = this.goalPeriodsQuery.goalPeriods$.pipe(
       map((goalPeriods) => {
         const categories = goalPeriods
           .reduce((prevTotalCategories: string[], cur) => {
@@ -64,6 +67,10 @@ export class PlanFacadeService {
         return [...new Set(categories)];
       })
     );
+  }
+
+  onCategoriesChange(categories: string[]) {
+    this.goalPeriodsStore.setFilteredCategories(categories);
   }
 
   fetchYearlyAndQuarterlyGoalPeriods(year: number) {

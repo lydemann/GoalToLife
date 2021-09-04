@@ -37,6 +37,8 @@ export class GoalPeriodsQuery extends QueryEntity<
   monthlyGoalPeriod$: Observable<GoalPeriod>;
   currentYearGoalPeriod$: Observable<GoalPeriod>;
   quarterGoalPeriods$: Observable<GoalPeriod[]>;
+  goalPeriodsWithFilteredGoals$!: Observable<Record<string, GoalPeriod>>;
+  categories$: Observable<string[]>;
 
   constructor(
     protected store: GoalPeriodsStore,
@@ -125,6 +127,55 @@ export class GoalPeriodsQuery extends QueryEntity<
             calendarDate: this.getFirstDateInQuarter(+year, +quarter),
           };
         });
+      })
+    );
+
+    this.categories$ = this.goalPeriods$.pipe(
+      map((goalPeriods) => {
+        const categories = goalPeriods
+          .reduce((prevTotalCategories: string[], cur) => {
+            const categoriesForGoalPeriod = cur.goals.reduce(
+              (prev: string[], cur) => [...prev, ...(cur.categories || [])],
+              []
+            );
+
+            return [...prevTotalCategories, ...categoriesForGoalPeriod];
+          }, [])
+          .filter((category) => !!category);
+
+        return [...new Set(categories)];
+      })
+    );
+
+    this.goalPeriodsWithFilteredGoals$ = combineQueries([
+      this.goalPeriodEntities$,
+      this.select((state) => state.filteredCategories),
+      this.categories$,
+    ]).pipe(
+      map(([goalPeriodEntities, filteredCategories, categories]) => {
+        const filteredGoalPeriodEntities: Record<string, GoalPeriod> = {};
+        for (const key in goalPeriodEntities) {
+          if (Object.prototype.hasOwnProperty.call(goalPeriodEntities, key)) {
+            const goalPeriod = goalPeriodEntities[key];
+            if (
+              filteredCategories?.length > 0 &&
+              categories.length !== filteredCategories.length
+            ) {
+              const goals = goalPeriod.goals.filter((goal) =>
+                goal.categories?.some((category) =>
+                  filteredCategories.includes(category)
+                )
+              );
+              filteredGoalPeriodEntities[goalPeriod.date] = {
+                ...goalPeriod,
+                goals,
+              };
+            } else {
+              filteredGoalPeriodEntities[goalPeriod.date] = goalPeriod;
+            }
+          }
+        }
+        return filteredGoalPeriodEntities;
       })
     );
   }

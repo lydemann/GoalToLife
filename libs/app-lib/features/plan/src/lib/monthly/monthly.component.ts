@@ -63,9 +63,9 @@ export class MonthlyComponent implements OnInit {
     this.calendarDate = new Date(this._currentDate.setHours(0, 0, 0, 0));
     this.calendarDate.setMonth(this.calendarDate.getMonth(), 1); // avoiding problems with 29th,30th,31st days
 
-    this.categories$ = this.planFacadeService.monthlyCategories$;
+    this.categories$ = this.planFacadeService.categories$;
 
-    this.goalPeriods$ = this.planFacadeService.goalPeriods$;
+    this.goalPeriods$ = this.planFacadeService.goalPeriodsWithFilteredGoals$;
 
     this.currentMonthGoalPeriod$ =
       this.planFacadeService.currentMonthGoalPeriod$;
@@ -80,6 +80,10 @@ export class MonthlyComponent implements OnInit {
       this.calendarDate.getFullYear()
     );
     // TODO: update path params on month change
+  }
+
+  onCategoriesChange(categories: string[]) {
+    this.planFacadeService.onCategoriesChange(categories);
   }
 
   onAddGoal(goal: Goal) {

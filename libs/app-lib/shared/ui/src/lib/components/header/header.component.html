@@ -15,6 +15,7 @@
           selectedText=" "
           #select
           (click)="onSelectTags($event, select)"
+          (ionChange)="onCategoriesSelected()"
         >
           <ion-select-option
             *ngFor="let category of categories"

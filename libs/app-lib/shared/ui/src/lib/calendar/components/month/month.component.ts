@@ -219,7 +219,9 @@ export class MonthComponent implements OnInit, OnChanges {
   // listening to change of month to refresh calendar
   ngOnChanges(changes: any): void {
     this.weeks = [];
-    this._buildMonth();
+    if (this.goalPeriods) {
+      this._buildMonth();
+    }
   }
 
   onAddTodo(goal: Goal) {

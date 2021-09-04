@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
-  OnInit,
+  Output,
+  ViewChild,
 } from '@angular/core';
 import { IonSelect, NavController } from '@ionic/angular';
 
@@ -16,7 +18,22 @@ export class HeaderComponent {
   @Input() backUrl: string;
   @Input() backText: string;
   @Input() title: string;
-  @Input() categories: string[] = [];
+
+  private _categories: string[] = [];
+  public get categories(): string[] {
+    return this._categories;
+  }
+  @Input()
+  public set categories(v: string[]) {
+    this._categories = v;
+    if (this.select) {
+      this.select.value = v;
+    }
+  }
+
+  @Output() categoriesChange = new EventEmitter<string[]>();
+
+  @ViewChild('select') select: IonSelect;
 
   constructor(private navCtrl: NavController) {}
 
@@ -26,8 +43,11 @@ export class HeaderComponent {
 
   onSelectTags(event: Event, ionSelect: IonSelect) {
     ionSelect.open();
-
     event.preventDefault();
     event.stopImmediatePropagation();
+  }
+
+  onCategoriesSelected() {
+    this.categoriesChange.next(this.select.value);
   }
 }

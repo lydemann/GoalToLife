@@ -10,7 +10,9 @@ import { GoalPeriodsState } from './goal-periods.model';
  * Create initial state
  */
 export function createInitialState(): GoalPeriodsState {
-  return {};
+  return {
+    filteredCategories: [],
+  };
 }
 
 /**
@@ -71,5 +73,9 @@ export class GoalPeriodsStore extends EntityStore<GoalPeriodsState> {
     ]?.goals.filter((goalId) => goalId !== goal.id);
     this.update(goal.scheduledDate, { goals: updatedGoals });
     this.goalsStore.remove(goal.id);
+  }
+
+  setFilteredCategories(categories: string[]) {
+    this.update({ filteredCategories: categories });
   }
 }
