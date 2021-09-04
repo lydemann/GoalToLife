@@ -32,7 +32,7 @@ export const SAVE_RETRO_FORM_DEBOUNCE_TIME = 500;
   styleUrls: ['day.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DayComponent implements OnChanges, OnDestroy {
+export class DayComponent implements OnChanges, OnDestroy, AfterViewInit {
   /*
    * PRIVATE variables
    * date (date + month) - used to define whether day is in currently selected month and for further TODO-list logic
@@ -99,18 +99,18 @@ export class DayComponent implements OnChanges, OnDestroy {
     // TODO: handle clicked outside deselect
   }
 
-  // ngAfterViewInit(): void {
-  // const isCurrentDay = this.isHighlited();
-  // if (isCurrentDay) {
-  //   setTimeout(() => {
-  //     this.host.nativeElement.scrollIntoView({
-  //       behavior: 'smooth',
-  //       inline: 'center',
-  //       block: 'center',
-  //     });
-  //   }, 300);
-  //}
-  // }
+  ngAfterViewInit(): void {
+    const isCurrentDay = this.isHighlited();
+    if (isCurrentDay) {
+      setTimeout(() => {
+        this.host.nativeElement.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'center',
+          block: 'center',
+        });
+      }, 300);
+    }
+  }
 
   ngOnDestroy(): void {
     this.destroy$.next();
