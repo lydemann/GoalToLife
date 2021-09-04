@@ -23,7 +23,7 @@
     >
       <tag-input-dropdown
         [showDropdownIfEmpty]="true"
-        [autocompleteItems]="['Item1', 'item2', 'item3']"
+        [autocompleteItems]="categories$ | async"
       >
       </tag-input-dropdown>
     </tag-input>

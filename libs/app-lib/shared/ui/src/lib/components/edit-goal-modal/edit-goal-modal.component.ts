@@ -5,9 +5,11 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PlanFacadeService } from '@app/app-lib/shared/domain';
 import { Goal, GoalPeriodType } from '@app/shared/domain';
 import { getDailyGoalKey } from '@app/shared/util';
 import { ModalController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 
 export interface EditModalComponentProps {
   goal: Goal;
@@ -23,10 +25,12 @@ export class EditGoalModalComponent implements OnInit, EditModalComponentProps {
   @Input() allCategories: string[];
 
   formGroup: FormGroup;
+  categories$: Observable<string[]>;
 
   constructor(
     private modalController: ModalController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private planFacade: PlanFacadeService
   ) {}
 
   ngOnInit() {
@@ -36,6 +40,7 @@ export class EditGoalModalComponent implements OnInit, EditModalComponentProps {
       scheduledDate: this.goal.scheduledDate || GoalPeriodType.DAILY,
       categories: [this.goal.categories],
     });
+    this.categories$ = this.planFacade.categories$;
   }
 
   onSubmit() {
