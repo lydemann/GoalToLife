@@ -83,10 +83,10 @@ export class MonthComponent implements OnInit, OnChanges {
   }
 
   weeksTrackBy(idx, item: Week) {
-    return item.weekNumber;
+    return idx;
   }
   daysTrackBy(idx, item: CalendarDate) {
-    return item.date;
+    return idx;
   }
 
   /*
