@@ -6,13 +6,11 @@ import {
   Goal,
   GoalPeriod,
   GoalPeriodStore,
-} from '@app/shared/domain';
-import {
   getDailyGoalKey,
   getMonthlyGoalPeriodKey,
   getQuarterlyGoalPeriodKey,
   getYearlyGoalPeriodKey,
-} from '@app/shared/util';
+} from '@app/shared/domain';
 
 const getGoalPeriodsQuery = gql`
   query goalGoalPeriodsQuery(
@@ -186,7 +184,7 @@ export class PlanResourceService {
         type: goal.type,
         scheduledDate: goal.scheduledDate,
         completed: goal.completed,
-        categories: goal.categories
+        categories: goal.categories,
       } as Goal,
     });
   }
