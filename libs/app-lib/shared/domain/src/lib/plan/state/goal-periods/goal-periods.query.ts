@@ -123,7 +123,10 @@ export class GoalPeriodsQuery extends QueryEntity<
           } as GoalPeriodStore;
 
           return {
-            ...this.enrichGoalPeriod(currentMonthlyGoalPeriod, goalEntities),
+            ...this.enrichGoalPeriod(
+              currentMonthlyGoalPeriod,
+              goalEntities as any
+            ),
             calendarDate: this.getFirstDateInQuarter(+year, +quarter),
           };
         });
@@ -196,8 +199,8 @@ export class GoalPeriodsQuery extends QueryEntity<
   }
 
   private getEnrichedGoalPeriods(
-    goalPeriods,
-    goalEntities
+    goalPeriods: GoalPeriodStore[],
+    goalEntities: Record<string, Goal>
   ): Record<string, GoalPeriod> {
     return goalPeriods.reduce(
       (prev, goalPeriod) => ({

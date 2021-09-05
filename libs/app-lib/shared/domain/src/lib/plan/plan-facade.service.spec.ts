@@ -115,6 +115,7 @@ describe('PlanFacadeService', () => {
             },
           },
           "error": null,
+          "filteredCategories": Array [],
           "ids": Array [
             "2021/4",
           ],

@@ -38,6 +38,9 @@
     },
     "shared-domain-auth": {
       "tags": ["scope:shared", "type:domain", "scope:auth"]
+    },
+    "shared-util": {
+      "tags": ["scope:shared", "type:util"]
     }
   },
   "targetDependencies": {

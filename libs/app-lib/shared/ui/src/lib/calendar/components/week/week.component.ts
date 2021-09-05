@@ -3,12 +3,15 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output,
 } from '@angular/core';
 
-import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/domain';
-import { getGoalKey } from '@app/shared/util';
+import {
+  getGoalKey,
+  Goal,
+  GoalPeriod,
+  GoalPeriodType,
+} from '@app/shared/domain';
 import { CalendarDate } from '../../classes';
 
 @Component({

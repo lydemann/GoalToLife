@@ -12,8 +12,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
-import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/domain';
-import { getGoalKey } from '@app/shared/util';
+import {
+  getGoalKey,
+  Goal,
+  GoalPeriod,
+  GoalPeriodType,
+} from '@app/shared/domain';
 import { TODOItem } from '../../calendar/classes/todo-item';
 
 export const SAVE_RETRO_FORM_DEBOUNCE_TIME = 500;
