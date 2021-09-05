@@ -9,12 +9,10 @@ import {
   GoalPeriod,
   GoalPeriodStore,
   GoalPeriodType,
-} from '@app/shared/domain';
-import {
   getMonthlyGoalPeriodKey,
   getQuarterlyGoalPeriodKey,
   getYearlyGoalPeriodKey,
-} from '@app/shared/util';
+} from '@app/shared/domain';
 import { MONTH_PARAM_KEY, YEAR_PARAM_KEY } from '../../plan.constants';
 import { GoalsQuery } from '../goals/goals.query';
 import { GoalPeriodsState } from './goal-periods.model';
