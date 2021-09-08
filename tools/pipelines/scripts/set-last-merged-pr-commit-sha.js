@@ -5,7 +5,7 @@ async function lastMergedPRCommitSha(octokit) {
 		.graphql({
 			query: `
       query { 
-        repository(owner: "lydemann", name: "course-platform") {
+        repository(owner: "lydemann", name: "GoalToLife") {
           pullRequests(states: MERGED, last: 1) {
             nodes {
               url,
