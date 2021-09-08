@@ -6,8 +6,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PlanFacadeService } from '@app/app-lib/shared/domain';
-import { Goal, GoalPeriodType } from '@app/shared/domain';
-import { getDailyGoalKey } from '@app/shared/util';
+import { getDailyGoalKey, Goal, GoalPeriodType } from '@app/shared/domain';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 

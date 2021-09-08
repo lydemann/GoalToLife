@@ -1,7 +1,6 @@
 import { getWeekNumber } from '@app/shared/util';
 import { formatDate } from '@angular/common';
-
-import { GoalPeriodType } from '@app/shared/domain';
+import { GoalPeriodType } from './interfaces/goal-period';
 
 export const dailyGoalKeyFormat = 'YYYY-MM-dd';
 
@@ -31,7 +30,7 @@ export const getWeeklyGoalKey = (date: Date) => {
   return `${date.getFullYear()}-w${weekNumber}`;
 };
 
-export const getWeeklyGoalKeyFromWeekumber = (
+export const getWeeklyGoalKeyFromWeekNumber = (
   year: number,
   weekNumber: number
 ) => {

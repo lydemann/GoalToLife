@@ -1,4 +1,3 @@
-import { getWeeklyGoalKey } from '@app/shared/util';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,7 +9,12 @@ import {
 } from '@angular/core';
 
 import { getDailyGoalKey } from '@app/app-lib/shared/domain';
-import { Goal, GoalPeriod, GoalPeriodType } from '@app/shared/domain';
+import {
+  getWeeklyGoalKey,
+  Goal,
+  GoalPeriod,
+  GoalPeriodType,
+} from '@app/shared/domain';
 import { CalendarDate } from '../../classes/day-date';
 import { Week } from '../../classes/weeks';
 

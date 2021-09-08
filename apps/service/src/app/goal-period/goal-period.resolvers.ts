@@ -7,8 +7,9 @@ import {
   GoalPeriod,
   GoalPeriodStore,
   GoalPeriodType,
+  getWeeklyGoalKeyFromWeekNumber,
 } from '@app/shared/domain';
-import { getWeeklyGoalKeyFromWeekumber, getWeekNumber } from '@app/shared/util';
+import { getWeekNumber } from '@app/shared/util';
 import { firestoreDB } from '../firestore';
 import { createResolver } from '../utils/create-resolver';
 interface GoalsInput {
@@ -65,7 +66,7 @@ export const goalQueryResolvers = {
       if (!!toDate || !!fromDate) {
         const weeks = getWeeksBetweenDates(fromDate, toDate);
         const weekDateKeys = weeks.map((week) =>
-          getWeeklyGoalKeyFromWeekumber(week.year, week.weekNumber)
+          getWeeklyGoalKeyFromWeekNumber(week.year, week.weekNumber)
         );
         // eslint-disable-next-line no-console
         console.log(weekDateKeys);
