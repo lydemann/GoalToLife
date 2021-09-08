@@ -1,0 +1,11 @@
+<app-goal-period
+  [isSelected]="calendarDate.isSelected"
+  [goalPeriod]="calendarDate.goalPeriod"
+  [date]="calendarDate.date"
+  (addTodo)="onAddTodo($event)"
+  (deleteTodo)="onDeleteTodo($event)"
+  (editTodo)="editTodo.next($event)"
+  (toggleComplete)="toggleComplete.emit($event)"
+  (retroChange)="retroChange.emit($event)"
+>
+</app-goal-period>

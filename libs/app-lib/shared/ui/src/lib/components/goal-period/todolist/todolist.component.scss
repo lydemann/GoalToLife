@@ -1,0 +1,46 @@
+.todo-wrapper {
+  font-size: 0.9em;
+
+  .list-group {
+    padding: 0;
+    li {
+      position: relative;
+      display: flex;
+      padding: 8px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      align-items: center;
+      margin: auto;
+      margin-bottom: -1px;
+      max-width: 200px;
+
+      .checkbox {
+        min-width: 20px;
+        margin-right: 8px;
+      }
+
+      .text {
+        flex: 1;
+        text-align: left;
+        font-size: 12px;
+      }
+
+      .badge {
+        cursor: pointer;
+        float: right;
+      }
+    }
+    & > li:last-child {
+      .badge {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+textarea {
+  resize: vertical;
+  width: 100%;
+  max-height: 150px;
+  margin-top: 5px;
+}

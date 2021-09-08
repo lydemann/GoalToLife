@@ -1,0 +1,4 @@
+
+# should not be considered in affected commands and dep graph as it is testing utils
+**/*/testing/**
+*.spec*

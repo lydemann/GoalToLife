@@ -1,0 +1,42 @@
+<div class="todo-wrapper">
+  <div class="todo-list-wrapper">
+    <ul class="list-group">
+      <li
+        *ngFor="let todo of goals; let i = index"
+        class="{{ todoDOMClass }}-{{ todo.id }} list-group-item"
+        [draggable]="isDraggable()"
+        [appMakeDraggable]
+        [dragItemId]="todo.id"
+        [helperClass]="todoDOMClass"
+        (click)="onTodoItemClick(todo, $event)"
+      >
+        <ion-checkbox
+          class="checkbox"
+          (click)="onToggleComplete(todo, $event)"
+          [checked]="todo.completed"
+        >
+        </ion-checkbox>
+        <span class="text">{{ todo.name }}</span>
+        <span
+          (click)="onDeleteTODO(todo, $event)"
+          class="badge badge-default bg-danger"
+        >
+          <i class="fa fa-times"></i>
+        </span>
+      </li>
+    </ul>
+  </div>
+  <!-- <app-task *ngIf="editable === true"></app-task> -->
+  <form (submit)="onAddTODO($event)">
+    <ion-input
+      #addTodoText
+      (keydown.enter)="onKeydown($event)"
+      (keyup.enter)="onAddTODO($event)"
+      [formControl]="todoTextControl"
+      class="form-control"
+      name="todoText"
+      autocomplete="off"
+      placeholder="Add task - Enter"
+    ></ion-input>
+  </form>
+</div>

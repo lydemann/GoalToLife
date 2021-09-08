@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MONTH_PARAM_KEY, YEAR_PARAM_KEY } from '@app/app-lib';
+import { MONTH_PARAM_KEY, YEAR_PARAM_KEY } from '@app/app-lib/shared/domain';
 import { RedirectToCurrentMonthResolver } from './monthly/redirect-to-current-month.resolver';
+import { RedirectToCurrentYearResolver } from './monthly/redirect-to-current-year.resolver';
 
 export const planRoutes: Routes = [
   {
@@ -29,6 +30,10 @@ export const planRoutes: Routes = [
       },
       {
         path: 'yearly',
+        resolve: [RedirectToCurrentYearResolver],
+      },
+      {
+        path: `yearly/:${YEAR_PARAM_KEY}`,
         loadChildren: () =>
           import('./yearly/yearly.module').then((m) => m.YearlyModule),
       },

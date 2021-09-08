@@ -7,6 +7,7 @@ export const goalSchema = gql`
     scheduledDate: String
     type: String
     completed: Boolean
+    categories: [String]
   }
 
   type GoalPeriod {
@@ -23,6 +24,7 @@ export const goalSchema = gql`
 export const goalQuerySchema = `
     goal(scheduledDate: String): [Goal]
     goalPeriod(fromDate: String, toDate: String, dates: [String]): [GoalPeriod]
+    inboxGoals: [Goal]
 `;
 
 export const goalMutationSchema = `
@@ -36,6 +38,6 @@ export const goalMutationSchema = `
   ): GoalPeriod
 
   addGoal(id: String!, name: String!, type: String!, scheduledDate: String, goalIndex: Int): Goal
-  updateGoal(id: String!, name: String, type: String, scheduledDate: String, goalIndex: Int, completed: Boolean): Goal
+  updateGoal(id: String!, name: String, type: String, scheduledDate: String, goalIndex: Int, completed: Boolean, categories: [String]): Goal
   deleteGoal(id: String!): String
 `;

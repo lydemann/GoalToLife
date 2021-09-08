@@ -8,7 +8,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { Goal, GoalPeriodType, Task } from '@app/shared/interfaces';
+import { Goal, GoalPeriodType } from '@app/shared/domain';
 
 @Component({
   selector: 'app-task-group',
@@ -36,7 +36,7 @@ export class TaskGroupComponent implements OnInit {
     this.todoTextControl = new FormControl(null, [Validators.required]);
   }
 
-  tasksTrackBy(idx: number, task: Task) {
+  tasksTrackBy(idx: number, task: Goal) {
     return task.id;
   }
 

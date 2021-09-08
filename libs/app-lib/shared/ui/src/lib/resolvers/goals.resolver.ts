@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import { Goal } from '@app/shared/interfaces';
+import { Goal } from '@app/shared/domain';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })

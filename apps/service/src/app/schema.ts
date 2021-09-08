@@ -1,10 +1,9 @@
+import { gql } from 'apollo-server-express';
 import {
   goalMutationSchema,
   goalQuerySchema,
   goalSchema,
 } from './goal-period/goal-period.schema';
-
-const { gql } = require('apollo-server-express');
 
 const schema = gql`
   type Query {

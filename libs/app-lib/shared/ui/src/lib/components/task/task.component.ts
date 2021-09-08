@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  HostBinding,
   HostListener,
   Input,
   OnInit,
@@ -10,7 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { Goal, Task } from '@app/shared/interfaces';
+import { Goal } from '@app/shared/domain';
 import { IonInput } from '@ionic/angular';
 
 export const tempIdPrefix = 'temp';
@@ -33,9 +32,9 @@ export class TaskComponent implements OnInit {
 
   isTempTask = false;
 
-  @Output() edit = new EventEmitter<Task>();
-  @Output() add = new EventEmitter<Task>();
-  @Output() delete = new EventEmitter<Task>();
+  @Output() edit = new EventEmitter<Goal>();
+  @Output() add = new EventEmitter<Goal>();
+  @Output() delete = new EventEmitter<Goal>();
 
   taskNameControl: FormControl;
 
@@ -52,14 +51,14 @@ export class TaskComponent implements OnInit {
 
   @HostListener('document:keydown.enter', ['$event'])
   onAdd() {
-    if (!!this.task.id) {
+    if (this.task.id) {
       return;
     }
 
     const taskToAdd = {
       ...this.task,
       name: this.taskNameControl.value,
-    } as Task;
+    } as Goal;
     this.add.emit(taskToAdd);
   }
 

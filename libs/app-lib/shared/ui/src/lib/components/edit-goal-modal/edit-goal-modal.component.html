@@ -16,9 +16,28 @@
 
   <ion-item>
     <ion-label>Categories</ion-label>
-    <!-- TODO: multi auto complete select here -->
-    <ion-textarea formControlName="name"></ion-textarea>
+    <tag-input
+      [clearOnBlur]="true"
+      formControlName="categories"
+      [modelAsStrings]="true"
+    >
+      <tag-input-dropdown
+        [showDropdownIfEmpty]="true"
+        [autocompleteItems]="categories$ | async"
+      >
+      </tag-input-dropdown>
+    </tag-input>
   </ion-item>
+
+  <ion-item>
+    <ion-label>Date</ion-label>
+    <!-- TODO: multi auto complete select here -->
+    <ion-datetime
+      formControlName="scheduledDate"
+      placeholder="Select date"
+    ></ion-datetime>
+  </ion-item>
+
   <!-- 
   <ion-item>
     <ion-label>Keep in current date until completed</ion-label>

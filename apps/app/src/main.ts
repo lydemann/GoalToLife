@@ -18,4 +18,5 @@ const providers = [{ provide: 'persistStorage', useValue: storage }];
 
 platformBrowserDynamic(providers)
   .bootstrapModule(AppModule)
+  // eslint-disable-next-line no-console
   .catch((err) => console.log(err));
