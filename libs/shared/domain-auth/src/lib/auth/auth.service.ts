@@ -7,6 +7,7 @@ import firebase from 'firebase';
 })
 export class AuthService {
   constructor(public afAuth: AngularFireAuth) {
+    // TODO: enable with env flag
     // const auth = firebase.auth();
     // auth.useEmulator('http://localhost:9099');
   }
