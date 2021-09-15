@@ -357,9 +357,14 @@
           "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/service",
+            "webpackConfig": "webpack.node.config.js",
             "main": "apps/service/src/main.ts",
             "tsConfig": "apps/service/tsconfig.app.json",
-            "assets": ["apps/service/src/assets"]
+            "assets": [
+              "apps/service/src/assets",
+              "apps/service/src/firebase.json",
+              "apps/service/src/.firebaserc"
+            ]
           },
           "configurations": {
             "production": {
