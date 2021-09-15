@@ -1,14 +1,14 @@
 {
   "targets": {
-    "productivity-app": {
+    "productivity-app-28009": {
       "hosting": {
-        "app": [
-          "app"
+        "productivity-app-28009": [
+          "productivity-app-28009"
         ]
       }
     }
   },
   "projects": {
-    "default": "productivity-app"
+    "default": "productivity-app-28009"
   }
 }

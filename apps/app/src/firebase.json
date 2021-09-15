@@ -1,7 +1,7 @@
 {
   "hosting": [
     {
-      "target": "app",
+      "target": "productivity-app-28009",
       "public": "/",
       "headers": [
         {
