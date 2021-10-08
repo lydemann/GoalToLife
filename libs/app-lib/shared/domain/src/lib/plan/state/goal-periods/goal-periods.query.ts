@@ -136,7 +136,7 @@ export class GoalPeriodsQuery extends QueryEntity<
         const categories = goalPeriods
           .reduce((prevTotalCategories: string[], cur) => {
             const categoriesForGoalPeriod = cur.goals.reduce(
-              (prev: string[], cur) => [...prev, ...(cur.categories || [])],
+              (prev: string[], cur) => [...prev, ...(cur?.categories || [])],
               []
             );
 
