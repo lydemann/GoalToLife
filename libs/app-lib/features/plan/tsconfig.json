@@ -2,11 +2,6 @@
   "extends": "../../../../tsconfig.base.json",
   "files": [],
   "include": [],
-  "compilerOptions": {
-    "types": ["node", "jest"],
-    "emitDecoratorMetadata": true,
-    "target": "es2015"
-  },
   "references": [
     {
       "path": "./tsconfig.lib.json"
@@ -14,5 +9,11 @@
     {
       "path": "./tsconfig.spec.json"
     }
-  ]
+  ],
+  "compilerOptions": {},
+  "angularCompilerOptions": {
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
 }

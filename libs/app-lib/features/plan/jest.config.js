@@ -1,23 +1,20 @@
-/// <reference types="jest" />
-
 module.exports = {
-  displayName: 'app-lib-features-plan',
+  displayName: 'tester1',
   preset: '../../../../jest.preset.js',
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
-      tsConfig: '<rootDir>/tsconfig.spec.json',
+      tsconfig: '<rootDir>/tsconfig.spec.json',
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  coverageDirectory: '../../coverage/libs/tester1',
   transform: {
-    '^.+\\.[tj]sx?$': 'ts-jest',
+    '^.+\\.(ts|js|html)$': 'jest-preset-angular',
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',
     'jest-preset-angular/build/serializers/html-comment',
   ],
-  coverageDirectory: '../../../../coverage/libs/app-lib/features/plan',
 };
