@@ -13,7 +13,7 @@
     --todo-warn: mat-color($warn),
     --todo-foreground: mat-color($foreground, text),
     --todo-background: mat-color($background, background),
-    --todo-selected: mat-color($accent, 600),
+    --todo-selected: mat-color($accent, 100),
     --todo-hover: mat-color($accent, 700),
     --todo-black: map-get($unit-colors-vals, 'black'),
     --todo-white: map-get($unit-colors-vals, 'white'),
