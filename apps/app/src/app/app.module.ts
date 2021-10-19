@@ -46,7 +46,12 @@ export function endpointsFactory() {
     TagInputModule,
     GraphQLModule,
     HttpClientModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      mode: 'ios',
+      inputShims: true,
+      scrollAssist: false,
+      scrollPadding: false,
+    }),
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     LocalStorageModule.forRoot({
