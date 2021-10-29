@@ -1,4 +1,6 @@
 name: $(Date:yyyyMMdd).$(Rev:.r)
+pool:
+  vmImage: ubuntu-latest
 trigger:
   - master
 pr: none
