@@ -72,7 +72,8 @@
                 "output": "./svg"
               },
               "apps/app/src/.firebaserc",
-              "apps/app/src/firebase.json"
+              "apps/app/src/firebase.json",
+              "apps/app/src/manifest.webmanifest"
             ],
             "styles": [
               "apps/app/src/theme/variables.scss",
@@ -81,7 +82,9 @@
             "scripts": [],
             "stylePreprocessorOptions": {
               "includePaths": ["libs/shared/ui/styles/src/lib"]
-            }
+            },
+            "serviceWorker": true,
+            "ngswConfigPath": "apps/app/ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -163,7 +166,8 @@
                 "glob": "**/*",
                 "input": "apps/app/src/assets",
                 "output": "/assets"
-              }
+              },
+              "apps/app/src/manifest.webmanifest"
             ]
           },
           "configurations": {
