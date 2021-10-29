@@ -1,13 +1,13 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "GoalToLife",
-  "bundledWebRuntime": false,
-  "npmClient": "npm",
-  "webDir": "dist/apps/app",
-  "plugins": {
-    "SplashScreen": {
-      "launchShowDuration": 0
-    }
-  },
-  "cordova": {}
+	"appId": "io.ionic.starter",
+	"appName": "GoalToLife",
+	"bundledWebRuntime": false,
+	"npmClient": "npm",
+	"webDir": "dist/apps/app",
+	"plugins": {
+		"SplashScreen": {
+			"launchShowDuration": 0
+		}
+	},
+	"cordova": {}
 }

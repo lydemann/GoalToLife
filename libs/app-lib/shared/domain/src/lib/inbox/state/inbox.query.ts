@@ -28,7 +28,7 @@ export class InboxQuery extends Query<InboxState> {
         const goals = inboxGoalIds.map(
           (inboxGoalId) => goalEntities[inboxGoalId]
         );
-        return goals;
+        return goals.filter((goal) => !goal?.scheduledDate);
       }),
       startWith([])
     );
