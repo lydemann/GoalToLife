@@ -42,6 +42,10 @@ export class EditGoalModalComponent implements OnInit, EditModalComponentProps {
     this.categories$ = this.planFacade.categories$;
   }
 
+  dismissModal() {
+    this.modalController.dismiss();
+  }
+
   onSubmit() {
     if (this.formGroup.invalid) {
       return;

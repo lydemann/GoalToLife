@@ -1,4 +1,13 @@
-<h3 class="center">Edit goal</h3>
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Edit goal</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
 <form [formGroup]="formGroup" (submit)="onSubmit()">
   <ion-item>

@@ -17,6 +17,7 @@ import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
 import { SharedFeatureAuthModule } from '@app/shared/domain-auth';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { EditGoalModalModule } from '@app/app-lib/shared/ui';
 import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -68,6 +69,7 @@ export function endpointsFactory() {
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    EditGoalModalModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

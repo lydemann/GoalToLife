@@ -68,6 +68,7 @@ export class YearlyComponent implements OnInit {
       componentProps: {
         goal,
       } as EditModalComponentProps,
+      swipeToClose: true,
     });
 
     await modal.present();
