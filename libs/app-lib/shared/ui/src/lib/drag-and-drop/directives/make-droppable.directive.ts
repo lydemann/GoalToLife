@@ -18,7 +18,7 @@ export class MakeDroppableDirective implements OnInit {
   /*
    * Input: context of drop: list, day, ... (for further processing)
    */
-  @Input() dropContext: any;
+  @Input() dropContext: string;
 
   /*
    * Output: emitting event with data, that was dropped
@@ -72,20 +72,11 @@ export class MakeDroppableDirective implements OnInit {
 
       // preparing payload to emit
       const data: DropContent = new DropContent(
-        this.dropContext['context'],
-        JSON.parse(event.dataTransfer.getData('text')),
-        JSON.parse(event.dataTransfer.getData('text'))['elementClass']
+        this.dropContext,
+        JSON.parse(event.dataTransfer.getData('dragItem')),
+        event.dataTransfer.getData('elementClass')
       );
       this.dropped.emit(data);
-
-      // some direct DOM manipulation (I know that it's bad practice, but I got stuck with drag and drop,
-      // so this solution is used
-      const elementsToHide = this._document.querySelectorAll(
-        `.${data.elementClass}`
-      );
-      for (let i = 0; i < elementsToHide.length; i++) {
-        elementsToHide[i].remove();
-      }
     });
   }
 }

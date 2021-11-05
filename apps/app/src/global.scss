@@ -30,3 +30,28 @@
 a {
   text-decoration: none;
 }
+
+.draggingElement {
+  opacity: 0.5;
+}
+
+.bg-icon {
+  display: none !important;
+}
+
+.draggingElementOverArea {
+  // background-color: darken($base-color, 10%);
+
+  .draggingElement {
+    background-color: #ffffff;
+  }
+
+  .bg-icon {
+    color: #f1f1f1;
+    font-size: 40px;
+    position: absolute;
+    margin-top: -3px;
+    opacity: 0.5;
+    display: block !important;
+  }
+}

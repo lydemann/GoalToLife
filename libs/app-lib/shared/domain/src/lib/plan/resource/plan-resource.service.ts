@@ -203,4 +203,6 @@ export class PlanResourceService {
       },
     });
   }
+
+  moveGoal(orgGoalPeriodId: string, destGoalPeriodId: string, goalId: string) {}
 }

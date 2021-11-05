@@ -2,23 +2,24 @@
   <div class="todo-list-wrapper">
     <ul class="list-group">
       <li
-        *ngFor="let todo of goals; let i = index"
-        class="{{ todoDOMClass }}-{{ todo.id }} list-group-item"
+        *ngFor="let goal of goals; let i = index"
+        class="{{ todoDOMClass }}-{{ goal.id }} list-group-item"
         [draggable]="isDraggable()"
-        [appMakeDraggable]
-        [dragItemId]="todo.id"
+        appMakeDraggable
+        [dragItem]="goal"
+        [dragItemId]="goal.id"
         [helperClass]="todoDOMClass"
-        (click)="onTodoItemClick(todo, $event)"
+        (click)="onTodoItemClick(goal, $event)"
       >
         <ion-checkbox
           class="checkbox"
-          (click)="onToggleComplete(todo, $event)"
-          [checked]="todo.completed"
+          (click)="onToggleComplete(goal, $event)"
+          [checked]="goal.completed"
         >
         </ion-checkbox>
-        <span class="text">{{ todo.name }}</span>
+        <span class="text">{{ goal.name }}</span>
         <span
-          (click)="onDeleteTODO(todo, $event)"
+          (click)="onDeleteTODO(goal, $event)"
           class="badge badge-default bg-danger"
         >
           <i class="fa fa-times"></i>

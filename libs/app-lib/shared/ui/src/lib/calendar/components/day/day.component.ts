@@ -24,7 +24,7 @@ import {
 } from '@app/shared/domain';
 import { getWeekNumber } from '@app/shared/util';
 import { CalendarDate } from '../../classes/day-date';
-import { TODOItem } from '../../classes/todo-item';
+import { DropContent } from '../../../drag-and-drop/directives/drop-content';
 
 export const SAVE_RETRO_FORM_DEBOUNCE_TIME = 500;
 
@@ -86,13 +86,13 @@ export class DayComponent implements OnChanges, OnDestroy, AfterViewInit {
   @Output() editTodo = new EventEmitter<Goal>();
   @Output() toggleComplete = new EventEmitter<Goal>();
   @Output() retroChange = new EventEmitter<Partial<GoalPeriod>>();
+  @Output() replaceGoal = new EventEmitter<DropContent<Goal>>();
   blurRetroInput: any;
 
   /*
    * PUBLIC VARIABLES to manage interaction
    */
   currentClasses = {};
-  droppedTodo: TODOItem;
   goalPeriodType: GoalPeriodType = GoalPeriodType.DAILY;
   formattedDate: string;
 
@@ -162,8 +162,8 @@ export class DayComponent implements OnChanges, OnDestroy, AfterViewInit {
   /*
    * Handler, that fires when TODO is dropped on day
    */
-  onDropTodo(event: any): void {
-    this.droppedTodo = event.payload;
+  onDropTodo(event: DropContent<Goal>): void {
+    this.replaceGoal.next(event);
   }
 
   private _isCurrentMonth(): boolean {

@@ -15,6 +15,7 @@ import {
   GoalPeriod,
   GoalPeriodType,
 } from '@app/shared/domain';
+import { DropContent } from '../../../drag-and-drop/directives/drop-content';
 import { CalendarDate } from '../../classes/day-date';
 import { Week } from '../../classes/weeks';
 
@@ -58,6 +59,7 @@ export class MonthComponent implements OnInit, OnChanges {
   @Output() editTodo = new EventEmitter<Goal>();
   @Output() toggleComplete = new EventEmitter<Goal>();
   @Output() retroChange = new EventEmitter<Partial<GoalPeriod>>();
+  @Output() replaceGoal = new EventEmitter<DropContent<Goal>>();
 
   /*
    * PUBLIC VARIABLES to manage interaction and render UI
@@ -112,7 +114,11 @@ export class MonthComponent implements OnInit, OnChanges {
       const dailyGoalKey = getDailyGoalKey(date);
       const goalPeriod =
         this.goalPeriods[dailyGoalKey] ||
-        ({ type: GoalPeriodType.DAILY, goals: [] } as GoalPeriod);
+        ({
+          type: GoalPeriodType.DAILY,
+          goals: [],
+          date: dailyGoalKey,
+        } as GoalPeriod);
       const isSelected = date?.getTime() === this.selected?.getTime();
       days.push({
         goalPeriod,
@@ -181,7 +187,11 @@ export class MonthComponent implements OnInit, OnChanges {
       const weeklyGoalPeriodKey = getWeeklyGoalKey(firstDayOfWeek);
       const weeklyGoalPeriod =
         this.goalPeriods[weeklyGoalPeriodKey] ||
-        ({ type: GoalPeriodType.WEEKLY, goals: [] } as GoalPeriod);
+        ({
+          type: GoalPeriodType.WEEKLY,
+          goals: [],
+          date: weeklyGoalPeriodKey,
+        } as GoalPeriod);
       this.weeks.push({
         weekNumber: this.getWeekNumber(firstDayOfWeek),
         days,
@@ -226,6 +236,10 @@ export class MonthComponent implements OnInit, OnChanges {
     if (this.goalPeriods) {
       this._buildMonth();
     }
+  }
+
+  onReplaceGoal(goal: DropContent<Goal>) {
+    this.replaceGoal.next(goal);
   }
 
   onAddTodo(goal: Goal) {

@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Goal, GoalPeriod, GoalPeriodStore } from '@app/shared/domain';
-import { EntityStore, OrArray, StoreConfig } from '@datorama/akita';
+import {
+  arrayAdd,
+  arrayRemove,
+  EntityStore,
+  OrArray,
+  StoreConfig,
+} from '@datorama/akita';
 import produce from 'immer';
 
 import { GoalsStore } from '../goals/goals.store';
@@ -77,5 +83,28 @@ export class GoalPeriodsStore extends EntityStore<GoalPeriodsState> {
 
   setFilteredCategories(categories: string[]) {
     this.update({ filteredCategories: categories });
+  }
+
+  moveGoal(orgGoalPeriodId: string, destGoalPeriodId: string, goalId: string) {
+    const entities = this.getValue().entities;
+    const orgGoals = entities[orgGoalPeriodId]?.goals || [];
+    const orgUpdatedGoals = arrayRemove(orgGoals, [goalId]);
+    this.update(orgGoalPeriodId, (entity) => ({
+      ...entity,
+      goals: orgUpdatedGoals,
+    }));
+
+    const destGoals = entities[destGoalPeriodId]?.goals || [];
+    const destUpdatedGoals = arrayAdd(destGoals, [goalId]);
+    this.update(orgGoalPeriodId, (entity) => ({
+      ...entity,
+      date: destGoalPeriodId,
+      goals: destUpdatedGoals,
+    }));
+
+    this.goalsStore.update(
+      goalId,
+      (entity) => ({ ...entity, scheduledDate: destGoalPeriodId } as Goal)
+    );
   }
 }

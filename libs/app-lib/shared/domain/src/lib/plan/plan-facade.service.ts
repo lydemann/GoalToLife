@@ -107,6 +107,27 @@ export class PlanFacadeService {
     });
   }
 
+  replaceGoal(
+    orgGoalPeriodId: string,
+    destGoalPeriodId: string,
+    goalId: string
+  ) {
+    if (orgGoalPeriodId === destGoalPeriodId) {
+      // TODO: handle reordering
+      return;
+    }
+
+    // remove goal from goalperiod goals
+    this.goalPeriodsStore.moveGoal(orgGoalPeriodId, destGoalPeriodId, goalId);
+
+    // TODO: save updated goal
+    this.planResourceService.moveGoal(
+      orgGoalPeriodId,
+      destGoalPeriodId,
+      goalId
+    );
+  }
+
   updateGoalPeriod(goalPeriod: Partial<GoalPeriod>) {
     this.goalPeriodsStore.upsert(
       goalPeriod.date as string,

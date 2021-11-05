@@ -50,7 +50,6 @@ export class TODOListComponent implements OnInit, OnChanges {
     this._editable = v;
   }
 
-  @Input() droppedTodo: TODOItem;
   @Output() addTodo = new EventEmitter<Goal>();
   @Output() deleteTodo = new EventEmitter<Goal>();
   @Output() editTodo = new EventEmitter<Goal>();
@@ -121,7 +120,7 @@ export class TODOListComponent implements OnInit, OnChanges {
     this.todoTextControl.reset();
   }
   onKeydown(event) {
-    event.preventDefault();
+    // event.preventDefault();
   }
 
   // method to remove TODO from list
@@ -133,21 +132,21 @@ export class TODOListComponent implements OnInit, OnChanges {
   }
 
   // handling drag-and-drop's drop event to store TODO
-  onDrop(data?: any): void {
+  onDrop(): void {
     // target is day (generally)
-    if (data === undefined) {
-      // if drop into empty space in day, then - update date and put the item into beginning of the list
-      // this.todoService
-      //   .changeTodoDate(event, this._dayDate)
-      //   .then(() => this.getTODOList());
-    } else {
-      // if another event is target, then put new event above targeted one
-      // made for future use, can be activated with adding makeDroppable directive
-      // to list element: makeDroppable [dropContext]="{context: 'list'}" (dropped)="onDrop($event, todo)"
-      // this.todoService
-      //   .putAbove(event.payload, data)
-      //   .then(() => this.getTODOList());
-    }
+    // if (this.droppedGoal === undefined) {
+    // if drop into empty space in day, then - update date and put the item into beginning of the list
+    // this.todoService
+    //   .changeTodoDate(event, this._dayDate)
+    //   .then(() => this.getTODOList());
+    // } else {
+    // if another event is target, then put new event above targeted one
+    // made for future use, can be activated with adding makeDroppable directive
+    // to list element: makeDroppable [dropContext]="{context: 'list'}" (dropped)="onDrop($event, todo)"
+    // this.todoService
+    //   .putAbove(event.payload, data)
+    //   .then(() => this.getTODOList());
+    // }
   }
 
   // initializing list
@@ -157,11 +156,11 @@ export class TODOListComponent implements OnInit, OnChanges {
 
   // listening on incoming changes to handle "drop" and "refresh" of other components
   ngOnChanges(changes: any): void {
-    this._draggable = !this.editable;
+    this._draggable = true;
     this.getTODOList();
 
-    if (changes['droppedTodo']) {
-      if (changes.droppedTodo.currentValue !== undefined) {
+    if (changes['droppedGoal']) {
+      if (changes.droppedGoal.currentValue !== undefined) {
         this.onDrop();
       }
     } else {
@@ -170,8 +169,8 @@ export class TODOListComponent implements OnInit, OnChanges {
   }
 
   onTodoItemClick(goal: Goal, event: Event) {
-    event.stopPropagation();
-    this.editTodo.next(goal);
+    // event.stopPropagation();
+    // this.editTodo.next(goal);
   }
 
   onToggleComplete(goal: Goal, event: Event) {

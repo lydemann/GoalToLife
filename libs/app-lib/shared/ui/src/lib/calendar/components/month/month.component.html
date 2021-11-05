@@ -20,6 +20,7 @@
         (editTodo)="editTodo.next($event)"
         (toggleComplete)="toggleComplete.emit($event)"
         (retroChange)="retroChange.emit($event)"
+        (replaceGoal)="onReplaceGoal($event)"
       ></app-day>
       <app-day
         *ngFor="let day of week.days; trackBy: daysTrackBy"
@@ -32,6 +33,7 @@
         (editTodo)="editTodo.next($event)"
         (toggleComplete)="toggleComplete.emit($event)"
         (retroChange)="retroChange.emit($event)"
+        (replaceGoal)="onReplaceGoal($event)"
       ></app-day>
     </ng-container>
   </div>

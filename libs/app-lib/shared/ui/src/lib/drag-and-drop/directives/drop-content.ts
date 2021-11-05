@@ -1,12 +1,12 @@
 /*
   Class to support drag-and-drop: defines structure of "dataTransfered" object
  */
-export class DropContent {
+export class DropContent<T = object> {
   context: string;
-  payload: Object;
+  payload: T;
   elementClass: string;
 
-  constructor(context: string, payload: Object, elementClass?: string) {
+  constructor(context: string, payload: T, elementClass?: string) {
     this.context = context;
     this.payload = payload;
     this.elementClass = elementClass;

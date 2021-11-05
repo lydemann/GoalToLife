@@ -3,7 +3,7 @@
   [ngClass]="currentClasses"
   [attr.data-testid]="'day-' + formattedDate"
   appMakeDroppable
-  [dropContext]="{ context: 'day' }"
+  [dropContext]="calendarDate.goalPeriod.date"
   (dropped)="onDropTodo($event)"
   (click)="setActiveState()"
 >

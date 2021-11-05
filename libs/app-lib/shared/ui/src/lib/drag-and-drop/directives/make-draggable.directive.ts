@@ -13,10 +13,11 @@ export class MakeDraggableDirective implements OnInit {
   /*
    * Inputs: data to drag, draggable option and helper CSS class
    */
-  @Input() appMakeDraggable: DropContent = new DropContent('', {});
   @Input() draggable = true;
+  @Input() dragItem: any = {};
   @Input() helperClass: string;
   @Input() dragItemId: string | number;
+  dropContent: DropContent = new DropContent('', {});
 
   /*
    * Class, that is used to beautify dragging element in process
@@ -50,6 +51,8 @@ export class MakeDraggableDirective implements OnInit {
       }
       const element = this._elementRef.nativeElement;
 
+      element.draggable = true;
+
       // adding event listener on start of drag-event: add styling, prepare payload
       element.addEventListener('dragstart', (event) => {
         // making helper CSS-class to manipulate dragged element
@@ -66,16 +69,13 @@ export class MakeDraggableDirective implements OnInit {
         element.classList.add(elementIdentifyingClass);
 
         // putting class data into event (it'll be needed shortly, on drop)
-        this.appMakeDraggable.elementClass = elementIdentifyingClass;
+        // this.appMakeDraggable.elementClass = elementIdentifyingClass;
 
         /* preparing drag data: move element to another location and put some payload in it
            (our "TODO" in case of current application)
          */
         event.dataTransfer.effectAllowed = 'move';
-        event.dataTransfer.setData(
-          'text',
-          JSON.stringify(this.appMakeDraggable)
-        );
+        event.dataTransfer.setData('dragItem', JSON.stringify(this.dragItem));
         event.dataTransfer.setData('elementClass', elementIdentifyingClass);
       });
 

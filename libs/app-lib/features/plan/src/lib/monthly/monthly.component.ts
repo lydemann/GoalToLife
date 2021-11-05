@@ -11,6 +11,7 @@ import {
   YEAR_PARAM_KEY,
 } from '@app/app-lib/shared/domain';
 import {
+  DropContent,
   EditGoalModalComponent,
   EditModalComponentProps,
 } from '@app/app-lib/shared/ui';
@@ -92,6 +93,14 @@ export class MonthlyComponent implements OnInit {
 
   onDeleteGoal(goal: Goal) {
     this.planFacadeService.deleteGoal(goal);
+  }
+
+  onReplaceGoal(dropContext: DropContent<Goal>) {
+    this.planFacadeService.replaceGoal(
+      dropContext.payload.scheduledDate,
+      dropContext.context,
+      dropContext.payload.id
+    );
   }
 
   async onEditGoal(goal: Goal) {

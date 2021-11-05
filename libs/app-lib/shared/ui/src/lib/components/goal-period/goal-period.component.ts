@@ -19,6 +19,7 @@ import {
   GoalPeriodType,
 } from '@app/shared/domain';
 import { TODOItem } from '../../calendar/classes/todo-item';
+import { DropContent } from '../../drag-and-drop/directives/drop-content';
 
 export const SAVE_RETRO_FORM_DEBOUNCE_TIME = 500;
 
@@ -43,6 +44,7 @@ export class GoalPeriodComponent implements OnChanges, OnDestroy {
     return this.goalPeriod.type;
   }
   @Input() date: Date;
+  @Input() droppedGoal: Goal;
   @Output() addTodo = new EventEmitter<Goal>();
   @Output() deleteTodo = new EventEmitter<Goal>();
   @Output() editTodo = new EventEmitter<Goal>();
@@ -67,7 +69,6 @@ export class GoalPeriodComponent implements OnChanges, OnDestroy {
   /*
    * PUBLIC VARIABLES to manage interaction
    */
-  droppedTodo: TODOItem;
 
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -99,8 +100,8 @@ export class GoalPeriodComponent implements OnChanges, OnDestroy {
   /*
    * Handler, that fires when TODO is dropped on day
    */
-  onDropTodo(event: any): void {
-    this.droppedTodo = event.payload;
+  onDropTodo(event: DropContent<Goal>): void {
+    this.droppedGoal = event.payload;
   }
 
   /*

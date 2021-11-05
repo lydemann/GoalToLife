@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { combineQueries, HashMap, QueryEntity } from '@datorama/akita';
+import {
+  arrayRemove,
+  combineQueries,
+  HashMap,
+  QueryEntity,
+} from '@datorama/akita';
 import { RouterQuery } from '@datorama/akita-ng-router-store';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
