@@ -91,7 +91,9 @@ export class PlanFacadeService {
       .getMonthlyGoalPeriods(month, year)
       .subscribe(({ data }) => {
         this.goalPeriodsStore.setLoading(false);
-        this.goalPeriodsStore.addGoalPeriod(data.goalPeriod);
+        if (data.goalPeriod) {
+          this.goalPeriodsStore.addGoalPeriod(data.goalPeriod);
+        }
       });
   }
 

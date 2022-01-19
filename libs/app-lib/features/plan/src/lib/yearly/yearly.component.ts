@@ -27,6 +27,7 @@ export class YearlyComponent implements OnInit {
   currentYearGoalPeriod$: Observable<GoalPeriod>;
   quarterGoalPeriods$: Observable<GoalPeriod[]>;
   date: Date = new Date();
+  year: number;
   selectedQuarter: number;
 
   constructor(
@@ -44,6 +45,7 @@ export class YearlyComponent implements OnInit {
     this.currentYearGoalPeriod$ = this.planFacadeService.currentYearGoalPeriod$;
     this.quarterGoalPeriods$ = this.planFacadeService.quarterGoalPeriods$;
     this.date = new Date(year, 0);
+    this.year = this.date.getFullYear();
   }
 
   setSelectedQuarter(quarter: number) {

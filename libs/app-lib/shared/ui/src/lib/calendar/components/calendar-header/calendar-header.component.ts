@@ -57,6 +57,7 @@ export class CalendarHeaderComponent implements OnInit {
   /*
    * Output to emit event on month change
    */
+  @Output()
   monthChange = new EventEmitter<Date>();
 
   /*
@@ -80,6 +81,7 @@ export class CalendarHeaderComponent implements OnInit {
   onDirectionClick(direction: string): void {
     // changing month
     let newMonth = this.calendarDate.getMonth();
+
     switch (direction) {
       case this.FORWARD: {
         if (++newMonth > 11) {

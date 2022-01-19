@@ -1,7 +1,8 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ModalController, NavController } from '@ionic/angular';
+import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -52,7 +53,10 @@ export class MonthlyComponent implements OnInit {
   constructor(
     private planFacadeService: PlanFacadeService,
     private modalController: ModalController,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private navController: NavController,
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -76,11 +80,21 @@ export class MonthlyComponent implements OnInit {
 
   monthChanges(changeResult: any): void {
     this.calendarDate = new Date(changeResult);
-    this.planFacadeService.fetchMonthlyGoalPeriods(
-      this.calendarDate.getMonth(),
-      this.calendarDate.getFullYear()
-    );
-    // TODO: update path params on month change
+    const year = this.calendarDate.getFullYear();
+    const month = this.calendarDate.getMonth();
+    this.planFacadeService.fetchMonthlyGoalPeriods(month, year);
+    // this.navController.navigateForward(['plan', 'monthly', year, month], {
+    //   replaceUrl: true,
+    //   animated: false,
+    // });
+
+    // change url without reloading
+    const url = this.router
+      .createUrlTree(['../..', year, month], {
+        relativeTo: this.activatedRoute,
+      })
+      .toString();
+    this.location.go(url);
   }
 
   onCategoriesChange(categories: string[]) {
