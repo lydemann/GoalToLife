@@ -105,7 +105,7 @@ export class DayComponent implements OnChanges, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const isCurrentDay = this.isHighlited();
+    const isCurrentDay = this.isHighlighted();
     if (isCurrentDay) {
       setTimeout(() => {
         this.host.nativeElement.scrollIntoView({
@@ -140,8 +140,12 @@ export class DayComponent implements OnChanges, OnDestroy, AfterViewInit {
     return this._selected === this._dayDate.date ? true : false;
   }
 
-  private isHighlited(): boolean {
-    const highLightedTime = this._highlited.getTime();
+  private isHighlighted(): boolean {
+    const highLightedTime = new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate()
+    ).getTime();
     const dayTime = this._dayDate.date.getTime();
     return highLightedTime === dayTime ? true : false;
   }
@@ -185,7 +189,7 @@ export class DayComponent implements OnChanges, OnDestroy, AfterViewInit {
     this.calendarDate.isSelected =
       this.calendarDate.date?.getTime() === this.selected?.getTime();
     if (changes['calendarDate']) {
-      const isCurrentDay = this.isHighlited();
+      const isCurrentDay = this.isHighlighted();
       this.currentClasses = {
         currentMonth: this._isCurrentMonth(),
         selectedDay: null,
