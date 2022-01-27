@@ -112,6 +112,7 @@ interface UpdateGoalInput extends Partial<Goal> {
 }
 interface DeleteGoalInput {
   id: string;
+  scheduledDate: string;
 }
 
 export const goalMutationResolvers = {
@@ -169,19 +170,13 @@ export const goalMutationResolvers = {
     return payload;
   }),
   deleteGoal: createResolver<DeleteGoalInput>(
-    async (_, { id }, { auth: { uid } }) => {
+    async (_, { id, scheduledDate }, { auth: { uid } }) => {
       const goalRef = firestoreDB.doc(`/users/${uid}/goals/${id}`);
-      const goalSnap = await goalRef.get();
-      const goalToDelete = goalSnap.data() as Goal;
+      await goalRef.delete();
 
-      if (!goalToDelete) {
-        return 'No goal with id found';
-      }
-      goalRef.delete();
-
-      if (goalToDelete.scheduledDate) {
+      if (scheduledDate) {
         const goalPeriodRef = firestoreDB.doc(
-          `/users/${uid}/goalPeriods/${goalToDelete.scheduledDate}`
+          `/users/${uid}/goalPeriods/${scheduledDate}`
         );
         const goalPeriodSnap = await goalPeriodRef.get();
         const goalPeriod = (await goalPeriodSnap.data()) as GoalPeriodDB;

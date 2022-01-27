@@ -191,8 +191,8 @@ export class PlanResourceService {
 
   deleteGoal(goal: Goal) {
     const mutation = gql`
-      mutation deleteGoal($id: String!) {
-        deleteGoal(id: $id)
+      mutation deleteGoal($id: String!, $scheduledDate: String) {
+        deleteGoal(id: $id, scheduledDate: $scheduledDate)
       }
     `;
 
@@ -200,6 +200,7 @@ export class PlanResourceService {
       mutation,
       variables: {
         id: goal.id,
+        scheduledDate: goal.scheduledDate,
       },
     });
   }

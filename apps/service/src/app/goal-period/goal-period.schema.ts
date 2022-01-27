@@ -39,5 +39,5 @@ export const goalMutationSchema = `
 
   addGoal(id: String!, name: String!, type: String!, scheduledDate: String, goalIndex: Int): Goal
   updateGoal(id: String!, name: String, type: String, scheduledDate: String, goalIndex: Int, completed: Boolean, categories: [String]): Goal
-  deleteGoal(id: String!): String
+  deleteGoal(id: String!, scheduledDate: String): String
 `;
