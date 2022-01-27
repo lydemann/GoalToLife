@@ -17,6 +17,17 @@ export interface GoalPeriod extends Omit<GoalPeriodStore, 'goals'> {
   calendarDate?: Date;
 }
 
+export interface GoalPeriodDB {
+  date: string;
+  goals: Goal[];
+  type: GoalPeriodType;
+  // retro
+  wins: string;
+  improvementPoints: string;
+  obtainedKnowledge: string;
+  thoughts: string;
+}
+
 export interface GoalPeriodStore {
   date: string;
   goals: string[];

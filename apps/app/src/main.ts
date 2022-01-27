@@ -14,9 +14,9 @@ const storage = persistState({
   preStorageUpdateOperator: () => debounceTime(2000),
 });
 
-const providers = [{ provide: 'persistStorage', useValue: storage }];
+// const providers = [{ provide: 'persistStorage', useValue: storage }];
 
-platformBrowserDynamic(providers)
+platformBrowserDynamic()
   .bootstrapModule(AppModule)
   // eslint-disable-next-line no-console
   .catch((err) => console.log(err));

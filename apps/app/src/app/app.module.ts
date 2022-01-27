@@ -56,10 +56,10 @@ export function endpointsFactory() {
     }),
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    LocalStorageModule.forRoot({
-      prefix: 'my-app',
-      storageType: 'localStorage',
-    }),
+    // LocalStorageModule.forRoot({
+    //   prefix: 'my-app',
+    //   storageType: 'localStorage',
+    // }),
     environment.production ? [] : AkitaNgDevtools.forRoot(),
     AkitaNgRouterStoreModule,
     SharedFeatureAuthModule,

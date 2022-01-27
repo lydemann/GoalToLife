@@ -5,9 +5,9 @@ import {
   GetGoalPeriodsInput,
   Goal,
   GoalPeriod,
-  GoalPeriodStore,
   GoalPeriodType,
   getWeeklyGoalKeyFromWeekNumber,
+  GoalPeriodDB,
 } from '@app/shared/domain';
 import { getWeekNumber } from '@app/shared/util';
 import { firestoreDB } from '../firestore';
@@ -15,25 +15,6 @@ import { createResolver } from '../utils/create-resolver';
 interface GoalsInput {
   scheduledDate: string;
 }
-
-const enrichGoalPeriod = async (
-  goalPeriod: GoalPeriodStore,
-  uid: string
-): Promise<GoalPeriod> => {
-  if (!goalPeriod.goals) {
-    return Promise.resolve({ ...goalPeriod, goals: [] } as GoalPeriod);
-  }
-
-  const goalsPromises = goalPeriod.goals.map(async (goalId) => {
-    const snap = await firestoreDB.doc(`/users/${uid}/goals/${goalId}`).get();
-    return { id: snap.id, ...snap.data() } as Goal;
-  });
-  const goals = await Promise.all(goalsPromises);
-  return {
-    ...goalPeriod,
-    goals,
-  } as GoalPeriod;
-};
 
 export const goalQueryResolvers = {
   goal: createResolver<GoalsInput>(
@@ -69,22 +50,30 @@ export const goalQueryResolvers = {
           getWeeklyGoalKeyFromWeekNumber(week.year, week.weekNumber)
         );
         // eslint-disable-next-line no-console
-        console.log(weekDateKeys);
-        const goalPeriodSnapshotrangeWeeks = await firestoreDB
+        // console.log(weekDateKeys);
+        const goalPeriodSnapshotrangeWeeksProm = firestoreDB
           .collection(`/users/${uid}/goalPeriods`)
           .where('date', 'in', weekDateKeys)
           .get();
-        const goalPeriodsFromRangeWeeks = goalPeriodSnapshotrangeWeeks.docs.map(
-          (doc) => doc.data() as GoalPeriodStore
-        );
 
-        const goalPeriodSnapshotrangeDays = await firestoreDB
+        const goalPeriodSnapshotrangeDaysProm = firestoreDB
           .collection(`/users/${uid}/goalPeriods`)
           .where('date', '<=', toDate)
           .where('date', '>=', fromDate)
           .get();
+
+        const [goalPeriodSnapshotrangeWeeks, goalPeriodSnapshotrangeDays] =
+          await Promise.all([
+            goalPeriodSnapshotrangeWeeksProm,
+            goalPeriodSnapshotrangeDaysProm,
+          ]);
+
+        const goalPeriodsFromRangeWeeks = goalPeriodSnapshotrangeWeeks.docs.map(
+          (doc) => doc.data() as GoalPeriodDB
+        );
+
         const goalPeriodsFromRangeDays = goalPeriodSnapshotrangeDays.docs.map(
-          (doc) => doc.data() as GoalPeriodStore
+          (doc) => doc.data() as GoalPeriodDB
         );
 
         goalPeriods.push(
@@ -101,19 +90,11 @@ export const goalQueryResolvers = {
           .get();
 
         if (goalPeriodSnapshot.docs[0]) {
-          goalPeriods.push(
-            goalPeriodSnapshot.docs[0].data() as GoalPeriodStore
-          );
+          goalPeriods.push(goalPeriodSnapshot.docs[0].data() as GoalPeriodDB);
         }
       }
 
-      const enrichedGoalPeriods = await Promise.all(
-        goalPeriods.map(async (goalPeriod) => {
-          return enrichGoalPeriod(goalPeriod, uid);
-        })
-      );
-
-      return enrichedGoalPeriods;
+      return goalPeriods;
     }
   ),
 };
@@ -171,41 +152,22 @@ export const goalMutationResolvers = {
         id: newGoalRef.id,
         name,
         scheduledDate,
+        completed: false,
         type,
         createdAt: JSON.stringify(Date.now()),
       } as Goal;
       await newGoalRef.set(newGoal);
 
-      await updateGoalPeriod(
-        scheduledDate,
-        uid,
-        newGoalRef.id,
-        type,
-        goalIndex
-      );
+      await updateGoalPeriod(scheduledDate, uid, newGoal, type, goalIndex);
 
       return newGoal;
     }
   ),
-  updateGoal: createResolver<UpdateGoalInput>(
-    async (_, payload, { auth: { uid } }) => {
-      const goalRef = firestoreDB.doc(`/users/${uid}/goals/${payload.id}`);
-
-      const goalSnapShot = await goalRef.get();
-      if (!goalSnapShot.exists) {
-        throw new ApolloError("Goal doesn't exist");
-      }
-
-      await goalRef.update(payload);
-      await updateGoalPeriod(
-        payload.scheduledDate,
-        uid,
-        goalRef.id,
-        payload.type
-      );
-      return await goalSnapShot.data();
-    }
-  ),
+  updateGoal: createResolver<Goal>(async (_, payload, { auth: { uid } }) => {
+    // TODO: if no goal date, add to inbox
+    await updateGoalPeriod(payload.scheduledDate, uid, payload, payload.type);
+    return payload;
+  }),
   deleteGoal: createResolver<DeleteGoalInput>(
     async (_, { id }, { auth: { uid } }) => {
       const goalRef = firestoreDB.doc(`/users/${uid}/goals/${id}`);
@@ -222,9 +184,9 @@ export const goalMutationResolvers = {
           `/users/${uid}/goalPeriods/${goalToDelete.scheduledDate}`
         );
         const goalPeriodSnap = await goalPeriodRef.get();
-        const goalPeriod = (await goalPeriodSnap.data()) as GoalPeriodStore;
-        const updatedGoals = goalPeriod.goals.filter((goal) => goal !== id);
-        goalPeriodRef.update({ goals: updatedGoals } as GoalPeriodStore);
+        const goalPeriod = (await goalPeriodSnap.data()) as GoalPeriodDB;
+        const updatedGoals = goalPeriod.goals?.filter((goal) => goal.id !== id);
+        goalPeriodRef.update({ goals: updatedGoals } as GoalPeriodDB);
       }
 
       return 'Goal deleted';
@@ -234,7 +196,7 @@ export const goalMutationResolvers = {
 async function updateGoalPeriod(
   scheduledDate: string,
   uid: string,
-  goalId,
+  goal: Goal,
   type: GoalPeriodType,
   goalIndex?: number
 ) {
@@ -244,26 +206,69 @@ async function updateGoalPeriod(
       .doc(scheduledDate);
 
     const prevGoalPeriodSnap = await goalPeriodRef.get();
-    const prevGoalPeriod: GoalPeriodStore =
-      (prevGoalPeriodSnap.data() as GoalPeriodStore) ||
-      ({ date: scheduledDate, goals: [] } as GoalPeriodStore);
+    const prevGoalPeriod: GoalPeriodDB =
+      (prevGoalPeriodSnap.data() as GoalPeriodDB) ||
+      ({ date: scheduledDate, goals: [] } as GoalPeriodDB);
     const prevGoals = prevGoalPeriod.goals;
     let updatedGoals = [...prevGoals];
-    const goalShouldBeMoved =
-      goalIndex !== null && goalIndex >= 0 && goalIndex <= prevGoals.length;
-    if (goalShouldBeMoved) {
-      updatedGoals.splice(goalIndex, 0, goalId);
-    }
-    const goalNotExisting = !prevGoalPeriod.goals.includes(goalId);
-    if (goalNotExisting) {
-      updatedGoals = [...prevGoalPeriod.goals, goalId];
+    const existingGoalIndex = prevGoalPeriod.goals.findIndex(
+      (goal) => goal.id === goal.id
+    );
+    // TODO: move goal from existing index to new index
+    // const goalShouldBeMoved =
+    //   goalIndex !== null && goalIndex >= 0 && goalIndex <= prevGoals.length;
+    // if (goalShouldBeMoved) {
+    //   updatedGoals.splice(goalIndex, 0, goal);
+    // }
+    if (goalIndex !== -1) {
+      updatedGoals = [...prevGoalPeriod.goals, goal];
+    } else {
+      updatedGoals.splice(existingGoalIndex, 1, goal);
     }
 
     await goalPeriodRef.set({
       ...prevGoalPeriod,
       type,
       goals: updatedGoals,
-    } as GoalPeriodStore);
+    } as GoalPeriodDB);
+  }
+}
+
+async function addGoalPeriod(
+  scheduledDate: string,
+  uid: string,
+  goal: Goal,
+  type: GoalPeriodType,
+  goalIndex?: number
+) {
+  if (scheduledDate) {
+    const goalPeriodRef = firestoreDB
+      .collection(`/users/${uid}/goalPeriods`)
+      .doc(scheduledDate);
+
+    const prevGoalPeriodSnap = await goalPeriodRef.get();
+    const prevGoalPeriod: GoalPeriodDB =
+      (prevGoalPeriodSnap.data() as GoalPeriodDB) ||
+      ({ date: scheduledDate, goals: [] } as GoalPeriodDB);
+    const prevGoals = prevGoalPeriod.goals;
+    let updatedGoals = [...prevGoals];
+    const goalShouldBeMoved =
+      goalIndex !== null && goalIndex >= 0 && goalIndex <= prevGoals.length;
+    if (goalShouldBeMoved) {
+      updatedGoals.splice(goalIndex, 0, goal);
+    }
+    goalIndex = prevGoalPeriod.goals.findIndex((goal) => goal.id === goal.id);
+    if (goalIndex !== -1) {
+      updatedGoals = [...prevGoalPeriod.goals, goal];
+    } else {
+      updatedGoals.splice(goalIndex, 0, goal);
+    }
+
+    await goalPeriodRef.set({
+      ...prevGoalPeriod,
+      type,
+      goals: updatedGoals,
+    } as GoalPeriodDB);
   }
 }
 
