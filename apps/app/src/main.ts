@@ -10,9 +10,9 @@ if (environment.production) {
   enableProdMode();
 }
 
-const storage = persistState({
-  preStorageUpdateOperator: () => debounceTime(2000),
-});
+// const storage = persistState({
+//   preStorageUpdateOperator: () => debounceTime(2000),
+// });
 
 // const providers = [{ provide: 'persistStorage', useValue: storage }];
 
