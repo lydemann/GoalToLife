@@ -2,7 +2,7 @@ import { getWeekNumber } from '@app/shared/util';
 import { formatDate } from '@angular/common';
 import { GoalPeriodType } from './interfaces/goal-period';
 
-export const dailyGoalKeyFormat = 'YYYY-MM-dd';
+export const dailyGoalKeyFormat = 'yyyy-MM-dd';
 
 export const getGoalKey = (date: Date, goalPeriodType: GoalPeriodType) => {
   switch (goalPeriodType) {
